@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{ meta }}
+        <link href="{{ base_url() }}assets/sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- MetisMenu CSS -->
+        <link href="{{ base_url() }}assets/sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="{{ base_url() }}assets/sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="{{ base_url() }}assets/sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="{{ base_url() }}assets/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="{{ base_url() }}assets/bootstrap/css/typeahead.js-bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="{{ base_url() }}assets/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />
+        <link href="{{ base_url() }}assets/DataTables/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="{{ base_url() }}assets/sb-admin-2/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        
+        <!-- typeahead --> 
+        <link href="{{ base_url() }}assets/bootstrap/css/typeahead.js-bootstrap.css" rel="stylesheet" type="text/css">
+        <!-- datetimepicker --> 
+        <link rel="stylesheet" href="{{ base_url() }}assets/bootstrap/css/bootstrap-datetimepicker.min.css" />
+        
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <title>{{ title }}</title>
+        
+    </head>
+    <body>
+
+        {% block content %}
+
+        {% endblock %}
+        
+        <!-- Bootstrap Core JavaScript -->
+        <!-- jQuery -->
+        <script src="{{ base_url() }}assets/sb-admin-2/bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script type="text/javascript" src="{{ base_url() }}assets/bootstrap/js/moment.js"></script>
+        <script type="text/javascript" src="{{ base_url() }}assets/bootstrap/js/transition.js"></script>
+        <script type="text/javascript" src="{{ base_url() }}assets/bootstrap/js/collapse.js"></script>
+        <script src="{{ base_url() }}assets/sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="{{ base_url() }}assets/sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="{{ base_url() }}assets/sb-admin-2/js/sb-admin-2.js"></script>
+        <script type="text/javascript" src="{{ base_url() }}assets/fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
+        <!-- for datatable -->
+        <script type="text/javascript" src="{{ base_url() }}assets/DataTables/media/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="{{ base_url() }}assets/bootstrap/js/typeahead.min.js"></script>
+        <script type="text/javascript" src="{{ base_url() }}assets/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+
+        <script>
+        $(document).ready(function() {
+            
+            {{ SCRIPTS }}
+            
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+{% extends _layout %}
+
+{% block content %}
+    <div class="row">
+        <img src="{{ base_url() }}assets/images/opsimidlong.png" id="toplogin">
+        <div id="logindiv">
+            <form action="" method="post" data-toggle="validator" role="form">
+                <div class="form-group width250">
+                    <label>User Name</label>
+                    <input class="form-control" id="username" name="username" type="text" required>
+                </div>
+                <div class="form-group width250">
+                    <label>Password</label>
+                    <input class="form-control" id="password" name="password" type="password" required>
+                </div>
+                <input type="submit" class="btn btn-default" value="Login">
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% block content %}
+
+    var selected = [];
+        var table = $('#table_window_currency').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_currency',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "currency" },
+                    { "data": "symbol" },
+                    //{ "data": "currency_name" },
+                    { "data": "currency_country" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' Select ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    
+    $('body').on('show.bs.modal', '#window-currency',function (e) {
+
+    });
+    
+    var table = $('#table_window_dept').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_dept',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "dept_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return ' Select ';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    
+    $('body').on('show.bs.modal', '#window-dept',function (e) {
+
+    });
+  
+{% endblock %}
