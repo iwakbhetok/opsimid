@@ -1,0 +1,28 @@
+{% block content %}
+<div class="container-fluid">
+    <form action="{{ site_url() }}/t/coa_class/save" method="post" name="form1">
+        <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Reservation Code</label>
+                    <div class="col-xs-7">
+                        <!--<input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" placeholder="" readonly="TRUE">-->
+                        <input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{kode_vendor }}" placeholder="xx">
+                    </div> 
+                </div> 
+
+
+
+            </div>
+
+        </div>
+
+
+
+        <input type="submit" class="btn btn-default" value="Save" id="btnsave" name="btnsave">
+        <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
+    </form> 
+</div>
+
+{% endblock %}

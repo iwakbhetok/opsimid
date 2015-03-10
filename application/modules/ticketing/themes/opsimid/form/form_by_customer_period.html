@@ -1,0 +1,62 @@
+{% block content %}
+<div class="container-fluid">
+
+	<form action="{{ base_url }}index.php/reports/by_customer_period/save" method="post" name="form1">
+	<div class="row">    
+        <div class="col-lg-8">
+            <div class="form-group col-md-12">  
+                <div class="col-md-3">
+                    <label>Customer</label>
+                </div>    
+                <div class="col-md-9">
+                    <input class="form-control" id="customer_id" name="customer_id" type="text" value="{{ edit.customer_id }}" required/>                
+                </div>    
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-3">
+                    <label>Type</label>
+                </div>    
+                <select class="form-control m-b" id="customer_id" name="type" type="set" value="{{ edit.customer_id }}" required/>
+					<option value="0">Choose Type</option>
+					<option value="1">A</option>
+					<option value="2">B</option>
+					<option value="2">C</option>
+				</select>  
+                <div class="col-md-2">
+                <label>Currency</label>
+                </div>    
+                <div class="col-md-3">   
+                    <select class="form-control m-b" id="customer_id" name="type" type="set" value="{{ edit.customer_id }}" required/>
+					<option value="0">Choose Currency</option>
+					<option value="1">IDR</option>
+					<option value="2">USD</option>
+				</select>                
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-3">
+                    <label>Date From</label>
+                </div>
+                <div class="col-md-4">    
+                    <input onfocus="gfPop.fPopCalendar(this);" class="form-control" id="datepicker" name="date_from" type="date" value="{{ edit.date_from }}"  required />               
+                </div>
+				<div class="col-md-2">
+                    <label>Date To</label>
+                </div>
+                <div class="col-md-3">    
+                    <input onfocus="gfPop.fPopCalendar(this);" id="date_to" name="date_to" type="text" value="{{ edit.date_to }}" required/>                
+                </div>
+            </div>
+        </div>    
+    </div>
+	
+	<input type="submit" class="btn btn-default" value="Save" id="btnsave" name="btnsave">
+    <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
+	</form> 
+</div>
+
+
+
+
+
+{% endblock %}

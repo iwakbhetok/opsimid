@@ -1,0 +1,13 @@
+{% block content %}
+    //
+    var id_invoice = $('#id_invoice').val();
+    if (!!id_invoice){
+                $('#btnupdate').removeClass('hide');
+                $('#btnsave').addClass('hide');
+    }
+    else {
+                $('#btnupdate').addClass('hide');
+                $('#btnsave').removeClass('hide');
+    }
+
+{% endblock %}

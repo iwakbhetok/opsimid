@@ -1,0 +1,158 @@
+{% block content %}
+
+<section class="content right-side">
+	<div class="row">
+		<form action="{{ base_url }}index.php/dokumen/dokumen/save" method="post" name="form1">
+			<input type="hidden" name="id" id="id" value="{{ edit.id_dok }}" />
+		<div class="col-xs-6">
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Receipt No </label>
+				<div class="col-xs-6">
+					<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+					</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Date </label>
+				<div class="col-xs-6">
+					<div class="input-group date" id="datetimepicker1">
+                        <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="" placeholder="YYYY-MM-DD">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Product </label>
+				<div class="col-xs-6">
+				<select class="form-control">
+                    <option>1</option>
+                </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Name </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Passport No </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Old Passport No </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Order </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Address 1</label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Address 2</label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Company </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+		</div>
+		<div class="col-xs-6">
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Phone No </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Mobile Phone </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Office Phone </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Fax </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Finish Date </label>
+				<div class="col-xs-6">
+				<div class="input-group date" id="datetimepicker1">
+                        <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="" placeholder="YYYY-MM-DD">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Currency </label>
+				<div class="col-xs-6">
+				<select class="form-control">
+                    <option>1</option>
+                </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Price </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Remarks </label>
+				<div class="col-xs-6">
+				<textarea class="form-control" rows="3"></textarea>
+            	</div>
+			</div>
+
+		</div>
+	</form>
+	</div>
+	<input type="submit" class="btn btn-primary" value="Save" />
+    <input type="reset" class="btn btn-default" value="Clear" />
+
+</section>
+
+{% endblock %}

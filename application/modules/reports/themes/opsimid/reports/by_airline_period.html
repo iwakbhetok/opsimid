@@ -1,0 +1,91 @@
+{% block content %}
+
+ <!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+       <h1 class="page-header">
+            By Airlines/Period 
+        </h1>
+
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i><a href="#"> Dashboard</a>
+            </li>
+
+            <li class="active">
+                <i class="fa fa-edit"></i> Home
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <form action="{{ base_url }}home" method="post" name="form1">
+        <div class="col-lg-12">
+        <h4>Booking by Airline or Period</h4><br>        
+    </div>
+    <div class="form-group col-lg-12">
+         <div class="col-md-2">
+            <label>Airlines</label>
+        </div>
+            <div class="col-md-3">
+                <select class="form-control" id="airlines_id">
+                    <option value=""></option>                     
+                    <option value="1">Lion Air</option>
+                    <option value="2">Sriwijaya Air</option>
+                    <option value="3">Air Asia</option>
+                    <option value="4">Garuda Indonesia</option>
+                </select>
+            </div>
+        </div>
+    <div class="form-group col-lg-12">
+       <div class="col-md-2">
+               <label>Date From</label>
+       </div>
+       <div class="col-md-3">
+               <input onfocus="gfPop.fPopCalendar(this);" class="form-control" id="date_from" name="date_from" type="text" value="{{ main.date_from }}" required>
+            </div>
+    </div>
+    <div class="form-group col-lg-12">
+       <div class="col-md-2">
+               <label>Date To</label>
+       </div>
+       <div class="col-md-3">
+               <input onfocus="gfPop.fPopCalendar(this);" class="form-control" id="date_to" name="date_to" type="text" value="{{ main.date_to }}" required>
+            </div>
+    </div>             
+    <input type="submit" class="btn btn-default" value="View Report">
+    </form>  
+</div>
+<br>
+<br>
+
+<div class="panel panel-default">
+        <div class="panel-heading">
+            {{ BREADCRUMBS_TITLE }}
+        </div>
+        <div class="panel-body">
+            <div class="row">  
+                 <div class="table-responsive">
+                     <div class="col-lg-12">
+                      <table id="table_other_invoice" class="table table-bordered table-hover table-striped">
+                           <thead>
+                               <tr>
+                                   <th nowrap="nowrap">Invoice Number</th>
+                                   <th nowrap="nowrap">Customer</th>
+                                   <th nowrap="nowrap">Transaction No</th>
+                                   <th nowrap="nowrap">Due Date</th>
+                                   <th nowrap="nowrap">Contact Person</th>
+                                   <th nowrap="nowrap">Currency</th>
+								   <th nowrap="nowrap">Total</th>
+								   <th nowrap="nowrap">Action</th>
+                               </tr>
+                           </thead>               
+                      </table>
+                     </div>    
+                 </div>
+            </div>
+        </div>
+</div>
+    {% endblock %}

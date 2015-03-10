@@ -1,0 +1,43 @@
+{% block content %}
+<div class="container-fluid">
+    <form action="{{ site_url() }}/configuration/coa_class/save" method="post" name="form1">
+    <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />    
+    <div class="row">    
+        <div class="col-lg-8">
+            <div class="form-group col-xs-12">
+                <label for="class_id" class="col-xs-3 control-label">Class Id</label>
+                <div class="col-xs-7">
+                    <input type="text" class="form-control" id="class_id" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                </div>                
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="class_name" class="col-xs-3 control-label">Class Name</label>
+                <div class="col-xs-7">
+                    <input type="text" class="form-control" id="class_name" name="class_name" value="{{ edit.class_name }}" placeholder="xxxxxxxx">
+                </div>                
+            </div>
+            
+            <div class="form-group col-xs-12">
+                <label for="dept" class="col-xs-3 control-label">Class Type</label>
+                <div class="col-xs-7">
+                    <div class='input-group'>
+                            <input type="text" class="form-control typeahead tt-query" id="class_type_id" name="class_type_id" value="{{ edit.class_type_id }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                            <span class="input-group-btn">
+                                <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                    </div>                
+                </div>    
+            </div>
+            
+           
+        </div>   
+            
+    </div>
+    <input type="submit" class="btn btn-default" value="Save" id="btnsave" name="btnsave">
+    <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
+</form> 
+</div>
+
+{% endblock %}

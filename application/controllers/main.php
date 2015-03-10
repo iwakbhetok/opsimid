@@ -31,7 +31,7 @@ class Main extends CI_Controller {
         $data = array(
             'valid'     => '',
             'username'      => '',
-            'nama_lengkap'  => '',
+            'full_name'  => '',
             'level'         => '',
             'status'        => '',
             'user_group_id'      => '',                

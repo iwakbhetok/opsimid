@@ -1,0 +1,32 @@
+{% block content %}
+
+<section class="content right-side">
+	<form action="{{ base_url }}index.php/hotel/room/save" method="post" name="form1">
+    <div class="row">
+            <input type="hidden" name="room_id" id="room_id" value="{{ edit.room_id }}" />
+        <div class="col-xs-6">
+
+        	<div class="form-group col-xs-12">
+                <label class="col-xs-4 control-label">Room Name </label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="room_name" name="room_name" value="{{ edit.room_name}}" required placeholder="Type here. Example: Single, Double, etc.">
+                    </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+                <label class="col-xs-4 control-label">Description</label>
+                <div class="col-xs-6">
+                    <textarea class="form-control"  id="description" name="description" rows="3"></textarea>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+        <div class="row">
+			<input type="submit" class="btn btn-primary" value="Save" />
+			<input type="reset" class="btn btn-default" value="Clear" />
+			    </div>
+      </form>
+</section>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% block content %}
+<div class="container-fluid">
+    <form action="{{ site_url() }}/t/coa_class/save" method="post" name="form1">
+        <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Tour Code</label>
+                    <div class="col-xs-7">
+                        <!--<input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" placeholder="" readonly="TRUE">-->
+                        <input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{kode_vendor }}" placeholder="xx">
+                    </div> 
+                </div> 
+
+                <div class="form-group col-xs-12">
+                    <label for="class_id" class="col-xs-3 control-label">Airlines</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="kode_vendora" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    </div> 
+                </div>
+                
+                <div class="form-group col-xs-12">
+                    <label for="class_id" class="col-xs-3 control-label">Valid From</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="kode_vendorv" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    </div> 
+                </div>
+                
+                <div class="form-group col-xs-12">
+                    <label for="class_id" class="col-xs-3 control-label">Valid to</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="kode_vendorb" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    </div> 
+                </div>
+                
+                <div class="form-group col-xs-12">
+                    <label for="class_id" class="col-xs-3 control-label">Season</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="kode_vendore" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    </div> 
+                </div>
+                
+               
+            </div>
+
+            <div class="col-xs-6">
+                 <div class="form-group col-xs-12">
+                    <label for="class_id" class="col-xs-3 control-label">Description</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="kode_vensedor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    </div> 
+                </div> 
+
+                <div class="form-group col-xs-12">
+                    <label for="class_id" class="col-xs-3 control-label">Tour Type</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="kode_vendfor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    </div> 
+                </div>
+                
+                <div class="form-group col-xs-12">
+                    <label for="class_id" class="col-xs-3 control-label">Based on person</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="kode_venqdor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    </div> 
+                </div>
+                
+                <div class="form-group col-xs-12">
+                    <label for="class_id" class="col-xs-3 control-label">Region</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="kode_venduor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    </div> 
+                </div>
+                
+                <div class="form-group col-xs-12">
+                    <label for="class_id" class="col-xs-3 control-label">Currency</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="kode_venodor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+
+
+        <input type="submit" class="btn btn-default" value="Save" id="btnsave" name="btnsave">
+        <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
+    </form> 
+</div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% block content %}
+
+var selected = [];
+var table = $('#table_invoice').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/hotel/ajax_data/getrecord_invoice',
+        "columns": [
+                { "data": "nomor" },
+                { "data": "dp_number" },
+                { "data": "transaksi_no" },
+                { "data": "tanggal_transaksi" },
+                { "data": "id_dept" },                
+                { "data": "kode_customer" },
+                { "data": "cp" },
+                { "data": "currency" },                
+                { "data": "amount" },
+                { "mRender" : function ( data, type, full ) {
+                    FullData = full;
+                    return '{{ BUTTON_CRUD }} ';
+                  }
+                },
+            ], 
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }   
+});
+
+
+// Edit record
+$('#table_invoice').on( 'click', 'a.edit-btn', function (e) {
+        e.preventDefault();        
+        var delId = $(this).data('edit-id');
+        window.location.href='{{ site_url() }}/cashier/dp_customer/form/' + delId;
+        //editor
+        //    .title( 'Edit record' )
+        //    .buttons( { "label": "Update", "fn": function () { editor.submit() } } )
+        //    .edit( $(this).closest('tr') );
+} );
+ 
+// Delete a record
+$('#table_invoice').on( 'click', 'a.del-btn', function (e) {
+        e.preventDefault();
+        if(confirm("Are you sure?")) {
+                var delId = $(this).data('delete-id');  
+		window.location='{{ site_url() }}/cashier/dp_customer/delete/' + delId;	
+	}
+	else
+		return false;
+                
+        //alert('hapus ' + $(this).data('delete-id'));
+        //editor
+        //    .title( 'Edit record' )
+        //    .message( "Are you sure you wish to delete this row?" )
+        //    .buttons( { "label": "Delete", "fn": function () { editor.submit() } } )
+        //    .remove( $(this).closest('tr') );
+} );
+    
+$('body').on('show.bs.modal', '.modal',function (e) {
+    
+});
+
+{% endblock %}

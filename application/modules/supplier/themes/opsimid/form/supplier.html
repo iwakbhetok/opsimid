@@ -1,0 +1,113 @@
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            <h2>Supplier Of Hotel</h2></h1>
+
+        <ol class="breadcrumb">
+            <b><h4>This page is available only for create supplier of hotel</h4></b>
+        </ol>
+    </div>
+</div>
+
+<!-- /.row -->
+
+<form action="{{ base_url }}index.php/hotels/vendor/save" method="post" name="form1">
+<input type="hidden" name="id" id="id" value="{{ edit.id_vendor }}" />
+<table width="100%">
+<tr>
+<td valign="top">
+<div class="form-group width100">
+{% set kodeVendor = kode_vendor %}
+{% if edit.id_vendor !='' %}
+	{% set kodeVendor = edit.kode_vendor %}
+    <script language="javascript">
+    //if edit //
+	//loadState({{ edit.country_code}})
+	//setTimeout(function(){
+		//jquery("#stateno").val({{ edit.state_no }})
+	//},1000)
+	// end if
+
+    </script>
+{% endif %}
+<label for="kode_vendor">Code</label>
+<input name="kode_vendor" type="text" id="kode_vendor" value="{{ kodeVendor }}" size="10" readonly="readonly"/>
+</div>
+
+<div class="form-group width100">
+<label for="nama_vendor">Supplier Name</label>
+<input name="nama_vendor" type="text" id="nama_vendor" value="{{ edit.nama_vendor }}" size="30" required />
+</div>
+
+<div class="form-group width100">
+<label for="alamat" class="top">Address</label>
+<textarea name="alamat" cols="50" rows="4" id="alamat" type="text">{{ edit.alamat }}</textarea>
+</div>
+
+<div class="form-group width200">
+<label for="country_code">Country</label>
+<select id="country_code" name="country_code" onchange="loadState(this.value)">
+<option value="">--Select--</option>
+    {% for count in country %}
+    <option value="{{ count.country_code }}" {% if count.country_code == edit.country_code%} selected="selected" {% endif %}>{{ count.country_desc}}</option>
+    {% endfor %}
+</select>
+</div>
+
+<div class="form-group width200">
+<label for="nama_state">State</label>
+
+<select id="state_no" name="state_no" onblur="loadCity(this.value);">
+<option value="">--Select--</option>
+    {% for c in state %}
+    <option value="{{ c.state_no }}" {% if c.state_no == edit.state_no %} selected="selected" {% endif %}>{{ c.state_desc }}</option>
+    {% endfor %}
+</select></div>
+
+
+<div class="form-group width200">
+<label for="city_code">City</label>
+<select id="city_code" name="city_code">
+<option value="">--Select--</option>
+    {% for c in city %}
+    <option value="{{ c.city_code }}" {% if c.city_code == edit.city_code %} selected="selected" {% endif %}>{{ c.city_desc }}</option>
+    {% endfor %}
+</select>
+</div></td>
+<td valign="top">
+
+<div class="form-group width100">
+<label for="kode_pos">Post Code</label>
+<input name="kode_pos" type="text" id="kode_pos" value="{{ edit.kode_pos}}" size="20" onkeyup="angka(this);" />
+</div>
+
+<div class="form-group width100">
+<label for="telp">Phone Number</label>
+<input name="telp" type="text" id="telp" value="{{ edit.telp }}" size="20" onkeyup="angka(this);" />
+</div>
+
+<div class="form-group width100">
+<label for="fax">Fax</label>
+<input name="fax" type="text" id="fax" value="{{ edit.fax }}" size="20"  onkeyup="angka(this);"/>
+</div>
+
+<div class="form-group width100">
+<label for="email">Email</label>
+<input name="email" type="text" id="email" value="{{ edit.email }}" size="20"  />
+</div>
+
+<div class="form-group width100">
+<label for="kontak_person">Contact Person</label>
+<input name="kontak_person" type="text" id="kontak_person" value="{{ edit.kontak_person }}" size="30" onkeypress="return validateForm();" />
+</div>
+
+<div class="form-group width100">
+<label for="keterangan" class="top">Description</label>
+<textarea name="keterangan" cols="50" rows="8" id="keterangan" type="text">{{ edit.keterangan }}</textarea>
+<input type="hidden" name="type" id="type" value="1" />
+</div></td></tr></table>
+
+<input type="submit" class="btn btn-default width100" value="Save" />
+    <input type="reset" class="btn btn-default width100" value="Clear" />
+</form><br />

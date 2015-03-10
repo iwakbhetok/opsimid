@@ -1,0 +1,125 @@
+{% block content %}
+
+<section class="content right-side">
+	<div class="row">
+		<form action="{{ base_url }}index.php/dokumen/dokumen/save" method="post" name="form1">
+			<input type="hidden" name="id" id="id" value="{{ edit.id_dok }}" />
+		<div class="col-xs-6">
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Code </label>
+				<div class="col-xs-6">
+					<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+					</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Type </label>
+				<div class="col-xs-6">
+				<select class="form-control">
+                    <option>1</option>
+                </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Country </label>
+				<div class="col-xs-6">
+				<select class="form-control">
+                    <option>1</option>
+                </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">State </label>
+				<div class="col-xs-6">
+				<select class="form-control col-xs-10">
+                    <option>1</option>
+                </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">City </label>
+				<div class="col-xs-6">
+				<select class="form-control col-xs-10">
+                    <option>1</option>
+                </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Process </label>
+				<div class="col-xs-6">
+				<select class="form-control col-xs-10">
+                    <option>1</option>
+                </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Category </label>
+				<div class="col-xs-6">
+				<select class="form-control col-xs-10">
+                    <option>1</option>
+                </select>
+            	</div>
+			</div>
+
+		</div>
+		<div class="col-xs-6">
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Currency </label>
+				<div class="col-xs-6">
+				<select class="form-control">
+                    <option>1</option>
+                </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Nett Price </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Sell Price </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Profit </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Description </label>
+				<div class="col-xs-6">
+				<textarea class="form-control" rows="3"></textarea>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Remarks </label>
+				<div class="col-xs-6">
+				<textarea class="form-control" rows="3"></textarea>
+            	</div>
+			</div>
+		</div>
+			<input type="submit" class="btn btn-primary" value="Save" />
+    		<input type="reset" class="btn btn-default" value="Clear" />
+    		
+	</form>
+	</div>
+
+</section>
+
+{% endblock %}
