@@ -1,7 +1,7 @@
 {% block content %}
 
 <section class="content right-side">
-	<form action="{{ base_url }}index.php/hotel/hotel/save" method="post" name="form1">
+	<form action="{{ site_url('/hotel/class_hotel/save') }}" method="post" name="form1">
     <div class="row">
             <input type="hidden" name="class_id" id="class_id" value="{{ edit.class_id }}" />
         <div class="col-xs-6">
@@ -16,7 +16,7 @@
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Description</label>
                 <div class="col-xs-6">
-                    <textarea class="form-control"  id="description" name="description" rows="3"></textarea>
+                    <textarea class="form-control"  id="description" name="description" rows="3">{{ edit.description}}</textarea>
                     </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
     </div>
         <div class="row">
 			<input type="submit" class="btn btn-primary" value="Save" />
-			<input type="reset" class="btn btn-default" value="Clear" />
+			<input type="button" onclick="history.back()" class="btn btn-default" value="Back" />
 			    </div>
       </form>
 </section>

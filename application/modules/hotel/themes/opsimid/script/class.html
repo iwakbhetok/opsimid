@@ -22,23 +22,24 @@ var table = $('#table_class').dataTable( {
             }   
 });
 
-//edit
-$('#table_class').on('click', 'a.edit-btn', function (e) {
-    e.preventDefault(); 
-    var editId = $(this).data('edit-id');
-    window.location.href='{{ site_url() }}/hotel/class_hotel/form/' + editId;
-});
+// Edit record
+$('#table_class').on( 'click', 'a.edit-btn', function (e) {
+        e.preventDefault();        
+        var editId = $(this).data('edit-id');
+        window.location.href='{{ site_url() }}/hotel/class_hotel/form/' + editId;
+} );
+
+
 
 // Delete a record
 $('#table_class').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
         if(confirm("Are you sure?")) {
                 var delId = $(this).data('delete-id');  
-		window.location='{{ site_url() }}/hotel/class_hotel/delete/' + delId;	
-	}
-	else
-		return false;
-        
+        window.location='{{ site_url() }}/hotel/class_hotel/delete/' + delId;   
+    }
+    else
+        return false;
 } );
 
 {% endblock %}

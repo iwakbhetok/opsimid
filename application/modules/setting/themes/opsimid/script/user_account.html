@@ -30,10 +30,6 @@ $('#table_user_account').on( 'click', 'a.edit-btn', function (e) {
         e.preventDefault();        
         var delId = $(this).data('edit-id');
         window.location.href='{{ site_url() }}/setting/user_account/form/' + delId;
-        //editor
-        //    .title( 'Edit record' )
-        //    .buttons( { "label": "Update", "fn": function () { editor.submit() } } )
-        //    .edit( $(this).closest('tr') );
 } );
  
 // Delete a record

@@ -9,6 +9,38 @@ class Ajax_data extends CI_Controller {
         parent::__construct();
     }
 
+    function customer()
+    {
+        $this->db->order_by('full_name asc');
+        $query = $this->db->get('mst_customer');
+        foreach($query->result() as $row):
+            $data[] = $row->full_name; 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+
+    function getclass_combobox()
+    {
+        $this->load->model('class_mdl');
+        $data = $this->class_mdl->getclass_combobox();
+        echo json_encode($data);
+    }
+
+    function gethotel_name_combobox()
+    {
+        $this->load->model('hotel_mdl');
+        $data = $this->hotel_mdl->gethotel_name_combobox();
+        echo json_encode($data);
+    }
+
+    function getroom_type_combobox()
+    {
+        $this->load->model('room_mdl');
+        $data = $this->room_mdl->getroom_type_combobox();
+        echo json_encode($data);
+    }
+
     function getrecord_supplier() {
         $this->load->model('supplier_mdl');
         $data = array(
@@ -100,7 +132,7 @@ class Ajax_data extends CI_Controller {
     }
 
     function getrecord_hotel_rate() {
-        $this->load->model('quotation_mdl');
+        $this->load->model('hotel_rate_mdl');
         $data = array(
             'aaData' => array(),
             'sEcho' => 0,
@@ -108,9 +140,9 @@ class Ajax_data extends CI_Controller {
             'iTotalDisplayRecords' => '',
         );
         //find total record 
-        $data['aaData'] = $this->quotation_mdl->getdatalist();
-        $data['iTotalRecords'] = $this->quotation_mdl->getrecordcount();
-        $data['iTotalDisplayRecords'] = $this->quotation_mdl->getrecordcount();
+        $data['aaData'] = $this->hotel_rate_mdl->getdatalist();
+        $data['iTotalRecords'] = $this->hotel_rate_mdl->getrecordcount();
+        $data['iTotalDisplayRecords'] = $this->hotel_rate_mdl->getrecordcount();
         echo json_encode($data);
     }
 

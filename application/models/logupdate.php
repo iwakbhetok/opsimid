@@ -44,7 +44,6 @@ class logUpdate extends CI_Model {
 			
 			$query = $this->db->get_where($table, $record);
 			$data = $query->row();
-			
 			$arrData = array_combine($field, (array) $data);
 			$dataRecord = str_replace("+", " ", http_build_query($arrData, '', ', '));
 		}
@@ -54,8 +53,8 @@ class logUpdate extends CI_Model {
 		}
 		
 		$this->db->set("ip_address", $ip);
-		$this->db->set("id_user", $this->session->userdata('userId'));
-		$this->db->set("id_jabatan", $this->session->userdata('userSKPD'));
+		$this->db->set("user_id", $this->session->userdata('userId'));
+		$this->db->set("position_id", $this->session->userdata('userSKPD'));
 		$this->db->set("action", $act);
 		$this->db->set("record", $dataRecord);
 		$this->db->set("table_transaction", $table);

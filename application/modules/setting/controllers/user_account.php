@@ -49,7 +49,7 @@ class User_account extends CI_Controller {
         $this->output->set_output($output);     
     }
 
-    function form()
+    function form($id='')
     {
         $data = array();        
         

@@ -14,6 +14,21 @@ class room_mdl extends CI_Model {
         return $data;
     }
 
+    function getroom_type_combobox()
+    {
+        $this->db->order_by('room_name asc');
+        $query = $this->db->get('hotel_mst_room');
+        $nomor = 1;
+        foreach($query->result() as $row):
+            $data[] = array(
+                'room_id'   => $row->room_id,
+                'room_name' => $row->room_name,
+            ); 
+            $nomor++;
+        endforeach;
+        return $data;
+    }
+
     function getdatalist() {
         $data = array();
         $fields = array(

@@ -1,7 +1,133 @@
 {% block content %}
-<div class="row">
-        <form class="form-horizontal" action="{{ site_url('hotel/hotel_rate/save') }}" method="post" role="form" name="form1">
-        	{{ form_builder }}
-        </form>
-</div>
+
+	 <form class="form-horizontal" action="{{ site_url('hotel/hotel_rate/save') }}" method="post" role="form" name="form1">
+		<div class="row">
+		    <input type="hidden" name="hotel_rate_id" id="hotel_rate_id" value="{{ edit.hotel_rate_id }}" />
+		<div class="col-xs-6">
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Supplier Name </label>
+				<div class="col-xs-6">
+					<select class="form-control" id="supplier_name" name="supplier_name" required>
+                    </select>
+					</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Hotel Name </label>
+				<div class="col-xs-6">
+				<select class="form-control" id="hotel_name" name="hotel_name" required>
+                    </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Room Type </label>
+				<div class="col-xs-6">
+				<select class="form-control" id="room_type" name="room_type" required>
+                    </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Class Type </label>
+				<div class="col-xs-6">
+				<select class="form-control" id="class_type" name="class_type" required>
+                    </select>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">From Date </label>
+				<div class="col-xs-6">
+				<div class="input-group date" id="datetimepicker1">
+                    <input type="text" class="form-control" id="date_from" name="date_from" value="" placeholder="YYYY-MM-DD" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">To Date </label>
+				<div class="col-xs-6">
+				<div class="input-group date" id="datetimepicker2">
+                    <input type="text" class="form-control" id="date_to" name="date_to" value="" placeholder="YYYY-MM-DD" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Market Type </label>
+				<div class="col-xs-6">
+				<select class="form-control" id="market_type" name="market_type" required>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Foreign">Foreign</option>
+                        <option value="KITAS/KIMS">KITAS/KIMS</option>
+                        <option value="Other">Other</option>
+                    </select>
+            	</div>
+			</div>
+
+		</div> 
+
+		<div class="col-xs-6">
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Currency </label>
+				<div class="col-xs-6">
+					<select class="form-control" id="currency" name="currency" required>
+                    </select>
+					</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Room Price Nett </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="nett_room" name="nett_room" value="{{ edit.nett_room }}" required>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Room Price Sell </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="sell_room" name="sell_room" value="{{ edit.sell_room}}" required>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Breakfast Price Nett </label>
+				<div class="col-xs-6">
+				<input type="text" class="form-control" id="nett_breakfast" name="nett_breakfast" value="{{ edit.nett_breakfast}}" required>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Breakfast Price Sell </label>
+				<div class="col-xs-6">
+					<input type="text" class="form-control" id="sell_breakfast" name="sell_breakfast" value="{{ edit.sell_breakfast}}" required>
+            	</div>
+			</div>
+
+			<div class="form-group col-xs-12">
+				<label class="col-xs-4 control-label">Inculde Breakfast </label>
+				<div class="col-xs-6">
+				<select class="form-control" id="include_breakfast" name="include_breakfast" required>
+                       <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+            	</div>
+			</div>
+
+		</div>   
+		        	
+	</div><br>
+
+	<div class="row">
+	    <input type="submit" class="btn btn-primary" value="Save" />
+        <input type="button" onclick="history.back();" class="btn btn-default" value="Back" />    	
+	</div>
+    </form>
 {% endblock %}

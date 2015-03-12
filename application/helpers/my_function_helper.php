@@ -1,10 +1,19 @@
 <?php
 
 //convert numbers to currency format
-if (!function_exists('currency_format')) {
+if (!function_exists('currency_format_idr')) {
 
-    function currency_format($number) {
+    function currency_format_idr($number) {
         return 'Rp. ' . number_format($number);
+    }
+
+}
+
+//convert numbers to currency format
+if (!function_exists('currency_format_two_digit')) {
+
+    function currency_format_two_digit($number) {
+        return number_format($number, 2, '.', ',');
     }
 
 }

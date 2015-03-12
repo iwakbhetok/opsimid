@@ -18,7 +18,8 @@ class User_mdl extends CI_Model {
                 'valid'          => true,
                 'username'       => $row->username,
                 'full_name'      => $row->full_name,
-                'user_group_id'  => $row->group_id,                
+                'user_group_id'  => $row->group_id,
+                'user_id'        => $row->user_id,
             );
             $iduser = $row->user_id;
             // update last login

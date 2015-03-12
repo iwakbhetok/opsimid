@@ -81,12 +81,12 @@ if (!function_exists('convert_datepicker_to_english_format')) {
     function convert_datepicker_to_english_format($indonesia_format = '') {
         $value = '';
         if ($indonesia_format != '') {
-            $temp_english_format = explode(" ", $indonesia_format);
+            $temp_english_format = explode("-", $indonesia_format);
             $tanggal = $temp_english_format[0];
             $bulan = $temp_english_format[1];
             $tahun = $temp_english_format[2];
 
-            $value = $tahun . "/" . get_month_number($bulan) . "/" . $tanggal;
+            $value = $tahun . " " . get_month_number($bulan) . " " . $tanggal;
         }
         return $value;
     }

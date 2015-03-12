@@ -6,7 +6,7 @@ class Class_hotel extends CI_Controller {
         parent::__construct();
         $this->load->library('menu');
         $this->load->model('user_mdl');
-        $this->load->model('form_mdl');
+        $this->load->model('class_mdl');
 
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -27,37 +27,43 @@ class Class_hotel extends CI_Controller {
         
         $content = $this->twiggy->template('breadcrumbs')->render();
         $content .= $this->twiggy->template('list/class')->render();
+        $this->twiggy->set('content_page', $content);
 
         $this->twiggy->set('FORM_NAME', 'form_class');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
         $this->twiggy->set('FORM_IDKEY', 'full.class_id');
-        $this->twiggy->set('FORM_LINK', site_url('hotel/class_hotel/form'));
+        $this->twiggy->set('FORM_LINK', site_url('hotel/class_hotel/delete'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
 
-        $this->twiggy->set('content_page', $content);
-        $script_page = $this->twiggy->template('script/class')->render();       
-
+        $script_page = $this->twiggy->template('script/class')->render();
         $this->twiggy->set('SCRIPTS', $script_page);
-        
-        $this->twiggy->set('content_page', $content);
-
         $output = $this->twiggy->template('dashboard')->render();
-        $this->output->set_output($output);     
+        $this->output->set_output($output);   
+
     }
 
-    function form()
+    function form($id='')
     {
-        $data = array();        
-        
-        // create content page fo dp supplier
+        if (!empty($id)){
+        $data = $this->class_mdl->getdataid($id);
+        $this->twiggy->set('edit', $data); 
+        };
+
+
+        $data = array(); 
         $content = $this->twiggy->template('breadcrumbs')->render();
-        //$content .= $this->twiggy->template('form/filter_dp_supplier')->render();        
         $content .= $this->twiggy->template('form/form_class')->render();
-        // end        
+        $this->twiggy->set('content_page', $content);        
+        $this->twiggy->set('FORM_NAME', 'form_class');
+        $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
+        $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
+        $this->twiggy->set('FORM_IDKEY', $id);
+        $this->twiggy->set('FORM_LINK', site_url('hotel/class_hotel/delete'));    
+        
         $this->twiggy->set('content_page', $content);
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -66,5 +72,29 @@ class Class_hotel extends CI_Controller {
         
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
+    }
+
+    function save()
+    {
+        $params = (object) $this->input->post();   
+        
+        $valid = $this->class_mdl->save($params);
+        //echo $this->db->last_query();
+        
+        //die();
+        if (empty($valid))
+            $this->owner->alert("Please complete the form", "../index.php/hotel/class_hotel/form");
+        else
+            redirect("../index.php/hotel/class_hotel/index");
+    }
+
+    public function delete()
+    {       
+        $valid = false;
+        $id = $this->uri->segment(4, 0);
+        $valid = $this->class_mdl->delete($id);
+        
+        if ($valid)
+            redirect("../index.php/hotel/class_hotel/index");  
     }
  }

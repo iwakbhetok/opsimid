@@ -2,36 +2,36 @@
 
 <section class="content right-side">
     <div class="row">
-        <form action="{{ base_url }}index.php/hotel/hotel/save" method="post" name="form1">
-            <input type="hidden" name="id" id="id" value="{{ edit.hotel_id }}" />
+        <form action="{{ site_url('/hotel/hotel/save') }}" method="post" name="form1">
+            <input type="hidden" name="hotel_id" id="hotel_id" value="{{ edit.hotel_id }}" />
         <div class="col-xs-6">
 
             <div class="form-group col-xs-12">
-                <label class="col-xs-4 control-label">Hotel ID </label>
+                <label class="col-xs-4 control-label">Hotel Code </label>
                 <div class="col-xs-6">
-                    <input type="text" class="form-control" id="hotel_id" name="hotel_id" value="{{ edit.hotel_id}}">
+                    <input type="text" class="form-control" id="hotel_code" name="hotel_code" value="{{ edit.hotel_code}}">
                     </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Hotel Name </label>
                 <div class="col-xs-6">
-                    <input type="text" class="form-control" id="hotel_name" name="hotel_name" value="{{ edit.hotel_name}}">
+                    <input type="text" class="form-control" id="hotel_name" name="hotel_name" value="{{ edit.hotel_name}}" required>
                     </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Address </label>
                 <div class="col-xs-6">
-                    <textarea class="form-control"  id="address" name="address" rows="3"></textarea>
+                    <textarea class="form-control"  id="address" name="address" rows="3" required>{{ edit.address}}</textarea>
                     </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Country </label>
                 <div class="col-xs-6">
-                    <select class="form-control" id="country_code" name="country_code">
-                    <option>1</option>
+                    <select class="form-control" id="country_code" name="country_code" required>
+                        <option default selected value="{{ edit.country_id}}">{{ edit.country_code}}</option>
                     </select>
                     </div>
             </div>
@@ -39,17 +39,15 @@
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">State </label>
                 <div class="col-xs-6">
-                    <select class="form-control" id="state_number" name="state_number">
-                    <option>1</option>
+                    <select class="form-control" id="state" name="state" required>
                     </select>
                     </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">City </label>
-                <div class="col-xs-6" id="city_code" name="city_code">
-                    <select class="form-control">
-                    <option>1</option>
+                <div class="col-xs-6">
+                    <select class="form-control" id="city" name="city">
                     </select>
                     </div>
             </div>
@@ -62,7 +60,8 @@
                 <label class="col-xs-4 control-label">Type </label>
                 <div class="col-xs-6">
                     <select class="form-control" id="hotel_type" name="hotel_type">
-                    <option>1</option>
+                    <option value="Domestic">Domestic</option>
+                    <option value="Internasional">Internasional</option>
                     </select>
                     </div>
             </div>
@@ -71,7 +70,11 @@
                 <label class="col-xs-4 control-label">Star </label>
                 <div class="col-xs-6">
                     <select class="form-control" id="star" name="star">
-                    <option>1</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                     </select>
                     </div>
             </div>
@@ -100,15 +103,15 @@
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Contact Person </label>
                 <div class="col-xs-6">
-                    <input type="text" class="form-control" id="contact_person" name="contact_person" value="{{ edit.contact_person}}">
+                    <input type="text" class="form-control" id="contact_person" name="contact_person" value="{{ edit.contact_person}}" required>
                     </div>
             </div>
         </div>
   
     </div>
     <div class="row">
-<input type="submit" class="btn btn-primary" value="Save" />
-<input type="reset" class="btn btn-default" value="Clear" />
+        <input type="submit" class="btn btn-primary" value="Save" />
+        <input type="button" onclick="history.back();" class="btn btn-default" value="Back" />
     </div>
       </form>
 </section>

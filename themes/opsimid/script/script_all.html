@@ -24,8 +24,95 @@
                     }
                 }   
     });
-    
-    
+        
+
+    //populate supplier hotel
+    $.ajax({           
+        type: "GET",
+        url: "{{ site_url() }}/ajax_master_data/getsupplier_hotel", 
+        data:'',
+        dataType: 'json',               
+        success: function(data){ 
+            $("#supplier_name").append('<option value="" default selected>Supplier Name</option>');
+            var arrayLength = data.length;
+            for(i = 0; i < arrayLength; i++) 
+                $("#supplier_name").append("<option value='"+data[i]['supplier_id']+"'>"+data[i]['supplier_name']+"</option>");
+        } 
+
+    });
+
+    //populate currency
+    $.ajax({           
+        type: "GET",
+        url: "{{ site_url() }}/ajax_master_data/get_currency_combobox", 
+        data:'',                        
+        dataType: 'json',               
+        success: function(data){ 
+            $("#currency").append('<option value="" default selected>Currency</option>');
+            var arrayLength = data.length;
+            for(i = 0; i < arrayLength; i++) 
+                $("#currency").append("<option value='"+data[i]['currency']+"'>"+data[i]['currency_label']+"</option>");
+        } 
+
+    });
+
+
+    //populate country
+    $.ajax({           
+        type: "GET",
+        url: "{{ site_url() }}/ajax_master_data/get_country", 
+        data:'',                        
+        dataType: 'json',               
+        success: function(data){ 
+            $("#country_code").append('<option value="" default selected>Country</option>');
+            var arrayLength = data.length;
+            for(i = 0; i < arrayLength; i++) 
+                $("#country_code").append("<option value='"+data[i]['country_id']+"'>"+data[i]['country_name']+"</option>");
+        } 
+
+    });
+
+    //populate state
+    $("#country_code").on("change", function(){
+        var id = $("#country_code").val();
+        $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: "{{ site_url() }}/ajax_master_data/get_state/"+id,
+                data: '',
+                dataType: "json",
+                success: function (data) {
+                    $('select#state option').remove();
+                    $("#state").append('<option selected>State</option>');
+                    var arrayLength = data.length;
+                    for(i = 0; i < arrayLength; i++) 
+                    $("#state").append("<option value='"+data[i]['state_id']+"'>"+data[i]['state_name']+"</option>");
+                    
+                }
+        });        
+    })
+
+    //populate city
+    $("#state").on("change", function(){
+        var id = $("#state").val();
+        $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: "{{ site_url() }}/ajax_master_data/get_city/"+id,
+                data: '',
+                dataType: "json",
+                success: function (data) {
+                    $('select#city option').remove();
+                    $("#city").append('<option selected>City</option>');
+                    var arrayLength = data.length;
+                    for(i = 0; i < arrayLength; i++) 
+                    $("#city").append("<option value='"+data[i]['city_id']+"'>"+data[i]['city_name']+"</option>");
+                    
+                }
+        });        
+    })
+
+       
     $('body').on('show.bs.modal', '#window-currency',function (e) {
 
     });

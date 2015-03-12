@@ -1,0 +1,112 @@
+{% block content %}
+
+    $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+
+    $('#datetimepicker2').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+            
+    // customer_name typeahead
+    $('#customer_name.typeahead').typeahead({                
+        name: 'customer_name',
+        prefetch: '{{ site_url() }}index.php/hotel/ajax_data/customer',
+        limit: 20
+    });
+
+    //populate class
+    $.ajax({           
+        type: "GET",
+        url: "{{ site_url() }}/hotel/ajax_data/getclass_combobox", 
+        data:'',
+        dataType: 'json',               
+        success: function(data){ 
+            $("#class_type").append('<option value="" default selected>Class Type</option>');
+            var arrayLength = data.length;
+            for(i = 0; i < arrayLength; i++) 
+                $("#class_type").append("<option value='"+data[i]['class_id']+"'>"+data[i]['class_name']+"</option>");
+        } 
+
+    });
+
+    //populate room type
+    $.ajax({           
+        type: "GET",
+        url: "{{ site_url() }}/hotel/ajax_data/getroom_type_combobox", 
+        data:'',
+        dataType: 'json',               
+        success: function(data){ 
+            $("#room_type").append('<option value="" default selected>Room Type</option>');
+            var arrayLength = data.length;
+            for(i = 0; i < arrayLength; i++) 
+                $("#room_type").append("<option value='"+data[i]['room_id']+"'>"+data[i]['room_name']+"</option>");
+        } 
+
+    });
+
+    //populate hotel name
+    $.ajax({           
+        type: "GET",
+        url: "{{ site_url() }}/hotel/ajax_data/gethotel_name_combobox", 
+        data:'',
+        dataType: 'json',               
+        success: function(data){ 
+            $("#hotel_name").append('<option value="" default selected>Hotel Name</option>');
+            var arrayLength = data.length;
+            for(i = 0; i < arrayLength; i++) 
+                $("#hotel_name").append("<option value='"+data[i]['hotel_id']+"'>"+data[i]['hotel_name']+"</option>");
+        } 
+
+    });
+
+var selected = [];
+var table = $('#table_hotel_rate').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/hotel/ajax_data/getrecord_hotel_rate',
+        "columns": [
+                { "data": "hotel_name" },              
+                { "data": "supplier_name" },
+                { "data": "class_name" },
+                { "data": "room_name" },                
+                { "data": "date_from" },
+                { "data": "date_to" },
+                { "data": "sell_room" },
+                { "data": "sell_breakfast" },
+                { "mRender" : function ( data, type, full ) {
+                    FullData = full;
+                    return '{{ BUTTON_CRUD }} ';
+                  }
+                },
+            ], 
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }   
+});
+
+
+// Edit record
+$('#table_hotel_rate').on( 'click', 'a.edit-btn', function (e) {
+        e.preventDefault();        
+        var editId = $(this).data('edit-id');
+        window.location.href='{{ site_url() }}/hotel/hotel_rate/form/' + editId;
+} );
+
+
+
+// Delete a record
+$('#table_hotel_rate').on( 'click', 'a.del-btn', function (e) {
+        e.preventDefault();
+        if(confirm("Are you sure?")) {
+                var delId = $(this).data('delete-id');  
+        window.location='{{ site_url() }}/hotel/hotel_rate/delete/' + delId;   
+    }
+    else
+        return false;
+} );
+
+{% endblock %}
