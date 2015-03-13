@@ -20,6 +20,22 @@ class Ajax_master_data extends CI_Controller {
         $data['iTotalDisplayRecords']   = $this->currency_all_mdl->getrecordcount();
         echo json_encode($data);
     }
+
+    function get_customer()
+    {
+        $this->load->model('customer_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->customer_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->customer_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->customer_mdl->getrecordcount();
+        echo json_encode($data);
+    }
     
     function getsupplier_hotel()
     {

@@ -1,0 +1,48 @@
+{% block content %}
+
+var selected = [];
+var table = $('#table_airlines').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/ticketing/ajax_data/getrecord_airlines',
+        "columns": [
+                { "data": "airlines_name" },                                
+                { "data": "contact_person" },
+                { "data": "phone" },
+                { "data": "email" },
+                { "data": "address" },
+                { "mRender" : function ( data, type, full ) {
+                    FullData = full;
+                    return '{{ BUTTON_CRUD }} ';
+                  }
+                },
+            ], 
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }   
+});
+
+// Edit record
+$('#table_airlines').on( 'click', 'a.edit-btn', function (e) {
+        e.preventDefault();        
+        var editId = $(this).data('edit-id');
+        window.location.href='{{ site_url() }}/ticketing/airlines/form/' + editId;
+} );
+
+
+
+// Delete a record
+$('#table_airlines').on( 'click', 'a.del-btn', function (e) {
+        e.preventDefault();
+        if(confirm("Are you sure?")) {
+                var delId = $(this).data('delete-id');  
+        window.location='{{ site_url() }}/ticketing/airlines/delete/' + delId;   
+    }
+    else
+        return false;
+} );
+
+{% endblock %}

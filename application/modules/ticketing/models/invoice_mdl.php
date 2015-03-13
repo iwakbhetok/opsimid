@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class modelinvoice extends CI_Model {
+class invoice_mdl extends CI_Model {
 	
 	public function __construct(){
             parent::__construct();
@@ -9,7 +9,7 @@ class modelinvoice extends CI_Model {
         
         function getrecordcount()
         {
-            $data = $this->db->count_all_results('trans_invhotel');
+            $data = $this->db->count_all_results('ticketing_invoice');
             return $data;
         }
         

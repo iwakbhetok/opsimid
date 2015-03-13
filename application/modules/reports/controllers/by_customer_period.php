@@ -16,6 +16,9 @@ class by_customer_period extends CI_Controller {
             $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
             $data = array();
 
+            $window_page = $this->twiggy->template('window/window_customer')->render();
+            $this->twiggy->set('window_page', $window_page);
+
             $content = $this->twiggy->template('reports/by_customer_period')->render();                
             $this->twiggy->set('content_page', $content);
 

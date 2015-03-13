@@ -1,0 +1,53 @@
+{% block content %}
+
+<section class="content right-side">
+	<form action="{{ site_url('/ticketing/airlines/save') }}" method="post" name="form1">
+    <div class="row">
+            <input type="hidden" name="airlines_id" id="airlines_id" value="{{ edit.airlines_id }}" />
+        <div class="col-lg-8">
+
+        	<div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Airlines Name</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="airlines_name" name="airlines_name" value="{{ edit.airlines_name}}" required placeholder="Type here. Example: Air Asia, etc.">
+                    </div>
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Contact Person</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="contact_person" name="contact_person" value="{{ edit.contact_person}}" required placeholder="Type here. Example: John, etc.">
+                    </div>
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Phone</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{ edit.phone}}" required placeholder="Type here. Example: 021-8xx, etc.">
+                    </div>
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">E-Mail</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="email" name="email" value="{{ edit.email}}" required placeholder="Type here. Example: John@gmail.com, etc.">
+                    </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Address</label>
+                <div class="col-md-6">
+                    <textarea class="form-control"  id="address" name="address" rows="5">{{ edit.address}}</textarea>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+        <div class="row">
+			<input type="submit" class="btn btn-primary" value="Save" />
+			<input type="button" onclick="history.back()" class="btn btn-default" value="Cancel" />
+			    </div>
+      </form>
+</section>
+
+{% endblock %}

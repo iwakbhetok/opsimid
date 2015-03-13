@@ -6,36 +6,36 @@
       return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     }
 
-    //populate max hotel code also increment it
+    //populate max supplier code also increment it
     $.ajax({           
         type: "GET",
-        url: "{{ site_url() }}/hotel/ajax_data/getmax_hotel_code", 
+        url: "{{ site_url() }}/supplier/ajax_data/getmax_supplier_ticketing_code", 
         data:'',
         dataType: 'json',               
         success: function(data){ 
-            var new_code = 1;
-            var last_code = parseInt(data[0]['hotel_code']);
-            new_code += last_code;
+            var new_data = data[0]['supplier_code'].substr(2);
+            var last_code = parseFloat(new_data);
+            var new_code = parseInt(last_code) + 1 ;
             var data = pad(new_code, 6);
-            $("#hotel_code").val(data);
+            $("#supplier_code").val("TC" + data);
             
         } 
 
     });
 
+
 var selected = [];
-var table = $('#table_hotel').dataTable( {    
+var table = $('#table_supplier_ticketing').dataTable( {    
         "searching": true,
         "ordering": false,    
         "bLengthChange" : false,
-        "ajax": '{{ site_url() }}/hotel/ajax_data/getrecord_hotel',
+        "ajax": '{{ site_url() }}/supplier/ajax_data/getrecord_supplier_ticketing',
         "columns": [
-                { "data": "hotel_name" },              
-                { "data": "hotel_type" },
-                { "data": "star" },
-                { "data": "address" },                
-                { "data": "telp" },
-                { "data": "email" },
+                { "data": "supplier_code" },                
+                { "data": "supplier_name" },
+                { "data": "address" },
+                { "data": "city_name" },
+                { "data": "phone_number" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
                     return '{{ BUTTON_CRUD }} ';
@@ -49,22 +49,21 @@ var table = $('#table_hotel').dataTable( {
             }   
 });
 
-
 // Edit record
-$('#table_hotel').on( 'click', 'a.edit-btn', function (e) {
+$('#table_supplier_ticketing').on( 'click', 'a.edit-btn', function (e) {
         e.preventDefault();        
         var editId = $(this).data('edit-id');
-        window.location.href='{{ site_url() }}/hotel/hotel/form/' + editId;
+        window.location.href='{{ site_url() }}/supplier/supplier/form/' + editId;
 } );
 
 
 
 // Delete a record
-$('#table_hotel').on( 'click', 'a.del-btn', function (e) {
+$('#table_supplier_ticketing').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
         if(confirm("Are you sure?")) {
                 var delId = $(this).data('delete-id');  
-        window.location='{{ site_url() }}/hotel/hotel/delete/' + delId;   
+        window.location='{{ site_url() }}/supplier/supplier/delete/' + delId;   
     }
     else
         return false;

@@ -3,35 +3,34 @@
 <section class="content right-side">
     <div class="row">
         <form action="{{ base_url }}index.php/supplier/supplier/save" method="post" name="form1">
-            <input type="hidden" name="id" id="id" value="{{ edit.id_dok }}" />
+            <input type="hidden" name="supplier_id" id="supplier_id" value="{{ edit.supplier_id }}" />
         <div class="col-xs-6">
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Code </label>
                 <div class="col-xs-6">
-                    <input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+                    <input type="text" class="form-control" id="supplier_code" name="supplier_code" value="{{ edit.supplier_code}}" readonly="readonly">
                     </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Supplier Name </label>
                 <div class="col-xs-6">
-                <input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+                <input type="text" class="form-control" id="supplier_name" name="supplier_name" value="{{ edit.supplier_name}}">
                 </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Address </label>
                 <div class="col-xs-6">
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea class="form-control" rows="3" name="address" id="address"></textarea>
                 </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Country </label>
                 <div class="col-xs-6">
-                <select class="form-control col-xs-10">
-                    <option>1</option>
+                <select class="form-control col-xs-10" name="country_code" id="country_code">
                 </select>
                 </div>
             </div>
@@ -39,8 +38,7 @@
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">State </label>
                 <div class="col-xs-6">
-                <select class="form-control col-xs-10">
-                    <option>1</option>
+                <select class="form-control col-xs-10" name="state" id="state">
                 </select>
                 </div>
             </div>
@@ -48,8 +46,7 @@
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">City </label>
                 <div class="col-xs-6">
-                <select class="form-control col-xs-10">
-                    <option>1</option>
+                <select class="form-control col-xs-10" name="city" id="city">
                 </select>
                 </div>
             </div>
@@ -60,47 +57,47 @@
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Post Code </label>
                 <div class="col-xs-6">
-                <input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+                <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ edit.zip_code}}">
                 </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Phone No </label>
                 <div class="col-xs-6">
-                <input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+                <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ edit.phone_number}}">
                 </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Fax </label>
                 <div class="col-xs-6">
-                <input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+                <input type="text" class="form-control" id="fax" name="fax" value="{{ edit.fax}}">
                 </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Email </label>
                 <div class="col-xs-6">
-                <input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+                <input type="text" class="form-control" id="email" name="email" value="{{ edit.email}}">
                 </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Contact Person </label>
                 <div class="col-xs-6">
-                <input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
+                <input type="text" class="form-control" id="contact_person" name="contact_person" value="{{ edit.contact_person}}">
                 </div>
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-xs-4 control-label">Description </label>
                 <div class="col-xs-6">
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea class="form-control" rows="3" name="description" id="description"></textarea>
                 </div>
             </div>
         </div>
             <input type="submit" class="btn btn-primary" value="Save" />
-            <input type="reset" class="btn btn-default" value="Clear" />
+            <input type="button" onclick="history.back()" class="btn btn-default" value="Back" />
             
     </form>
     </div>

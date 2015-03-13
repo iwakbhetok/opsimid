@@ -117,14 +117,19 @@
 
     });
     
-    var table = $('#table_window_dept').dataTable( {    
+    var table = $('#table_window_customer').dataTable( {    
             "searching": true,
             "ordering": false,    
             "bLengthChange" : false,
-            "ajax": '{{ site_url() }}/ajax_master_data/get_dept',
+            "ajax": '{{ site_url() }}/ajax_master_data/get_customer',
             "columns": [
                     { "data": "nomor" },
-                    { "data": "dept_name" },
+                    { "data": "customer_name" },
+                    { "data": "address" },
+                    { "data": "email" },
+                    { "data": "contact_person" },
+                    { "data": "pricing_policy" },
+                    { "data": "description" },
                     { "mRender" : function ( data, type, full ) {
                         FullData = full;
                         return ' Select ';
@@ -138,7 +143,7 @@
                 }   
     });
     
-    $('body').on('show.bs.modal', '#window-dept',function (e) {
+    $('body').on('show.bs.modal', '#window-customer',function (e) {
 
     });
   

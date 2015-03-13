@@ -1,0 +1,62 @@
+{% block content %}
+
+<section class="content right-side">
+	<form action="{{ site_url('/ticketing/ticket_stock/save') }}" method="post" name="form1">
+    <div class="row">
+            <input type="hidden" name="ticket_stock_id" id="ticket_stock_id" value="{{ edit.ticket_stock_id }}" />
+            <input type="hidden" name="vendor_id" id="vendor_id" value="{{ edit.vendor_id }}" />
+            <input type="hidden" name="group_id" id="group_id" value="{{ edit.group_id }}" />
+        <div class="col-lg-8">
+
+        	<div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Prefix</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="prefix" name="prefix" value="{{ edit.prefix}}" required placeholder="Type here. Example: , etc.">
+                    </div>
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Start</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="start" name="start" value="{{ edit.start}}" required placeholder="Type here. Example: , etc.">
+                    </div>
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Until</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="until" name="until" value="{{ edit.until}}" required placeholder="Type here. Example: , etc.">
+                    </div>
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Total Ticket</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="total_ticket" name="total_ticket" value="{{ edit.total_ticket}}" required placeholder="Type here. Example: , etc.">
+                    </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Stock Date</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control"  id="stock_date" name="stock_date" value="{{ edit.stock_date}}" required placeholder="Type here. "
+                    </div>
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Description</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control"  id="description" name="description" value="{{ edit.description}}" required placeholder="Type here. "
+                    </div>
+            </div>
+        </div>
+
+    </div>
+        <div class="row">
+			<input type="submit" class="btn btn-primary" value="Save" />
+			<input type="button" onclick="history.back()" class="btn btn-default" value="Cancel" />
+			    </div>
+      </form>
+</section>
+
+{% endblock %}

@@ -30,6 +30,15 @@ class hotel_mdl extends CI_Model {
         return $data;
     }
 
+    function getmax_hotel_code()
+    {
+        $this->db->select_max('hotel_code');
+        $this->db->limit(1);
+        $query = $this->db->get('hotel_mst_hotels');
+        $data = $query->result();
+        return $data;
+    }
+
     function getdatalist() {
         $data = array();
         $fields = array(

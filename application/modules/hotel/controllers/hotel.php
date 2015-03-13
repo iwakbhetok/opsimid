@@ -45,16 +45,22 @@ class Hotel extends CI_Controller {
         $this->twiggy->set('SCRIPTS', $script_page);
 
         $output = $this->twiggy->template('dashboard')->render();
-        $this->output->set_output($output);     
+        $this->output->set_output($output);   
 
     }
 
-    function form($id='')
+    function form()
     {
+        $id =  $this->uri->segment(4, 0);
         if (!empty($id)){
         $data = $this->hotel_mdl->getdataid($id);
         $this->twiggy->set('edit', $data); 
-        };
+        $script_page = $this->twiggy->template('script/script_all')->render();
+        }
+        else{
+           $script_page = $this->twiggy->template('script/hotel')->render(); 
+           $script_page .= $this->twiggy->template('script/script_all')->render();
+        }
 
 
         $data = array(); 
@@ -75,7 +81,7 @@ class Hotel extends CI_Controller {
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
 
-        $script_page = $this->twiggy->template('script/script_all')->render();
+        
         $this->twiggy->set('SCRIPTS', $script_page);
 
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
