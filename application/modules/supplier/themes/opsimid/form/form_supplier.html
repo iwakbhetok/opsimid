@@ -1,6 +1,11 @@
 {% block content %}
 
 <section class="content right-side">
+<div class="box border green">
+    <div class="box-title">
+      <h4><i class="fa fa-bars"></i>{{ BREADCRUMBS_TITLE }}</h4>
+    </div>
+    <div class="box-body big">
     <div class="row">
         <form action="{{ base_url }}index.php/supplier/supplier/save" method="post" name="form1">
             <input type="hidden" name="supplier_id" id="supplier_id" value="{{ edit.supplier_id }}" />
@@ -101,7 +106,8 @@
             
     </form>
     </div>
-
+</div>
+</div>
 </section>
 
 {% endblock %}

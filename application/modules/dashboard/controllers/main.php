@@ -20,7 +20,11 @@ class Main extends CI_Controller {
         $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
         $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
 
-        $content = $this->twiggy->template('dashboard_layout')->render();            
+        //$this->twiggy->set('BREADCRUMBS_TITLE', 'Dashboard');
+        $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Home');
+
+        $content = $this->twiggy->template('breadcrumbs')->render();
+        $content .= $this->twiggy->template('dashboard_layout')->render();            
         $this->twiggy->set('content_page', $content);
         
         $output = $this->twiggy->template('dashboard')->render();

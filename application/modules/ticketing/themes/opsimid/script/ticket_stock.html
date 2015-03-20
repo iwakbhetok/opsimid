@@ -1,78 +1,115 @@
 {% block content %}
+    $("#table_ticket_stock").hide();
+    $("#table_ticket_stock_2").hide();
 
-    $('#datetimepicker1').datetimepicker({
-                    format: 'YYYY-MM-DD'
-                });
-
-    $('#datetimepicker2').datetimepicker({
-                format: 'YYYY-MM-DD'
-            });
-
-    $('#datetimepicker3').datetimepicker({
-                    format: 'YYYY-MM-DD'
-                });
-
-    $('#datetimepicker4').datetimepicker({
-                format: 'YYYY-MM-DD'
-            });
-
-var selected = [];
-var table = $('#table_invoice').dataTable( {    
-        "searching": true,
-        "ordering": false,    
-        "bLengthChange" : false,
-        "ajax": '{{ site_url() }}/hotel/ajax_data/getrecord_invoice',
-        "columns": [
-                { "data": "nomor" },
-                { "data": "dp_number" },
-                { "data": "transaksi_no" },
-                { "data": "tanggal_transaksi" },
-                { "data": "id_dept" },                
-                { "data": "kode_customer" },
-                { "data": "cp" },
-                { "data": "currency" },                
-                { "data": "amount" },
-                { "mRender" : function ( data, type, full ) {
-                    FullData = full;
-                    return '{{ BUTTON_CRUD }} ';
-                  }
-                },
-            ], 
-            "rowCallback": function( row, data ) {
-                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
-                    $(row).addClass('selected');
+     $( "#btn_invoice_1" ).click(function(e) {
+     //e.preventDefault();
+      var customer_name = $('#customer_name').val();
+      var date_from = $('#date_from').val();
+      var date_to = $('#date_to').val();
+      $("#table_ticket_stock").show("slow", "swing");
+         $.ajax({
+                type:'POST',
+                url:'{{ site_url() }}/ticketing/ajax_data/get_id_by_customer_name',
+                data: {"customer_name":customer_name},
+                success:function(customer_id){
+                    var selected = [];
+                    var table = $('#table_ticket_stock').dataTable( {
+                            "searching": true,
+                            "ordering": false,
+                            "bLengthChange" : true,
+                            "ajax": {
+                                "url": "{{ site_url() }}/ticketing/ajax_data/getlist_by_customer_id/"+customer_id+"/"+date_from+"/"+date_to,
+                                "type": "POST",
+                                },
+                            "columns": [
+                                    { "data": "invoice_number" },
+                                    { "data": "customer_name" },
+                                    { "data": "supplier_name" },
+                                    { "data": "create_date" },
+                                    { "data": "due_date" },
+                                    { "data": "airlines_name" },
+                                    { "data": "total" },
+                                    { "mRender" : function ( data, type, full ) {
+                                        FullData = full;
+                                        return '{{ BUTTON_CRUD }} ';
+                                      }
+                                    },
+                                ], 
+                                "rowCallback": function( row, data ) {
+                                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                                        $(row).addClass('selected');
+                                    }
+                                }   
+                    });
                 }
-            }   
-});
+            });
+    });
+
+    $( "#btn_invoice_cancel_1" ).click(function(e) {
+    e.preventDefault();
+    var oTable = $('#table_ticket_stock').dataTable();
+        oTable.fnClearTable(0);
+        oTable.fnDraw();
+        var customer_name = $('#customer_name').val('');
+        var date_from = $('#date_from').val('');
+        var date_to = $('#date_to').val('');
+    });
+
+    $( "#btn_invoice_2" ).click(function(e) {
+     e.preventDefault();
+      var customer_name = $('#customer_name_2').val();
+      var date_from = $('#date_from_2').val();
+      var date_to = $('#date_to_2').val();
+       $("#table_ticket_stock_2").show("slow", "swing");
+         $.ajax({
+                type:'POST',
+                url:'{{ site_url() }}/ticketing/ajax_data/get_id_by_customer_name',
+                data: {"customer_name":customer_name},
+                success:function(customer_id){
+                    var selected = [];
+                    var table = $('#table_ticket_stock_2').dataTable( {
+                            "searching": true,
+                            "ordering": false,    
+                            "bLengthChange" : true,
+                            "ajax": {
+                                "url": "{{ site_url() }}/ticketing/ajax_data/getlist_by_customer_id/"+customer_id+"/"+date_from+"/"+date_to,
+                                "type": "POST",
+                                },
+                            "columns": [
+                                    { "data": "invoice_number" },
+                                    { "data": "customer_name" },
+                                    { "data": "supplier_name" },
+                                    { "data": "create_date" },
+                                    { "data": "due_date" },
+                                    { "data": "airlines_name" },
+                                    { "data": "total" },
+                                    { "mRender" : function ( data, type, full ) {
+                                        FullData = full;
+                                        return '{{ BUTTON_CRUD }} ';
+                                      }
+                                    },
+                                ], 
+                                "rowCallback": function( row, data ) {
+                                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                                        $(row).addClass('selected');
+                                    }
+                                }   
+                    });
+                }
+            });
+    });
 
 
-// Edit record
-$('#table_invoice').on( 'click', 'a.edit-btn', function (e) {
+// SELECT record
+$('#table_invoice').on( 'click', 'a.select-btn', function (e) {
         e.preventDefault();        
-        var delId = $(this).data('edit-id');
+        var delId = $(this).data('select-id');
         window.location.href='{{ site_url() }}/cashier/dp_customer/form/' + delId;
         //editor
         //    .title( 'Edit record' )
         //    .buttons( { "label": "Update", "fn": function () { editor.submit() } } )
         //    .edit( $(this).closest('tr') );
-} );
- 
-// Delete a record
-$('#table_invoice').on( 'click', 'a.del-btn', function (e) {
-        e.preventDefault();
-        if(confirm("Are you sure?")) {
-                var delId = $(this).data('delete-id');  
-		window.location='{{ site_url() }}/cashier/dp_customer/delete/' + delId;	
-	}
-	else
-		return false;
-                
-        //alert('hapus ' + $(this).data('delete-id'));
-        //editor
-        //    .title( 'Edit record' )
-        //    .message( "Are you sure you wish to delete this row?" )
-        //    .buttons( { "label": "Delete", "fn": function () { editor.submit() } } )
-        //    .remove( $(this).closest('tr') );
 } );
     
 $('body').on('show.bs.modal', '.modal',function (e) {

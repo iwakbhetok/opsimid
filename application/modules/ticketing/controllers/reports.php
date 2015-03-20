@@ -24,9 +24,8 @@ class Reports extends CI_Controller {
         $this->load->model('report_menu_mdl');
         $report_list = $this->report_menu_mdl->get_reportmenu(29);
         $this->twiggy->set('report_list', $report_list);
-        // create content page fo dp supplier
-        $content = $this->twiggy->template('breadcrumbs')->render();
-        //$content .= $this->twiggy->template('form/filter_dp_supplier')->render();        
+
+        $content = $this->twiggy->template('breadcrumbs')->render();      
         $content .= $this->twiggy->template('content/reports')->render();
         // end        
         $this->twiggy->set('content_page', $content);
@@ -41,10 +40,10 @@ class Reports extends CI_Controller {
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
-        $script_page = $this->twiggy->template('script/reports')->render();         
+        //$script_page = $this->twiggy->template('script/reports')->render();         
         //$script_page .= $this->twiggy->template('script/script_all')->render();         
-        
-        $this->twiggy->set('SCRIPTS', $script_page);
+        //$this->twiggy->set('SCRIPTS', $script_page);
+
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
     }

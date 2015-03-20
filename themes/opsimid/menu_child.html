@@ -1,7 +1,10 @@
-    <ul class="nav nav-second-level">
+    <ul class="sub">
         {% for child_menu in menuchild %}
-        <li>
-            <a href="{{ child_menu.child_link }}"><i class="fa fa-fw fa-tasks"></i> {{ child_menu.child_name }} {{ child_menu.iconarrow }}</a>
+        <li {{ child_menu.has_child }}>
+            <a href="{{ child_menu.child_link }}">
+                <i class="fa fa-fw fa-tasks"></i> <span class="sub-menu-text">{{ child_menu.child_name }}</span> 
+                {{ child_menu.iconarrow }}
+            </a>
             {{ child_menu.CHILD_THIRD_LIST }}
         </li>
         {% endfor %}

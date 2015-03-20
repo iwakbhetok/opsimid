@@ -132,11 +132,21 @@ class modelNumbertrans extends CI_Model {
 		$this->db->update("mst_conf");
 	}
 	
-	public function getVendorTur() {	
+//	public function getVendorTur() {	
+////		$log = $this->session->all_userdata();
+//		$valid = false;
+//		
+//		$vtNum = $this->lastVt + 1;
+//		$lastVt = $this->vendorturId."".$this->thnTrans."".$this->blnTrans."".$this->convertToChar($vtNum);
+////                print_r($lastVt);
+//		return $lastVt;		
+//	}
+        
+        public function getVendorTur($max) {	
 //		$log = $this->session->all_userdata();
-		$valid = false;
+//		$valid = false;
 		
-		$vtNum = $this->lastVt + 1;
+		$vtNum = $max + 1;
 		$lastVt = $this->vendorturId."".$this->thnTrans."".$this->blnTrans."".$this->convertToChar($vtNum);
 //                print_r($lastVt);
 		return $lastVt;		

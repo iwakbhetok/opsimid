@@ -125,4 +125,42 @@ class ticket_stock_mdl extends CI_Model {
         return $valid;      
     }
 
+    function getdatalist_invoice_customer($id, $date_from, $date_to)
+    {
+        $fields = array(
+            'tti.customer_id',
+            'tti.invoice_id',
+            'tti.invoice_number',
+            'mc.title',
+            'mc.full_name',
+            'ms.supplier_name',
+            'tti.invoice_date',
+            'tti.due_date',
+            'tma.airlines_name',
+            'tti.total_sell_price',
+            'tti.currency',
+            );
+        $this->db->select($fields);
+        $this->db->join('mst_customer mc','mc.customer_id = tti.customer_id');
+        $this->db->join('mst_supplier ms','ms.supplier_id = tti.supplier_id');
+        $this->db->join('ticketing_mst_airlines tma','tma.airlines_id = tti.airlines_id');
+        $this->db->where('tti.customer_id', $id);
+        $this->db->where('(tti.invoice_date > "'.$date_from.'" AND tti.invoice_date < "'.$date_to.'")');
+        $query = $this->db->get('trans_ticketing_invoice tti');
+        $data = array();
+        foreach ($query->result() as $row) {
+            $data[] = array(
+                'invoice_id'   => $row->invoice_id,
+                'invoice_number'=> $row->invoice_number.'<br>'.convert_datepicker_to_english_format($row->invoice_date),
+                'customer_name' => $row->title.' '.$row->full_name,
+                'supplier_name' => $row->supplier_name,
+                'create_date'   => convert_datepicker_to_english_format($row->invoice_date),
+                'due_date'      => convert_datepicker_to_english_format($row->due_date),
+                'airlines_name' => $row->airlines_name,
+                'total'         =>  '<p style="text-align:right;">'.currency_format_two_digit($row->total_sell_price).' '. $row->currency.'</p>',
+                );
+        }
+        return $data;
+    }
+
 }

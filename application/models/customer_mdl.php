@@ -12,6 +12,17 @@ class customer_mdl extends CI_Model {
         $data = $this->db->count_all_results();
         return $data;
     }
+
+    function getrecord_with_typehead($params)
+    {
+        $this->db->where('full_name LIKE', '%'.$params.'%');
+        $query = $this->db->get('mst_customer');
+        foreach ($query->result() as $row):
+            $data[] = array($row->full_name,
+                );
+        endforeach;
+        return $data;
+    }
         
     function getdatalist()
     {
@@ -33,6 +44,18 @@ class customer_mdl extends CI_Model {
             ); 
             $nomor++;
         endforeach;
+        return $data;
+    }
+
+    function get_id_by_customer_name($name)
+    {
+        $query = $this->db->query("SELECT customer_id FROM mst_customer WHERE CONCAT (title, ' ', full_name) = '" .$name."'");
+        $data = 0;
+        if ($query->num_rows() > 0)
+            {
+               $row = $query->row();
+               $data = (int)$row->customer_id;
+            }
         return $data;
     }
 

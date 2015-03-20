@@ -1,0 +1,35 @@
+{% extends _layout %}
+
+{% block content %}
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+       <!-- Navigation -->
+       {% include 'toggle_header.html' %}
+       <!-- End Navigation -->
+        
+       <!-- Navigation -->
+       {% include 'menu_top.html' %}
+       <!-- End Navigation -->
+        
+       <!-- Navigation -->
+       {% include 'menu.html' %}
+       <!-- End Navigation -->
+       
+    </nav>
+    
+    <!-- Page Content -->
+    <div id="page-wrapper">
+            <div class="container-fluid">
+                {{ window_page }}
+                
+                
+                {{ content_page }}
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+    
+</div>
+{% endblock %}

@@ -1,27 +1,99 @@
 {% block content %}
-<div class="container-fluid">
-    <form action="{{ site_url() }}/t/coa_class/save" method="post" name="form1">
-        <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />
+<div class="content right-side">
+    <form action="{{ site_url() }}/tour/sub_cost/save" method="post" name="form1">
+        <input id="class_id" name="sub_cost_id" type="hidden" value="{{ edit.sub_cost_id }}" />
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Code</label>
-                    <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    <label for="sub_cost_code" class="col-xs-4 control-label">Code</label>
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control" id="sub_cost_code" name="sub_cost_code" value="{{ edit.sub_cost_code }}" placeholder="Sub Cost Code">
                     </div> 
                 </div>
 
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Cost</label>
-                    <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    <label for="sub_cost_name" class="col-xs-4 control-label">Cost</label>
+                    <div class="col-xs-6">
+                        <select class="form-control" id="sub_cost_name" name="sub_cost_name">
+                            <option value="ACA INSURANCE">ACA INSURANCE</option>
+                            <option value="Add Deviasi">Add Deviasi</option>
+                            <option value="Additional">Additional</option>
+                            <option value="Airport Tax International">Airport Tax International</option>
+                            <option value="APO TAX INT; CHILD">APO TAX INT; CHILD</option>
+                            <option value="Apohandling/Delivery Ticket">Apohandling/Delivery Ticket</option>
+                            <option value="Asuransi Individu">Asuransi Individu</option>
+                            <option value="Asuransi Keluarga">Asuransi Keluarga</option>
+                            <option value="Banner">Banner</option>
+                            <option value="Bonus">Bonus</option>
+                            <option value="Cancellation Fee">Cancellation Fee</option>
+                            <option value="Cancellation Fee Weaver">Cancellation Fee Weaver</option>
+                            <option value="Car Rent">Car Rent</option>
+                            <option value="Deviasi">Deviasi</option>
+                            <option value="DOCUMENTATION">DOCUMENTATION</option>
+                            <option value="Domestic Ticket">Domestic Ticket</option>
+                            <option value="Driver Room">Driver Room</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Flight Insurance">Flight Insurance</option>
+                            <option value="FOC Cost">FOC Cost</option>
+                            <option value="Food Suplement">Food Suplement</option>
+                            <option value="General Item">General Item</option>
+                            <option value="GOLF">GOLF</option>
+                            <option value="GOLF EQUIPMENT RENTAL">GOLF EQUIPMENT RENTAL</option>
+                            <option value="Guide Fee">Guide Fee</option>
+                            <option value="Hotel International">Hotel International</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="International ticket">International ticket</option>
+                            <option value="Join Tour">Join Tour</option>
+                            <option value="Less Deviasi">Less Deviasi</option>
+                            <option value="Less Hotel">Less Hotel</option>
+                            <option value="Less Ticket Domestic">Less Ticket Domestic</option>
+                            <option value="Less Ticket International">Less Ticket International</option>
+                            <option value="Local Guide">Local Guide</option>
+                            <option value="Luggage Van">Luggage Van</option>
+                            <option value="Meals">Meals</option>
+                            <option value="Parking Fee">Parking Fee</option>
+                            <option value="PIC">PIC</option>
+                            <option value="PORT TAXES">PORT TAXES</option>
+                            <option value="Single Suplement">Single Suplement</option>
+                            <option value="Ski Pass Beginner">Ski Pass Beginner</option>
+                            <option value="Ski Standar Ski Equipment">Ski Standar Ski Equipment</option>
+                            <option value="Souvenir">Souvenir</option>
+                            <option value="T/L ACCOMODATION">T/L ACCOMODATION</option>
+                            <option value="T/L Airport Tax">T/L Airport Tax</option>
+                            <option value="T/L Allowance">T/L Allowance</option>
+                            <option value="T/L APO HANDLING">T/L APO HANDLING</option>
+                            <option value="T/L Fiscal">T/L Fiscal</option>
+                            <option value="T/L Flight Insurance">T/L Flight Insurance</option>
+                            <option value="T/L Insurance">T/L Insurance</option>
+                            <option value="T/L Land">T/L Land</option>
+                            <option value="T/L Meals">T/L Meals</option>
+                            <option value="T/L Other Expenses">T/L Other Expenses</option>
+                            <option value="T/L Passport">T/L Passport</option>
+                            <option value="T/L Phone allowance">T/L Phone allowance</option>
+                            <option value="T/L Single Supplement">T/L Single Supplement</option>
+                            <option value="T/L Ticket Domestic">T/L Ticket Domestic</option>
+                            <option value="T/L Ticket International">T/L Ticket International</option>
+                            <option value="T/L Tipping Budget">T/L Tipping Budget</option>
+                            <option value="T/L Visa">T/L Visa</option>
+                            <option value="Tiket">Tiket</option>
+                            <option value="Tipping">Tipping</option>
+                            <option value="TL COST IN RUPIAH">TL COST IN RUPIAH</option>
+                            <option value="TL COST IN USD">TL COST IN USD</option>
+                            <option value="TL Miscelaneous">TL Miscelaneous</option>
+                            <option value="TRANSFER APT-HTL">TRANSFER APT-HTL</option>
+                            <option value="TRANSFER HTL-APT">TRANSFER HTL-APT</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="UP GRADE CABIN">UP GRADE CABIN</option>
+                            <option value="Visa">Visa</option>
+                        </select>
                     </div> 
                 </div>
 
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Description</label>
-                    <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                    <label for="class_id" class="col-xs-4 control-label">Description</label>
+                    <div class="col-xs-6">
+                        <!--<input type="text" class="form-control" id="description" name="description" value="{{ edit.description }}" placeholder="Description">-->
+                        <textarea class="form-control" id="description" name="description" value="{{ edit.description }}" placeholder="Description"></textarea>
                     </div> 
                 </div>
 
@@ -30,10 +102,10 @@
             </div>
         </div>
 
-
-
-        <input type="submit" class="btn btn-default" value="Save" id="btnsave" name="btnsave">
-        <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
+        <div class="row">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <input type="button" onclick="history.back()" class="btn btn-default" value="Back" />
+        </div>
     </form> 
 </div>
 

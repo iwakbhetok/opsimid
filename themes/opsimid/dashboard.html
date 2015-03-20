@@ -1,34 +1,44 @@
 {% extends _layout %}
 
 {% block content %}
-<div id="wrapper">
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-       <!-- Navigation -->
-       {% include 'toggle_header.html' %}
-       <!-- End Navigation -->
-        
-       <!-- Navigation -->
-       {% include 'menu_top.html' %}
-       <!-- End Navigation -->
-        
-       <!-- Navigation -->
-       {% include 'menu.html' %}
-       <!-- End Navigation -->
+
+        <!-- HEADER -->
+	<header class="navbar clearfix" id="header">
+            <div class="container">
+				<!-- Navigation -->
+                                {% include 'toggle_header.html' %}
+                                <!-- End Navigation -->
        
-    </nav>
-    
-    <!-- Page Content -->
-    <div id="page-wrapper">
-            <div class="container-fluid">
-                {{ window_page }}
+				<!-- Navigation -->
+                                {% include 'menu_navigasi_top.html' %}
+                                <!-- End Navigation -->				
+				
+		</div>
+            
+                <!-- Navigation -->
+                {% include 'menu_top.html' %}
+                <!-- End Navigation -->
                 
-                {{ content_page }}
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
-    </div>
-    <!-- /#page-wrapper -->
-    
-</div>
+        </header>    
+
+        <!-- PAGE -->
+        <section id="page">
+                <!-- Navigation -->
+                {% include 'menu.html' %}
+                <!-- End Navigation -->
+                
+                <div id="main-content">
+                    {{ window_page }}
+                    
+                    <div class="container">
+                        <div class="row">
+					<div id="content" class="col-lg-12">
+                    {{ content_page }}
+                                        </div>
+                        </div>    
+                    </div>
+                </div>
+        </section>
+        <!-- PAGE -->
+
 {% endblock %}

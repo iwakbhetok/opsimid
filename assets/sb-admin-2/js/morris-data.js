@@ -55,7 +55,7 @@ $(function() {
         }],
         xkey: 'period',
         ykeys: ['iphone', 'ipad', 'itouch'],
-        labels: ['iPhone', 'iPad', 'iPod Touch'],
+        labels: ['Ticketing', 'Hotels', 'Tours'],
         pointSize: 2,
         hideHover: 'auto',
         resize: true

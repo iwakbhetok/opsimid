@@ -7,7 +7,7 @@ var table = $('#table_quotation').dataTable( {
         "bLengthChange" : false,
         "ajax": '{{ site_url() }}/tour/ajax_data/getrecord_quotation',
         "columns": [
-                { "data": "code_tour" },                
+                { "data": "tour_code" },                
                 { "data": "type" },
                 { "data": "valid_from" },
                 { "data": "valid_to" },                
@@ -27,18 +27,18 @@ var table = $('#table_quotation').dataTable( {
 });
 
 //edit
-$('#table_supplier').on('click', 'a.edit-btn', function (e) {
+$('#table_quotation').on('click', 'a.edit-btn', function (e) {
     e.preventDefault(); 
     var editId = $(this).data('edit-id');
-    window.location.href='{{ site_url() }}/tour/supplier/form/' + editId;
+    window.location.href='{{ site_url() }}/tour/quotation/form/' + editId;
 });
 
 // Delete a record
-$('#table_supplier').on( 'click', 'a.del-btn', function (e) {
+$('#table_quotation').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
         if(confirm("Are you sure?")) {
                 var delId = $(this).data('delete-id');  
-		window.location='{{ site_url() }}/configuration/coa_class/delete/' + delId;	
+		window.location='{{ site_url() }}/tour/quotation/delete/' + delId;	
 	}
 	else
 		return false;

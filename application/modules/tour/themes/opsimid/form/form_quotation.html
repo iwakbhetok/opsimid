@@ -1,91 +1,288 @@
 {% block content %}
 <div class="container-fluid">
-    <form action="{{ site_url() }}/t/coa_class/save" method="post" name="form1">
-        <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />
+    <form action="{{ site_url() }}/tour/quotation/save" method="post" name="form1">
+        <input id="quotation_id" name="quotation_id" type="hidden" value="{{ edit.quotation_id }}" />
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group col-xs-12">
                     <label for="kodeVendor" class="col-xs-3 control-label">Tour Code</label>
                     <div class="col-xs-7">
                         <!--<input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" placeholder="" readonly="TRUE">-->
-                        <input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{kode_vendor }}" placeholder="xx">
+                        <input type="text" class="form-control" id="airlines_id" name="airlines_id" value="{{edit.airlines_id }}" placeholder="Tour Code">
                     </div> 
                 </div> 
 
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Airlines</label>
+                    <label for="airline_id" class="col-xs-3 control-label">Airlines</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendora" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
-                    </div> 
+                        <select  class="form-control" id="airline_id" name="airline_id" onchange="loadState(this.value)">
+                            <option value="">--Select--</option>
+                            {% for air in airlines.airlines %}
+                            <option value="{{ air.airlines_id }}" {% if air.airline_id == edit.airline_id%} selected="selected" {% endif %}>{{ air.airlines_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>  
                 </div>
-                
+
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">Valid From</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendorv" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="valid_from" name="valid_from" value="{{ edit.valid_from }}" placeholder="Valid From">
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">Valid to</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendorb" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="valid_to" name="valid_to" value="{{ edit.valid_to }}" placeholder="Valid to">
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">Season</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendore" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <select class="form-control" id="region" name="region">
+                            <option value="Holiday">Holiday</option>
+                            <option value="Other">Other</option>
+                            <option value="Weekend">Weekend</option>
+                        </select>
                     </div> 
                 </div>
-                
-               
+
+
             </div>
 
             <div class="col-xs-6">
-                 <div class="form-group col-xs-12">
+                <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">Description</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vensedor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="description" name="description" value="{{ edit.description }}" placeholder="Description">
                     </div> 
                 </div> 
 
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">Tour Type</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendfor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <select class="form-control" id="region" name="region">
+                            <option value="Package">Package</option>
+                            <option value="Incentive">Incentive</option>
+                            <option value="Group">Group</option>
+                        </select>
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">Based on person</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_venqdor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="pax" name="pax" value="{{ edit.pax }}" placeholder="Based on person">
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">Region</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_venduor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <select class="form-control" id="region" name="region">
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="America">America</option>
+                            <option value="Africa">Africa</option>
+                        </select>
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">Currency</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_venodor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <select  class="form-control" id="currency" name="currency" onchange="loadState(this.value)">
+                            <option value="">--Select--</option>
+                            {% for count in airlines.currency %}
+                            <option value="{{ count.currency }}" {% if count.currency == edit.currency%} selected="selected" {% endif %}>{{ count.currency}}</option>
+                            {% endfor %}
+                        </select>
                     </div> 
                 </div>
             </div>
         </div>
 
+        <!--detail-->
+        <div id="detailInvoice">
+            <table class="table table-bordered table-hover table-striped" align="center" cellpadding="1" class="tblPass" style="margin-top:20px;">
+                <tr class="passHead">
+                    <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>Main Cost</strong></center></td>
+                <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>Sub Cost</strong></center></td>
+                <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>Detail</strong></center></td>
+                <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>Supplier</strong></center></td>
+                <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>Description</strong></center></td>
+                <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>Org Ccy</strong></center></td>
+                <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>Org Price</strong></center></td>
+                <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>ADULT</strong></center></td><br />
+                <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>CHILD</strong></center></td>
+                <td nowrap="nowrap" bgcolor="#CCCCCC"><center><strong>TRIPLE</strong></center></td>
+                </tr>
 
+                <tr class="passClone" id="entri_1" style="border-bottom:solid 5px #ccc">
+                    <td nowrap="nowrap" class="colom_1">
+                        <select class="form-control" id="cost_id_1" name="cost_id_1">
+                            {% for cost in airlines.cost %}
+                            <option value="{{ cost.cost_id }}" {% if cost.cost_id == edit.cost_id %} selected="selected" {% endif %}>{{ cost.cost_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
 
-        <input type="submit" class="btn btn-default" value="Save" id="btnsave" name="btnsave">
+                    <td nowrap="nowrap" class="colom_2">
+                        <select class="form-control" id="sub_cost_id_1" name="sub_cost_id_1">
+                            {% for sub_cost in airlines.sub_cost %}
+                            <option value="{{ sub_cost.sub_cost_id }}" {% if sub_cost.sub_cost_id == edit.sub_cost_id %} selected="selected" {% endif %}>{{ sub_cost.sub_cost_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td nowrap="nowrap" class="colom_3">
+                        <input class="form-control detail_cost" name="detail_cost_1" id="detail_cost_1" type="text" size="20" required placeholder="Detail"/>
+                    </td>
+
+                    <td nowrap="nowrap" class="colom_4">
+                        <select class="form-control " id="supplier_id_1" name="supplier_id_1">
+                            {% for supplier in airlines.supplier %}
+                            <option value="{{ supplier.supplier_id }}" {% if supplier.supplier_id == edit.supplier_id %} selected="selected" {% endif %}>{{ supplier.supplier_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td nowrap="nowrap" class="colom_5">
+                        <input class="description form-control" name="description_1" id="description_1" type="text" size="30" required placeholder="Description"/></td>
+                    <td nowrap="nowrap" class="colom_6">
+                        <select id="org_ccy_1" name="org_ccy_1" class="form-control org_ccy">
+                            {% for curr in airlines.currency %}
+                            <option value="{{ curr.currency }}" {% if curr.currency == edit.currency %} selected="selected" {% endif %}>{{ curr.currency }}</option>
+                            {% endfor %}</select>
+                    </td>
+
+                    <td nowrap="nowrap" class="colom_7">
+                        <input class="form-control org_price" name="org_price_1" id="org_price_1" type="text" size="8" required placeholder="Org Price" onchange="
+                                angka(this);"/>
+                    </td>
+
+                    <td nowrap="nowrap" class="colom_8">
+                        <input class="form-control adult_price" name="adult_price_1" id="adult_price_1" type="text" size="8" required placeholder="ADULT" onchange="
+                                angka(this);"/>
+                    </td>
+
+                    <td nowrap="nowrap" class="colom_9">
+                        <input class="form-control chd_price" name="chd_price_1" id="chd_price_1" type="text" size="8" required placeholder="CHILD" onkeypress="validasi();"/>
+                    </td>
+
+                    <td nowrap="nowrap" class="colom_10">
+                        <input class="form-control triple_price" name="triple_price_1" id="triple_price_1" type="text" size="8" required placeholder="TRIPLE"/>
+                    </td>
+
+                    <td nowrap="nowrap" class="colom_11">
+                        <input name="del_1" type="button" class="btn btn-default" id="del_1"  style="display:none;" value="delete" />
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"><input type="hidden" class="totalPass" name="totalPass" id="totalPass" value="1"/></td>
+                </tr>
+
+            </table>
+            <br/>
+            <input type="button" class="btn btn-default" value="ADD DETAIL" onclick="addPassRow();"  />
+
+            <br/>
+            <br/>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Save" id="btnsave" name="btnsave">
         <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
     </form> 
 </div>
+
+<script type="text/javascript">
+    //untuk menambah baris
+    function addPassRow() {
+        var total = $("#totalPass").val();
+        if (total < 10) {
+            var num = $('.passClone').length;
+            var def = "IDR";// how many "duplicatable" input fields we currently have
+
+            newNum = new Number(num + 1);     // the numeric ID of the new input field being added
+            newElem = $('#entri_' + num).clone().attr('id', 'entri_' + newNum); // create the new element via clone(), and manipulate it's ID using newNum value
+            newElem.find('.id_cost').attr('id', 'id_cost_' + newNum).attr('name', 'id_cost_' + newNum).val('');
+            newElem.find('.id_subcost').attr('id', 'id_subcost_' + newNum).attr('name', 'id_subcost_' + newNum).val('');
+            newElem.find('.detail_cost').attr('id', 'detail_cost_' + newNum).attr('name', 'detail_cost_' + newNum).val('');
+            newElem.find('.id_vendor').attr('id', 'id_vendor_' + newNum).attr('name', 'id_vendor_' + newNum).val('');
+            newElem.find('.org_ccy').attr('id', 'org_ccy_' + newNum).attr('name', 'org_ccy_' + newNum).val('').val(def);
+            newElem.find('.description').attr('id', 'description_' + newNum).attr('name', 'description_' + newNum).val('');
+            newElem.find('.org_price').attr('id', 'org_price_' + newNum).attr('name', 'org_price_' + newNum).val('').bind("keyup", function () {
+                angka(this);
+            });
+            newElem.find('.adult_price').attr('id', 'adult_price_' + newNum).attr('name', 'adult_price_' + newNum).val('').bind("keyup", function () {
+                angka(this);
+            });
+            newElem.find('.chd_price').attr('id', 'chd_price_' + newNum).attr('name', 'chd_price_' + newNum).val('').bind("keyup", function () {
+                angka(this);
+            });
+            newElem.find('.triple_price').attr('id', 'triple_price_' + newNum).attr('name', 'triple_price' + newNum).val('').bind("keyup", function () {
+                angka(this);
+            });
+            newElem.find('.btn').attr('id', 'del_' + newNum).attr('name', 'del_' + newNum).css("display", "block").val('Delete-' + newNum)
+                    .bind("click", function (event) {
+                        var arr = $(this).val().split("-");
+                        deletePassenger(parseFloat(arr[1]));
+                    });
+
+            jQuery('#entri_' + num).after(newElem);
+            $("#totalPass").val(newNum);
+        }
+        else {
+            alert("max 10");
+            return false;
+        }
+    }
+
+    //untuk mengahapus
+    function deletePassenger(passID) {
+        if ($("#id_cost" + passID).val() !== "") {
+            if ($("#entri_" + passID).siblings().length && window.confirm('are you sure want to delete this?')) {
+                $.when($("#entri_" + passID).remove()).then(Reorder(passID));
+            }
+        }
+        else {
+            $.when($("#entri_" + passID).remove()).then(Reorder(passID));
+        }
+    }
+
+    $(document).ready(function () {
+        //paksa ke IDR
+        $(function () {
+            var def = "IDR";
+            $('.org_ccy,#currency').val(def);
+
+        });
+
+        //tanggal dari hari ini
+        $("#valid_from").datepicker({
+            minDate: 0,
+            maxDate: '+1Y+6M',
+            onSelect: function (dateStr) {
+                var min = $(this).datepicker('getDate'); // Get selected date
+                $("#cek_out_1").datepicker('option', 'minDate', min || '0'); // Set other min, default to today
+            }
+        });
+
+        //tanggal dari hari ini
+        $("#valid_to").datepicker({
+            minDate: '0',
+            maxDate: '+1Y+6M',
+            onSelect: function (dateStr) {
+                var max = $(this).datepicker('getDate'); // Get selected date
+                $('#datepicker').datepicker('option', 'maxDate', max || '+1Y+6M'); // Set other max, default to +18 months
+            }
+        });
+    });
+</script>
+<script>
+
+</script>
 
 {% endblock %}

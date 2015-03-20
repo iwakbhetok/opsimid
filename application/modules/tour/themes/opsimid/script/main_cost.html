@@ -6,10 +6,9 @@ var table = $('#table_main_cost').dataTable( {
         "ordering": false,    
         "bLengthChange" : false,
         "ajax": '{{ site_url() }}/tour/ajax_data/getrecord_main_cost',
-        "columns": [
-                { "data": "id_cost" },                
-                { "data": "nama_cost" },
-                { "data": "keterangan" },
+        "columns": [            
+                { "data": "cost_name" },
+                { "data": "description" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
                     return '{{ BUTTON_CRUD }} ';
@@ -24,22 +23,21 @@ var table = $('#table_main_cost').dataTable( {
 });
 
 //edit
-$('#table_supplier').on('click', 'a.edit-btn', function (e) {
+$('#table_main_cost').on('click', 'a.edit-btn', function (e) {
     e.preventDefault(); 
     var editId = $(this).data('edit-id');
-    window.location.href='{{ site_url() }}/tour/supplier/form/' + editId;
+    window.location.href='{{ site_url() }}/tour/cost/form/' + editId;
 });
 
 // Delete a record
-$('#table_supplier').on( 'click', 'a.del-btn', function (e) {
+$('#table_main_cost').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
         if(confirm("Are you sure?")) {
                 var delId = $(this).data('delete-id');  
-		window.location='{{ site_url() }}/configuration/coa_class/delete/' + delId;	
-	}
-	else
-		return false;
-        
+        window.location='{{ site_url() }}/tour/cost/delete/' + delId;   
+    }
+    else
+        return false;
 } );
 
 {% endblock %}

@@ -1,17 +1,25 @@
 {% block content %}
 
 <section class="content right-side">
+  <div class="box border green">
+    <div class="box-title">
+      <h4><i class="fa fa-bars"></i>{{ BREADCRUMBS_TITLE }}</h4>
+    </div>
+    <div class="box-body big">
 	<form action="{{ base_url }}index.php/dokumen/dokumen/save" method="post" name="form1">
 	<div class="row">
 			<input type="hidden" name="id" id="id" value="{{ edit.id_dok }}" />
 		<div class="col-xs-6">
 
 			<div class="form-group col-xs-12">
-				<label class="col-xs-4 control-label">Reservation Code </label>
-				<div class="col-xs-6">
-					<input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}">
-					</div>
-			</div>
+      <label class="col-xs-4 control-label">Reservation Number</label>
+      <div class="col-sm-6">
+        <div class="input-group">
+          <span class="input-group-addon">{{ CODE_PREFIX }}</span>
+          <input type="text" class="form-control tip" title="Reservation Number" readonly name="reservation_number" value="{{ edit.code}}">
+        </div>
+      </div>
+      </div>
 
 			<div class="form-group col-xs-12">
 				<label class="col-xs-4 control-label">Booking Date </label>
@@ -32,18 +40,18 @@
 			</div>
 
 			<div class="form-group col-xs-12">
-				<label class="col-xs-4 control-label">Customer </label>
-				<div class="col-xs-6">
-				<div class="input-group">
-                    <input type="text" class="form-control typeahead tt-query" id="branch_code" name="branch_code" value="" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:30px;" placeholder="type or select from button">
-                    <span class="input-group-btn">
-                        <button type="button" data-toggle="modal" data-target="#window-branch" class="btn-find btn btn-primary" style="cursor:pointer;margin-top:0.2px;">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-            	</div>
-			</div>
+                <label class="col-xs-4 control-label">Customer Name </label>
+                <div class="col-xs-6">
+                    <div class='input-group'>
+                            <input type="text" class="form-control typeahead tt-query" id="customer_name" name="customer_name" value="{{ edit.customer_name }}" style="margin-top:0px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;height:34px;" placeholder="xxxxxxxx">
+                            <span class="input-group-btn">
+                                <button type="button" data-toggle="modal" data-target="#window-vendor" class="btn btn-primary" style="cursor:pointer;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                    </div>
+                    </div>
+            </div>
 
 			<div class="form-group col-xs-12">
 				<label class="col-xs-4 control-label">Booker </label>
@@ -147,22 +155,22 @@
                                <td><input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}"></td>
                                <td><input type="text" class="form-control" id="code" name="code" value="{{ edit.code}}"></td>
                                <td>
-                               	<div class="input-group date" id="datetimepicker1">
-			                        <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="" placeholder="YYYY-MM-DD">
+                                <div class="input-group date">
+                                  <input type="text" class="form-control datepicker" id="expired_date" name="expired_date" value="" placeholder="DD-MM-YYYY">
+                                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                  </span>
+                              </div>
+                               </td>
+                               <td>
+                               	<div class="input-group date">
+			                        <input type="text" class="form-control datepicker" id="date_in" name="date_in" value="" placeholder="DD-MM-YYYY">
 			                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 			                        </span>
 			                    </div>
                                </td>
                                <td>
-                               	<div class="input-group date" id="datetimepicker1">
-			                        <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="" placeholder="YYYY-MM-DD">
-			                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-			                        </span>
-			                    </div>
-                               </td>
-                               <td>
-                               	<div class="input-group date" id="datetimepicker1">
-			                        <input type="text" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" value="" placeholder="YYYY-MM-DD">
+                               	<div class="input-group date">
+			                        <input type="text" class="form-control datepicker" id="date_out" name="date_out" value="" placeholder="DD-MM-YYYY">
 			                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 			                        </span>
 			                    </div>
@@ -189,6 +197,8 @@
     	</div>
     	</div>
 	</form>
+</div>
+</div>
 </section>
 
 {% endblock %}

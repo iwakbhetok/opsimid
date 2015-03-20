@@ -33,7 +33,8 @@ class Menu_mdl extends CI_Model {
                 $link = 'javascript:;';
                 $targetclass   = '';//'data-toggle="collapse" data-target="#'.strtolower($row->menu_name).'child"';
                 $targetid       = strtolower($row->menu_name).'child';
-                $iconarrow      = '<i class="fa fa-fw arrow"></i>';
+                $iconarrow      = '<span class="arrow"></span>';
+                $has_child      = 'class="has-sub"';
                 $this->twiggy->set('targetid', $targetid);
                 $this->twiggy->set('menuchild', $child);
                 $child_list     = $this->twiggy->template('menu_child')->render();
@@ -44,6 +45,7 @@ class Menu_mdl extends CI_Model {
                 $targetid       = '';
                 $iconarrow      = '';
                 $child_list     = '';
+                $has_child      = '';
             };
             
             $data[] = array(
@@ -52,6 +54,7 @@ class Menu_mdl extends CI_Model {
                 'menu_link'     => $link,
                 'menu_icon'     => $row->menu_icon,
                 'targetclass'   => $targetclass,
+                'has_child'     => $has_child,    
                 'targetid'      => $targetid,    
                 'iconarrow'     => $iconarrow,
                 'CHILD_LIST'    => $child_list
@@ -89,8 +92,9 @@ class Menu_mdl extends CI_Model {
             if (count($child)>0){                
                 $link = 'javascript:;';
                 $targetclass   = '';//'data-toggle="collapse" data-target="#'.strtolower($row->menu_name).'child"';
+                $has_child      = 'class="has-sub-sub"';
                 $targetid       = strtolower($row->menu_name).'child';
-                $iconarrow      = '<i class="fa fa-fw arrow"></i>';
+                $iconarrow      = '<span class="arrow"></span>';
                 $this->twiggy->set('targetid', $targetid);
                 $this->twiggy->set('menuchild', $child);
                 $child_list     = $this->twiggy->template('menu_third_child')->render();

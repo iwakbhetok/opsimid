@@ -41,9 +41,14 @@
 					<label>Due Date</label>
                 </div>    
                 <div class="col-md-4">    
-                    <input onfocus="gfPop.fPopCalendar(this);" class="form-control" id="datepicker" name="due_date" type="date" value="{{ edit.due_date }}"  required />               
+                    <div class="input-group date" id="datetimepicker1">
+                                    <input type="text" class="form-control" id="date_from" name="date_from" value="" placeholder="YYYY-MM-DD" required>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
                 </div>  
             </div>
+
             <div class="form-group col-md-12">
                 <div class="col-md-3">
                     <label>Type</label>

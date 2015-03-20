@@ -39,4 +39,20 @@ class Ajax_data extends CI_Controller {
         echo json_encode($data);
     }
 
+    function getrecord_code_configuration()
+    {
+        $this->load->model('code_configuration_mdl');
+        $data = array(
+            'aaData' => array(),
+            'sEcho' => 0,
+            'iTotalRecords' => '',
+            'iTotalDisplayRecords' => '',
+        );
+        //find total record 
+        $data['aaData'] = $this->code_configuration_mdl->getdatalist();
+        $data['iTotalRecords'] = $this->code_configuration_mdl->getrecordcount();
+        $data['iTotalDisplayRecords'] = $this->code_configuration_mdl->getrecordcount();
+        echo json_encode($data);   
+    }
+
 }

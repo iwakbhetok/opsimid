@@ -1,0 +1,50 @@
+{% block content %}
+<div class="content right-side">
+    <div class="box border green">
+    <div class="box-title">
+      <h4><i class="fa fa-bars"></i>{{ BREADCRUMBS_TITLE }}</h4>
+    </div>
+    <div class="box-body big">
+    <form action="{{ site_url() }}/tour/supplier/save" method="post" name="form1">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Code</label>
+                    <div class="col-xs-7">
+                        <!--<input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" placeholder="" readonly="TRUE">-->
+                        <input type="text" class="form-control" id="tour_code" name="tour_code" value="{{edit.supplier_code}}" placeholder="Type Tour Code" required>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+
+        <div id="proses" class="row">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <input type="button" onclick="history.back()" class="btn btn-default" value="Back" />
+        </div>    
+    </form> 
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //hide tombol
+        $("#proses").hide();
+
+        //typehead reservation
+        $('#tour_code').typeahead({
+            name: "tour_code",
+            remote: 'dataRerservationAjax?q=%QUERY',
+            limit: 2, //panjang ke bawah
+            minLength: 2, // minimal baru muncul
+            valueKey: 'tour_code',
+        });
+
+    });
+
+</script>
+{% endblock %}
+

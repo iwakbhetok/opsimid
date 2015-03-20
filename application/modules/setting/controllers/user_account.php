@@ -40,10 +40,10 @@ class User_account extends CI_Controller {
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
 
         $this->twiggy->set('content_page', $content);
-        $script_page = $this->twiggy->template('script/user_account')->render();       
 
+        $script_page = $this->twiggy->template('script/user_account')->render();
+        //$script_page = $this->twiggy->template('script/script_all')->render();
         $this->twiggy->set('SCRIPTS', $script_page);
-        $this->twiggy->set('content_page', $content);
 
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);     

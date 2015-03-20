@@ -1,0 +1,35 @@
+{% block content %}
+<div class="container-fluid">
+<div class="box border green">
+    <div class="box-title">
+      <h4><i class="fa fa-bars"></i>{{ BREADCRUMBS_TITLE }}</h4>
+    </div>
+    <div class="box-body big">
+    <form action="{{ site_url() }}/setting/code_configuration/save" method="post" name="form1">
+    <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />    
+    <div class="row">    
+        <div class="col-lg-8">
+            <div class="form-group col-xs-12">
+                <label for="username" class="col-xs-3 control-label">Code Name</label>
+                <div class="col-xs-7">
+                    <input type="text" class="form-control" id="code_name" name="code_name" required value="{{ edit.code_name }}" placeholder="xx">
+                </div>                
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="password" class="col-xs-3 control-label">Description</label>
+                <div class="col-xs-7">
+                    <textarea class="form-control" rows="2" name="description"></textarea>
+                </div>                
+            </div>            
+           
+        </div>   
+            
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save" id="btnsave" name="btnsave">
+    <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
+</form> 
+</div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,6 +1,11 @@
 {% block content %}
 
 <section class="content right-side">
+<div class="box border green">
+    <div class="box-title">
+      <h4><i class="fa fa-bars"></i>{{ BREADCRUMBS_TITLE }}</h4>
+    </div>
+    <div class="box-body big">
 	<form action="{{ site_url('/ticketing/airlines/save') }}" method="post" name="form1">
     <div class="row">
             <input type="hidden" name="airlines_id" id="airlines_id" value="{{ edit.airlines_id }}" />
@@ -48,6 +53,9 @@
 			<input type="button" onclick="history.back()" class="btn btn-default" value="Cancel" />
 			    </div>
       </form>
+
+  </div>
+</div>
 </section>
 
 {% endblock %}

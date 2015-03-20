@@ -3,7 +3,6 @@ class by_airline_period extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//$this->load->model('Authentication');
 	}
 	
 	public function index(){		
@@ -14,9 +13,18 @@ class by_airline_period extends CI_Controller {
             $this->twiggy->title('OPSIMID')->prepend('Reports');;
             $this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
             $this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');
-            $data = array();
+            $this->twiggy->set('BREADCRUMBS_TITLE', 'Booking by Airline or Period');
+            $this->twiggy->set('BREADCRUMBS_MAIN_TITLE', 'Report');
+            $this->twiggy->set('LIST_TITLE', 'Booking by Airline / Period');
 
-            $content = $this->twiggy->template('reports/by_airline_period')->render();                
+            $window_page = $this->twiggy->template('window/window_airlines')->render();
+            $this->twiggy->set('window_page', $window_page);
+
+            $script_page = $this->twiggy->template('script/by_airline_period')->render();       
+            $this->twiggy->set('SCRIPTS', $script_page);
+
+            $content = $this->twiggy->template('breadcrumbs')->render();
+            $content .= $this->twiggy->template('reports/by_airline_period')->render();                
             $this->twiggy->set('content_page', $content);
 
             $output = $this->twiggy->template('dashboard')->render();

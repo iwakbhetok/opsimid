@@ -1,6 +1,11 @@
 {% block content %}
 
 <section class="content right-side">
+<div class="box border green">
+    <div class="box-title">
+      <h4><i class="fa fa-bars"></i>{{ BREADCRUMBS_TITLE }}</h4>
+    </div>
+    <div class="box-body big">
 	<form action="{{ base_url }}index.php/hotel/room/save" method="post" name="form1">
     <div class="row">
             <input type="hidden" name="room_id" id="room_id" value="{{ edit.room_id }}" />
@@ -27,6 +32,8 @@
 			<input type="reset" class="btn btn-default" value="Clear" />
 			    </div>
       </form>
+    </div>
+</div>
 </section>
 
 {% endblock %}

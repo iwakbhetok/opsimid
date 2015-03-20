@@ -1,5 +1,39 @@
 {% block content %}
 
+    $("#save_btn").click(function(){
+        var currentTabTitle = $('div[id="mytabs"] ul li.active > a').attr("href");
+        var div_name = String(currentTabTitle);
+
+        var inputTypes = [];
+        $(div_name+' input[name][id][value]').each(function(){
+             inputTypes.push($(this).attr('name'));
+        });
+        console.log(inputTypes);
+
+    });
+
+
+    // customer typeahead
+    $('#customer_name.typeahead').typeahead({                
+                name: 'customer_name',
+                prefetch: '{{ site_url() }}/ajax_master_data/customer',
+                limit: 100
+    });
+    //console.log($('#customer_name'));
+
+    $('#customer_name_2.typeahead').typeahead({                
+                name: 'customer_name_2',
+                prefetch: '{{ site_url() }}/ajax_master_data/customer',
+                limit: 100
+    });
+
+    $(".datepicker").datepicker({
+        defaultDate: +7,
+        showOtherMonths: true,
+        autoSize: true,
+        dateFormat: "dd-mm-yy"
+    });
+
     var selected = [];
         var table = $('#table_window_currency').dataTable( {    
             "searching": true,
@@ -25,7 +59,6 @@
                 }   
     });
         
-
     //populate supplier hotel
     $.ajax({           
         type: "GET",

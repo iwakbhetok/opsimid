@@ -41,6 +41,7 @@ class invoice extends CI_Controller {
 
         $script_page = $this->twiggy->template('script/invoice')->render();
         $this->twiggy->set('SCRIPTS', $script_page);
+
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);   
 
@@ -70,6 +71,9 @@ class invoice extends CI_Controller {
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
+        $script_page = $this->twiggy->template('script/script_all')->render();
+        $this->twiggy->set('SCRIPTS', $script_page);
+
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
     }

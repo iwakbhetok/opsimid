@@ -17,33 +17,29 @@ class invoice_mdl extends CI_Model {
         {
             $data = array();
             $fields = array(
-                'id_detail', 
-                'dp_number', 
-                'transaksi_no', 
-                "(DATE_FORMAT(tanggal_transaksi, '%d-%m-%Y')) as tanggal_transaksi" ,
-                'id_dept',                
-                'kode_customer', 
-                'cp', 
-                'currency',
-                'amount',
-                'note',
+                'tti.invoice_id', 
+                'tti.invoice_number', 
+                'mc.title',
+                'mc.full_name', 
+                'tti.transaction_number',
+                "(DATE_FORMAT(tti.due_date, '%d-%m-%Y')) as due_date" ,       
+                'tti.flight_type',  
+                'tti.currency',
+                'tti.total_sell_price'
             );
             $this->db->select($fields);
-            $query = $this->db->get('trans_invhotel');
+            $this->db->join('mst_customer mc', 'mc.customer_id = tti.customer_id');
+            $query = $this->db->get('trans_ticketing_invoice tti');
             $nomor = 1;
             foreach($query->result() as $row):                
                 $data[] = array(
-                    'nomor'                 => $nomor,
-                    'id_dp_customer'        => $row->id_dp_customer, 
-                    'dp_number'             => $row->dp_number, 
-                    'transaksi_no'          => $row->transaksi_no, 
-                    'tanggal_transaksi'     => $row->tanggal_transaksi,
-                    'id_dept'               => $row->id_dept,                     
-                    'kode_customer'         => $row->kode_customer, 
-                    'cp'                    => $row->cp, 
-                    'currency'              => $row->currency,
-                    'amount'                => number_format($row->amount, 2, '.', ','),
-                    'note'                  => $row->note,
+                    'invoice_id'            => $row->invoice_id, 
+                    'invoice_number'        => $row->invoice_number, 
+                    'customer_name'         => $row->title.' '.$row->full_name, 
+                    'transaction_number'    => $row->transaction_number,
+                    'due_date'              => $row->due_date, 
+                    'flight_type'           => $row->flight_type,
+                    'total'                 => '<p style="text-align:right;">'.currency_format_two_digit($row->total_sell_price).' '.$row->currency.'</p>',
                 );
                 $nomor++;
             endforeach;
@@ -67,8 +63,8 @@ class invoice_mdl extends CI_Model {
                 'note',
             );
             $this->db->select($fields);
-            $this->db->where('id_dp_customer', $id);
-            $query = $this->db->get('dp_customer');
+            $this->db->where('invoice_id', $id);
+            $query = $this->db->get('trans_ticketing_invoice');
             if ($query->num_rows>0){
                 $row = $query->row();
                 $data = array(
@@ -79,7 +75,7 @@ class invoice_mdl extends CI_Model {
                     'id_dept'           => $row->id_dept,
                     'kode_customer'     => $row->kode_customer,
                     'cp'                => $row->cp,
-                    'currency'             => $row->currency,
+                    'currency'          => $row->currency,
                     'amount'            => $row->amount,
                     'note'              => $row->note,
                 );

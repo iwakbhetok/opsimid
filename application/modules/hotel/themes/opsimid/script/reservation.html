@@ -1,12 +1,11 @@
 {% block content %}
 
-    $('#datetimepicker1').datetimepicker({
-                format: 'YYYY-MM-DD'
-            });
-
-    $('#datetimepicker2').datetimepicker({
-                format: 'YYYY-MM-DD'
-            });
+    $(".datepicker").datepicker({
+        defaultDate: +7,
+        showOtherMonths: true,
+        autoSize: true,
+        dateFormat: "dd-mm-yy"
+    });
             
     // customer_name typeahead
     $('#customer_name.typeahead').typeahead({                
@@ -19,7 +18,7 @@ var selected = [];
 var table = $('#table_hotel_rate').dataTable( {    
         "searching": true,
         "ordering": false,    
-        "bLengthChange" : false,
+        "bLengthChange" : true,
         "ajax": '{{ site_url() }}/hotel/ajax_data/getrecord_hotel_rate',
         "columns": [
                 { "data": "hotel_name" },              

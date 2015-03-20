@@ -9,7 +9,7 @@ var table = $('#table_reservation').dataTable( {
         "columns": [
                 { "data": "book_code" },                
                 { "data": "full_name" },
-                { "data": "code_tour" },
+                { "data": "tour_code" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
                     return '{{ BUTTON_CRUD }} ';
@@ -24,18 +24,18 @@ var table = $('#table_reservation').dataTable( {
 });
 
 //edit
-$('#table_supplier').on('click', 'a.edit-btn', function (e) {
+$('#table_reservation').on('click', 'a.edit-btn', function (e) {
     e.preventDefault(); 
     var editId = $(this).data('edit-id');
-    window.location.href='{{ site_url() }}/tour/supplier/form/' + editId;
+    window.location.href='{{ site_url() }}/tour/reservation/form/' + editId;
 });
 
 // Delete a record
-$('#table_supplier').on( 'click', 'a.del-btn', function (e) {
+$('#table_reservation').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
         if(confirm("Are you sure?")) {
                 var delId = $(this).data('delete-id');  
-		window.location='{{ site_url() }}/configuration/coa_class/delete/' + delId;	
+		window.location='{{ site_url() }}/tour/reservation/delete/' + delId;	
 	}
 	else
 		return false;

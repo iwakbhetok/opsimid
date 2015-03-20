@@ -1,6 +1,11 @@
 {% block content %}
 
 <section class="content right-side">
+<div class="box border green">
+    <div class="box-title">
+      <h4><i class="fa fa-bars"></i>{{ BREADCRUMBS_TITLE }}</h4>
+    </div>
+    <div class="box-body big">
     <div class="row">
         <form action="{{ site_url('/hotel/hotel/save') }}" method="post" name="form1">
             <input type="hidden" name="hotel_id" id="hotel_id" value="{{ edit.hotel_id }}" />
@@ -114,6 +119,9 @@
         <input type="button" onclick="history.back();" class="btn btn-default" value="Back" />
     </div>
       </form>
+
+    </div>
+</div>
 </section>
 
 

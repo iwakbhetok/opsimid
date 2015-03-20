@@ -70,7 +70,7 @@ class Ajax_data extends CI_Controller {
     }
 
     function getrecord_reservation() {
-        $this->load->model('main_cost_mdl');
+        $this->load->model('reservation_mdl');
         $data = array(
             'aaData' => array(),
             'sEcho' => 0,
@@ -78,14 +78,14 @@ class Ajax_data extends CI_Controller {
             'iTotalDisplayRecords' => '',
         );
         //find total record 
-        $data['aaData'] = $this->main_cost_mdl->getdatalist();
-        $data['iTotalRecords'] = $this->main_cost_mdl->getrecordcount();
-        $data['iTotalDisplayRecords'] = $this->main_cost_mdl->getrecordcount();
+        $data['aaData'] = $this->reservation_mdl->getdatalist();
+        $data['iTotalRecords'] = $this->reservation_mdl->getrecordcount();
+        $data['iTotalDisplayRecords'] = $this->reservation_mdl->getrecordcount();
         echo json_encode($data);
     }
 
     function getrecord_invoice() {
-        $this->load->model('sub_cost_mdl');
+        $this->load->model('invoice_mdl');
         $data = array(
             'aaData' => array(),
             'sEcho' => 0,
@@ -93,14 +93,26 @@ class Ajax_data extends CI_Controller {
             'iTotalDisplayRecords' => '',
         );
         //find total record 
-        $data['aaData'] = $this->sub_cost_mdl->getdatalist();
-        $data['iTotalRecords'] = $this->sub_cost_mdl->getrecordcount();
-        $data['iTotalDisplayRecords'] = $this->sub_cost_mdl->getrecordcount();
+        $data['aaData'] = $this->invoice_mdl->getdatalist();
+        $data['iTotalRecords'] = $this->invoice_mdl->getrecordcount();
+        $data['iTotalDisplayRecords'] = $this->invoice_mdl->getrecordcount();
         echo json_encode($data);
     }
 
-    function getrecord_hotel_rate() {
-        $this->load->model('quotation_mdl');
+    function get_id_by_customer_name()
+    {
+        $this->load->model('customer_mdl');
+        $customer_name = $this->input->post('customer_name');
+        $customer_id = $this->customer_mdl->get_id_by_customer_name($customer_name);
+        echo json_encode($customer_id);
+    }
+
+    function getlist_by_customer_id()
+    {
+        $this->load->model('ticket_stock_mdl');
+        $customer_id = $this->uri->segment(4,0);
+        $date_from = $this->uri->segment(5,0);
+        $date_to = $this->uri->segment(6,0);
         $data = array(
             'aaData' => array(),
             'sEcho' => 0,
@@ -108,9 +120,24 @@ class Ajax_data extends CI_Controller {
             'iTotalDisplayRecords' => '',
         );
         //find total record 
-        $data['aaData'] = $this->quotation_mdl->getdatalist();
-        $data['iTotalRecords'] = $this->quotation_mdl->getrecordcount();
-        $data['iTotalDisplayRecords'] = $this->quotation_mdl->getrecordcount();
+        $data['aaData'] = $this->ticket_stock_mdl->getdatalist_invoice_customer($customer_id, $date_from, $date_to);
+        //$data['iTotalRecords'] = $this->ticket_stock_mdl->getrecordcount();
+        //$data['iTotalDisplayRecords'] = $this->ticket_stock_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+
+    function getrecord_invoice_by_customer_id($id) {
+        $this->load->model('invoice_mdl');
+        $data = array(
+            'aaData' => array(),
+            'sEcho' => 0,
+            'iTotalRecords' => '',
+            'iTotalDisplayRecords' => '',
+        );
+        //find total record 
+        $data['aaData'] = $this->invoice_mdl->getdatalist();
+        $data['iTotalRecords'] = $this->invoice_mdl->getrecordcount();
+        $data['iTotalDisplayRecords'] = $this->invoice_mdl->getrecordcount();
         echo json_encode($data);
     }
 

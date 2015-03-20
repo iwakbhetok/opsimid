@@ -4,17 +4,14 @@ var selected = [];
 var table = $('#table_invoice').dataTable( {    
         "searching": true,
         "ordering": false,    
-        "bLengthChange" : false,
-        "ajax": '{{ site_url() }}/configuration/ajax_data/getrecord_invoice',
+        "bLengthChange" : true,
+        "ajax": '{{ site_url() }}/ticketing/ajax_data/getrecord_invoice',
         "columns": [
                 { "data": "invoice_number" },
-                { "data": "custumer" },                
-                { "data": "symbol" },
-                { "data": "transc_number" },
+                { "data": "customer_name" },
+                { "data": "transaction_number" },
                 { "data": "due_date" },
-				{ "data": "contact_person" },
 				{ "data": "flight_type" },
-				{ "data": "currency" },
 				{ "data": "total" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;

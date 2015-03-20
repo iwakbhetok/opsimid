@@ -7,6 +7,7 @@ class supplier extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model('supplier_mdl');
 
         $this->load->model('modelNumbertrans');
 
@@ -38,20 +39,12 @@ class supplier extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_supplier');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');
-        $this->twiggy->set('FORM_IDKEY', 'full.class_id');
-        $this->twiggy->set('FORM_LINK', site_url('settings/coa_class/delete'));
+        $this->twiggy->set('FORM_IDKEY', 'full.supplier_id');
+        $this->twiggy->set('FORM_LINK', site_url('tour/supplier/delete'));
 
         $button_crud = $this->twiggy->template('button/btn_edit')->render();
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
-
-        $window_page = $this->twiggy->template('window/window_currency')->render();
-        $window_page .= $this->twiggy->template('window/window_dept')->render();
-        $window_page .= $this->twiggy->template('window/window_vendor')->render();
-        $window_page .= $this->twiggy->template('window/window_lg')->render();
-
-        // end        
-        $this->twiggy->set('window_page', $window_page);
 
         $script_page = $this->twiggy->template('script/supplier')->render();
         //$script_page .= $this->twiggy->template('script/script_all')->render();         
@@ -67,42 +60,61 @@ class supplier extends CI_Controller {
         if (!empty($id)) {
             $this->load->model('supplier_mdl');
             $data = $this->supplier_mdl->getdataid($id);
+//            print_r($data);
             $this->twiggy->set('edit', $data);
-        };
+        } else {
+            // create content page fo dp supplier
+            $max_id = $this->supplier_mdl->getMaxValue();
+            $datas = $this->modelNumbertrans->getVendorTur($max_id);
+            
+            $dataSend = array(
+                "supplier_code" => $datas,
+            );
 
-        
-        // create content page fo dp supplier
-        $kodeVendor = $this->modelNumbertrans->getVendorTur();
-//        $dataSend = array(
-//            "kode_vendor" => $kodeVendor,
-//        );
-        $data = array(
-            'kode_vendor' => $kodeVendor,
+            $this->twiggy->set('edit', $dataSend);
+        }
+
+        $state = $this->db->from("mst_state")->order_by("state_name", "asc")->get()->result();
+        $country = $this->db->from("mst_country")->order_by("country_name", "asc")->get()->result();
+        $city = $this->db->from("mst_city")->order_by("city_name", "asc")->get()->result();
+
+        $dropData = array(
+            "city" => $city,
+            "country" => $country,
+            "state" => $state,
         );
+        $this->twiggy->set('country', $dropData);
+
         $content = $this->twiggy->template('breadcrumbs')->render();
         $content .= $this->twiggy->template('form/form_supplier')->render();
 
-//         $data = $this->coa_class_mdl->getdataid($id);
-//            $this->twiggy->set('edit', $data); 
-        // end        
         $this->twiggy->set('content_page', $content);
-//        echo$kodeVendor;
-        $this->twiggy->set('kode_vendor', $kodeVendor);
-
-        $window_page = $this->twiggy->template('window/window_currency')->render();
-        $window_page .= $this->twiggy->template('window/window_dept')->render();
-        $window_page .= $this->twiggy->template('window/window_vendor')->render();
-        $window_page .= $this->twiggy->template('window/window_lg')->render();
-
-        // end        
-        $this->twiggy->set('window_page', $window_page);
 
         $script_page = $this->twiggy->template('script/form_coa_class')->render();
-        //$script_page .= $this->twiggy->template('script/script_all')->render();         
 
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
+    }
+
+    function save() {
+        $params = (object) $this->input->post();
+//print_r($params);
+        $valid = $this->supplier_mdl->save($params);
+
+        if (empty($valid))
+            $this->owner->alert("Please complete the form", "../index.php/tour/supplier/form");
+        else
+            redirect("../index.php/tour/supplier/index");
+    }
+
+    public function delete() {
+        $valid = false;
+        $id = $this->uri->segment(4, 0);
+        $valid = $this->supplier_mdl->delete($id);
+
+        if ($valid)
+            redirect("../index.php/tour/supplier/index");
     }
 
 }

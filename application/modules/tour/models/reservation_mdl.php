@@ -23,16 +23,29 @@ class reservation_mdl extends CI_Model {
             JOIN mst_customer c ON c.customer_id=a.customer_id
             ORDER BY c.full_name ASC");
         $result = $query->result();
-        
-        $nomor = 1; 
+
+        $nomor = 1;
         foreach ($result as $row):
             $data[] = array(
                 'nomor' => $nomor,
                 'book_code' => $row->book_code,
                 'full_name' => $row->full_name,
-                'code_tour' => $row->code_tour,
+                'tour_code' => $row->code_tour,
             );
             $nomor++;
+        endforeach;
+        return $data;
+    }
+
+    function getdataTypeHeadAjax($keyword) {
+        $data = array();
+        $query = $this->db->query("SELECT * FROM tour_mst_quotation WHERE code_tour LIKE '%" . $keyword . "%' ORDER BY `code_tour` ASC ");
+        $result = $query->result();
+
+        foreach ($result as $row):
+            $data[] = array(
+                'tour_code' => $row->code_tour,
+            );
         endforeach;
         return $data;
     }

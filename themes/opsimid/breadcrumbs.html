@@ -1,23 +1,28 @@
 {% block content %}
-<!-- Page Heading -->
- <div class="row">
-     <div class="col-lg-12">        
-        <h3 class="page-header">
-            {{ BREADCRUMBS_TITLE }}
-        </h3>
-        
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-dashboard"></i><a href="#"> Dashboard </a>
-            </li>            
-            <li class="active">
-                <i class="fa fa-edit"></i> {{ BREADCRUMBS_MAIN_TITLE }}
-            </li>
-            <li class="active">
-                <i class="fa fa-edit"></i> {{ BREADCRUMBS_TITLE }}
-            </li>
-        </ol>
-    </div>
- </div> 
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="page-header">
+									<!-- STYLER -->
+									
+									<!-- /STYLER -->
+									<!-- BREADCRUMBS -->
+									<ul class="breadcrumb">
+										<li>
+											<i class="fa fa-dashboard"></i>
+											<a href="#">Dashboard</a>
+										</li>
+										<li>
+											<a href="#">{{ BREADCRUMBS_MAIN_TITLE }}</a>
+										</li>
+										<li>{{ BREADCRUMBS_TITLE }}</li>
+									</ul>
+									<!-- /BREADCRUMBS -->
+									<div class="clearfix">
+										<h3 class="content-title pull-left">{{BREADCRUMBS_TITLE}}</h3>
+									</div>
+									<!--div class="description">Form Elements and Features</div-->
+								</div>
+							</div>
 
+						</div>
 {% endblock %}

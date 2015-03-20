@@ -7,9 +7,9 @@ var table = $('#table_supplier').dataTable( {
         "bLengthChange" : false,
         "ajax": '{{ site_url() }}/tour/ajax_data/getrecord_supplier',
         "columns": [
-                { "data": "id_vendor" },                
-                { "data": "nama_vendor" },
-                { "data": "alamat" },
+                { "data": "supplier_id" },                
+                { "data": "supplier_name" },
+                { "data": "address1" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
                     return '{{ BUTTON_CRUD }} ';
@@ -35,7 +35,7 @@ $('#table_supplier').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
         if(confirm("Are you sure?")) {
                 var delId = $(this).data('delete-id');  
-		window.location='{{ site_url() }}/configuration/coa_class/delete/' + delId;	
+		window.location='{{ site_url() }}/tour/supplier/delete/' + delId;	
 	}
 	else
 		return false;

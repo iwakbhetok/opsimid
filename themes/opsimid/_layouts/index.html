@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>{{ title }}</title>
-
-    <!-- Bootstrap Core JavaScript -->   
-    <link href="{{ base_url() }}assets/sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="{{ base_url() }}assets/sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
-    <!-- DataTables CSS -->
-    <link href="{{ base_url() }}assets/sb-admin-2/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="{{ base_url() }}assets/sb-admin-2/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-    
-    <link href="{{ base_url() }}assets/sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    
-    <!-- Custom CSS -->
-    <link href="{{ base_url() }}assets/sb-admin-2/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="{{ base_url() }}assets/sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <link href="{{ base_url() }}assets/css/style.css" rel="stylesheet" type="text/css" />
-    
-    <link href="{{ base_url() }}assets/bootstrap/css/typeahead.js-bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="{{ base_url() }}assets/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" media="screen" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>{{ title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- STYLESHEETS --><!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/css/cloud-admin.css" >
+	<link rel="stylesheet" type="text/css"  href="{{ base_url() }}assets/cloud-admin/css/themes/nature.css" id="skin-switcher" >
+	<link rel="stylesheet" type="text/css"  href="{{ base_url() }}assets/cloud-admin/css/responsive.css" >
+	
+	<link href="{{ base_url() }}assets/cloud-admin/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         
-    <!-- typeahead --> 
-    <link href="{{ base_url() }}assets/bootstrap/css/typeahead.js-bootstrap.css" rel="stylesheet" type="text/css">
-    <!-- datetimepicker --> 
-    <link rel="stylesheet" href="{{ base_url() }}assets/bootstrap/css/bootstrap-datetimepicker.min.css" />
-    
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" />
+	<!-- DATE RANGE PICKER -->
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/DataTables/media/css/jquery.dataTables.css" />
+	<!-- DATA TABLES 
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/datatables/media/css/jquery.dataTables.min.css" />
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/datatables/media/assets/css/datatables.min.css" />
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/datatables/extras/TableTools/media/css/TableTools.min.css" />-->
+        
+        
+	<!-- DATE RANGE PICKER -->
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+	<!-- TYPEAHEAD -->
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/typeahead/typeahead.css" />
+	<!-- FILE UPLOAD -->
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/bootstrap-fileupload/bootstrap-fileupload.min.css" />
+	<!-- SELECT2 -->
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/select2/select2.min.css" />
+	<!-- UNIFORM -->
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}assets/cloud-admin/js/uniform/css/uniform.default.min.css" />
+	<!-- JQUERY UPLOAD -->
+	<!-- blueimp Gallery styles -->
+	<link rel="stylesheet" href="{{ base_url() }}assets/cloud-admin/js/blueimp/gallery/blueimp-gallery.min.css">
+	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+	<link rel="stylesheet" href="{{ base_url() }}assets/cloud-admin/js/jquery-upload/css/jquery.fileupload.css">
+	<link rel="stylesheet" href="{{ base_url() }}assets/cloud-admin/js/jquery-upload/css/jquery.fileupload-ui.css">
+	<!-- FONTS -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -57,40 +53,63 @@
         {% endblock %}
     </div>
     <!-- /#wrapper -->
+    <!--/PAGE -->
+	<!-- JAVASCRIPTS -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- JQUERY -->
+	<script src="{{ base_url() }}assets/cloud-admin/js/jquery/jquery-2.0.3.min.js"></script>
+	<!-- JQUERY UI-->
+	<script src="{{ base_url() }}assets/cloud-admin/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<!-- BOOTSTRAP -->
+	<script src="{{ base_url() }}assets/bootstrap/js/bootstrap.min.js"></script>	
+		
+	<!-- DATE RANGE PICKER -->
+	<script src="{{ base_url() }}assets/cloud-admin/js/bootstrap-daterangepicker/moment.min.js"></script>
+        <script src="{{ base_url() }}assets/cloud-admin/js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+	<!-- SLIMSCROLL -->
+	<script type="text/javascript" src="{{ base_url('assets/cloud-admin/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js') }}"></script>
+        <script type="text/javascript" src="{{ base_url('assets/cloud-admin/js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js') }}"></script>
+	<!-- BLOCK UI -->
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/jQuery-BlockUI/jquery.blockUI.min.js"></script>
 
-    <!-- jQuery -->
-    <script src="{{ base_url() }}assets/sb-admin-2/bower_components/jquery/dist/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    
-    <script type="text/javascript" src="{{ base_url() }}assets/bootstrap/js/moment.js"></script>    
-    
-    <script type="text/javascript" src="{{ base_url() }}assets/sb-admin-2/bower_components/bootstrap/js/transition.js"></script>
-    <script type="text/javascript" src="{{ base_url() }}assets/sb-admin-2/bower_components/bootstrap/js/collapse.js"></script>
-    
-    <script src="{{ base_url() }}assets/sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ base_url() }}assets/sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-    
-    <!-- DataTables JavaScript -->
-    <script src="{{ base_url() }}assets/sb-admin-2/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="{{ base_url() }}assets/sb-admin-2/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{ base_url() }}assets/sb-admin-2/js/sb-admin-2.js"></script>
-    <script type="text/javascript" src="{{ base_url() }}assets/fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
-    <!-- for datatable -->
-    <script type="text/javascript" src="{{ base_url() }}assets/bootstrap/js/typeahead.min.js"></script>
-    <script type="text/javascript" src="{{ base_url() }}assets/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            
-            {{ SCRIPTS }}
-            
-        });
-    </script>
+	<script type="text/javascript" src="{{ base_url() }}assets/DataTables/media/js/jquery.dataTables.js"></script>
+	<!-- DATA TABLES 
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/datatables/media/assets/js/datatables.min.js"></script>
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js"></script>
+	-->
+	
+	<!-- TYPEHEAD -->
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/typeahead/typeahead.min.js"></script>
+	<!-- AUTOSIZE -->
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/autosize/jquery.autosize.min.js"></script>
+	<!-- COUNTABLE -->
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/countable/jquery.simplyCountable.min.js"></script>
+	<!-- INPUT MASK -->
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+	<!-- SELECT2 -->
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/select2/select2.min.js"></script>
+	<!-- UNIFORM -->
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/uniform/jquery.uniform.min.js"></script>
+	
+	<!-- COOKIE -->
+	<script type="text/javascript" src="{{ base_url() }}assets/cloud-admin/js/jQuery-Cookie/jquery.cookie.min.js"></script>
+	<!-- CUSTOM SCRIPT -->
+	<script type="text/javascript" src="{{ base_url() }}assets/maskMoney/jquery.maskMoney.js"></script>
+        
+        <script src="{{ base_url() }}assets/cloud-admin/js/script.js"></script>
+        
+	<script>
+		jQuery(document).ready(function() {
+            //App.setPage("user_account");  //Set current page
+			//App.setPage("forms");  //Set current page
+			App.init(); //Initialise plugins and elements
+                        
+                        {{ SCRIPTS }}
+		});
+	</script>
+	<!-- /JAVASCRIPTS -->
     
 </body>
 

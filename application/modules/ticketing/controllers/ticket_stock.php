@@ -30,13 +30,11 @@ class ticket_stock extends CI_Controller {
         $this->twiggy->set('content_page', $content);
 
         $this->twiggy->set('FORM_NAME', 'form_airlines');
-        $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
-        $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.stock_id');
+        $this->twiggy->set('FORM_SELECT_IDKEY', 'data-select-id');
+        $this->twiggy->set('FORM_IDKEY', 'full.invoice_id');
         $this->twiggy->set('FORM_LINK', site_url('ticketing/ticket_stock/delete'));
         
-        $button_crud = $this->twiggy->template('button/btn_edit')->render();         
-        $button_crud .= $this->twiggy->template('button/btn_del')->render();
+        $button_crud = $this->twiggy->template('button/btn_select')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
 
         $window_page = $this->twiggy->template('window/window_customer')->render();
@@ -44,7 +42,7 @@ class ticket_stock extends CI_Controller {
         $this->twiggy->set('window_page', $window_page);
 
         $script_page = $this->twiggy->template('script/ticket_stock')->render();
-        $script_page = $this->twiggy->template('script/script_all')->render();
+        $script_page .= $this->twiggy->template('script/script_all')->render();
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);   
@@ -71,8 +69,7 @@ class ticket_stock extends CI_Controller {
         
         $this->twiggy->set('content_page', $content);
         
-        $button_crud = $this->twiggy->template('button/btn_edit')->render();         
-        $button_crud .= $this->twiggy->template('button/btn_del')->render();
+        $button_crud = $this->twiggy->template('button/btn_select')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         
         $output = $this->twiggy->template('dashboard')->render();

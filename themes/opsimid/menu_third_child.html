@@ -1,5 +1,5 @@
-    <ul class="nav nav-third-level">
+    <ul class="sub-sub">
         {% for child_third_menu in menuchild %}
-        <li><a href="{{ child_third_menu.child_third_link }}"><i class="fa fa-fw fa-tasks"></i> {{ child_third_menu.child_third_name }}</a></li>
+        <li><a href="{{ child_third_menu.child_third_link }}"><span class="sub-sub-menu-text">{{ child_third_menu.child_third_name }}</span></a></li>
         {% endfor %}
     </ul>

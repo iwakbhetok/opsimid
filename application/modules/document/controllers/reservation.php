@@ -6,7 +6,7 @@ class Reservation extends CI_Controller {
         parent::__construct();
         $this->load->library('menu');
         $this->load->model('user_mdl');
-        $this->load->model('form_mdl');
+        $this->load->model('module_mdl');
 
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -37,7 +37,9 @@ class Reservation extends CI_Controller {
 
     function form()
     {
-        $data = array();        
+        $module_name = $this->uri->segment(1);
+        $data = $this->module_mdl->getcode_name_prefix($module_name);
+        $this->twiggy->set('CODE_PREFIX', $data[0]['code_name']);       
         
         $content = $this->twiggy->template('breadcrumbs')->render();       
         $content .= $this->twiggy->template('form/form_reservation')->render();

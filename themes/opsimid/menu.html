@@ -1,21 +1,35 @@
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        {% for menu in menu_navigasi %}
-                        <li>
-                            <a href="{{ menu.menu_link }}">
-                                 <i class="fa fa-fw {{ menu.menu_icon }}"></i> {{ menu.name }} {{ menu.iconarrow }}
-                            </a>
-                            {{ menu.CHILD_LIST }}
-                        </li>
-                        {% endfor %} 
-                        
-                        <li class="active">
-                            <a href="{{ site_url() }}/main/logout"><i class="fa fa-fw fa-sign-out fa-power-off"></i> Logout</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-
+                                <!-- SIDEBAR -->
+				<div id="sidebar" class="sidebar">
+					<div class="sidebar-menu nav-collapse">
+						<div class="divide-20"></div>
+						<!-- SEARCH BAR -->
+						<div id="search-bar">
+							<input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+						</div>
+						<!-- /SEARCH BAR -->
+						
+						<!-- SIDEBAR QUICK-LAUNCH -->
+						<!-- <div id="quicklaunch">
+						<!-- /SIDEBAR QUICK-LAUNCH -->
+						
+						<!-- SIDEBAR MENU -->
+						<ul>
+                                                    {% for menu in menu_navigasi %}
+                                                    <li {{ menu.has_child }}>
+                                                        <a href="{{ menu.menu_link }}" class="">
+                                                            <i class="fa {{ menu.menu_icon }} fa-fw "></i> <span class="menu-text">{{ menu.name }}</span> 
+                                                            {{ menu.iconarrow }} 
+                                                        </a>
+                                                        {{ menu.CHILD_LIST }}
+                                                    </li>
+                                                    {% endfor %}
+                                                    <li>
+                                                        <a href="{{ site_url() }}/main/logout"><i class="fa fa-fw fa-sign-out fa-power-off"></i> Logout</a>
+                                                    </li>                                                   
+							
+						</ul>
+						<!-- /SIDEBAR MENU -->
+					</div>
+				</div>
+				<!-- /SIDEBAR -->
+		

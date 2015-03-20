@@ -74,6 +74,28 @@ class Ajax_master_data extends CI_Controller {
         echo json_encode($data);
     }
 
+    function getrecord_customer_typehead() {
+        $this->load->model('customer_mdl');
+        $params = $this->input->post('query');
+        $data = $this->customer_mdl->getrecord_with_typehead($params);
+        echo json_encode($data);
+    }
+
+    function customer()
+    {
+        //$this->db->like('currency', $currency);
+        $this->db->order_by('full_name asc');
+        $query = $this->db->get('mst_customer');
+        foreach($query->result() as $row):
+            $data[] = array(
+                'customer_id'   => $row->customer_id,
+                'customer_name' => $row->title . ' ' . $row->full_name,
+                ); 
+        endforeach;
+        
+        echo json_encode($data);
+    }
+
 }    
     
     

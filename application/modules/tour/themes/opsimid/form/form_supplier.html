@@ -1,94 +1,115 @@
 {% block content %}
-<div class="container-fluid">
-    <form action="{{ site_url() }}/t/coa_class/save" method="post" name="form1">
-        <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />
+<div class="content right-side">
+    <form action="{{ site_url() }}/tour/supplier/save" method="post" name="form1">
+        <input id="supplier_id" name="supplier_id" type="hidden" value="{{ edit.supplier_id }}" />
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group col-xs-12">
                     <label for="kodeVendor" class="col-xs-3 control-label">Code</label>
                     <div class="col-xs-7">
                         <!--<input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" placeholder="" readonly="TRUE">-->
-                        <input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{kode_vendor }}" placeholder="xx">
+                        <input type="text" class="form-control" id="supplier_code" name="supplier_code" value="{{edit.supplier_code}}" placeholder="Supplier Code" readonly="TRUE">
                     </div> 
                 </div> 
 
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Supplier Name</label>
+                    <label for="name_supplier" class="col-xs-3 control-label">Supplier Name</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendora" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="supplier_name" name="supplier_name" value="{{ edit.supplier_name }}" placeholder="Name">
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Address</label>
+                    <label for="address1" class="col-xs-3 control-label">Address</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendorv" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <textarea class="form-control" id="address1" name="address1" value="{{ edit.address1 }}" placeholder="Address"></textarea> 
                     </div> 
                 </div>
-                
+
+                <div class="form-group col-xs-12">
+                    <label for="address2" class="col-xs-3 control-label">Address</label>
+                    <div class="col-xs-7">
+                        <textarea class="form-control" id="address2" name="address2" value="{{ edit.address2 }}" placeholder="Address"></textarea> 
+                    </div> 
+                </div>
+
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">Country</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendorb" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <select  class="form-control" id="country_id" name="country_id" onchange="loadState(this.value)">
+                            <option value="">--Select--</option>
+                            {% for count in country.country %}
+                            <option value="{{ count.country_id }}" {% if count.country_id == edit.country_id%} selected="selected" {% endif %}>{{ count.country_name}}</option>
+                            {% endfor %}
+                        </select>
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">State</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendore" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <select class="form-control" id="state_id" name="state_id" onblur="loadCity(this.value);">
+                            <option value="">--Select--</option>
+                            {% for c in country.state %}
+                            <option value="{{ c.state_id }}" {% if c.state_id == edit.state_id %} selected="selected" {% endif %}>{{ c.state_name }}</option>
+                            {% endfor %}
+                        </select>
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
                     <label for="class_id" class="col-xs-3 control-label">City</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendeor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <select class="form-control" id="city_id" name="city_id">
+                            <option value="">--Select--</option>
+                            {% for c in country.city %}
+                            <option value="{{ c.city_id }}" {% if c.city_id == edit.city_id %} selected="selected" {% endif %}>{{ c.city_name }}</option>
+                            {% endfor %}
+                        </select>
                     </div> 
                 </div>
             </div>
 
             <div class="col-xs-6">
-                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Post Code</label>
+                <div class="form-group col-xs-12">
+                    <label for="zip_code" class="col-xs-3 control-label">Post Code</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vensedor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ edit.zip_code }}" placeholder="Zip Code">
                     </div> 
                 </div> 
 
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Phone Number</label>
+                    <label for="phone_number" class="col-xs-3 control-label">Phone Number</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_vendfor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ edit.phone_number }}" placeholder="Phone number">
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Fax</label>
+                    <label for="fax" class="col-xs-3 control-label">Fax</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_venqdor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="fax" name="fax" value="{{ edit.fax }}" placeholder="Fax">
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Email</label>
+                    <label for="email" class="col-xs-3 control-label">Email</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_venduor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="email" name="email" value="{{ edit.email }}" placeholder="email">
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Contact Person</label>
+                    <label for="contact_person" class="col-xs-3 control-label">Contact Person</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" id="kode_venodor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">
+                        <input type="text" class="form-control" id="contact_person" name="contact_person" value="{{ edit.contact_person }}" placeholder="Contact Person">
                     </div> 
                 </div>
-                
+
                 <div class="form-group col-xs-12">
-                    <label for="class_id" class="col-xs-3 control-label">Description</label>
+                    <label for="description" class="col-xs-3 control-label">Description</label>
                     <div class="col-xs-7">
-                         <textarea name="alamat"  class="form-control" cols="50" rows="4" id="alamat" type="text">{{ edit.alamat }}</textarea>
-                        <!--<input type="text" id="kode_vendor" name="class_id" value="{{ edit.class_id }}" placeholder="xx">-->
+                        <textarea name="description"  class="form-control" cols="50" rows="4" id="description" type="text" placeholder="Description">{{ edit.description }}</textarea>
                     </div> 
                 </div>
             </div>
@@ -96,9 +117,39 @@
 
 
 
-        <input type="submit" class="btn btn-default" value="Save" id="btnsave" name="btnsave">
-        <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
+        <div class="row">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <input type="button" onclick="history.back()" class="btn btn-default" value="Back" />
+        </div>    
     </form> 
 </div>
 
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+//        alert("budiu");
+    });
+//    function loadState(idCountry)
+//    {
+//
+////        alert(idCountry);
+//        jQuery.post("{{ base_url }}index.php/main/country/getstate", {
+//            country_code: idCountry
+//        },
+//        function (data) {
+//            var opsi = "<option value=''>--Pilih--</option>";
+//            list = data.split("~");
+//            if (list.length > 1) {
+//                for (var x = 1; x < list.length; x++) {
+//
+//                    arr = list[x].split("#");
+//                    opsi += "<option value='" + arr[0] + "'>" + arr[1] + "</option>";
+//                    console.log(opsi);
+//                }
+//                jQuery("#state_no").html(opsi);
+//            }
+//        });
+//    }
+</script>
 {% endblock %}
+

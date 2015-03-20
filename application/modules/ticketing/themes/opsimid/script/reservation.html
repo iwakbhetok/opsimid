@@ -1,0 +1,31 @@
+{% block content %}
+
+var selected = [];
+    var table = $('#table_reservation_ticketing').dataTable( {    
+        "searching": true,
+        "ordering": false,    
+        "bLengthChange" : false,
+        "ajax": '{{ site_url() }}/ticketing/ajax_data/getrecord_reservation',
+        "columns": [
+                { "data": "invoice_number" },
+                { "data": "reservation_date" },
+                { "data": "customer_name" },
+                { "data": "supplier_name" },
+                { "data": "airlines" },
+                { "data": "currency" },
+                { "data": "total" },
+                { "mRender" : function ( data, type, full ) {
+                    FullData = full;
+                    return '{{BUTTON_VIEW }} ';
+                  }
+                },
+            ], 
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }   
+});
+
+
+{% endblock %}
