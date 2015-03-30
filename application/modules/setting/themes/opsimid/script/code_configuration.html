@@ -7,6 +7,7 @@ var table = $('#table_code_configuration').dataTable( {
         "bLengthChange" : false,
         "ajax": '{{ site_url() }}/setting/ajax_data/getrecord_code_configuration',
         "columns": [
+                { "data": "nomor" },
                 { "data": "code_name" },
                 { "data": "description" },
                 { "mRender" : function ( data, type, full ) {
@@ -24,29 +25,12 @@ var table = $('#table_code_configuration').dataTable( {
 
 
 // Edit record
-$('#table_user_account').on( 'click', 'a.edit-btn', function (e) {
+$('#table_code_configuration').on( 'click', 'a.edit-btn', function (e) {
         e.preventDefault();        
-        var delId = $(this).data('edit-id');
-        window.location.href='{{ site_url() }}/setting/user_account/form/' + delId;
+        var editId = $(this).data('edit-id');
+        window.location.href='{{ site_url() }}/setting/code_configuration/form/' + editId;
 } );
- 
-// Delete a record
-$('#table_user_account').on( 'click', 'a.del-btn', function (e) {
-        e.preventDefault();
-        if(confirm("Are you sure?")) {
-                var delId = $(this).data('delete-id');  
-		window.location='{{ site_url() }}/setting/user_account/delete/' + delId;	
-	}
-	else
-		return false;
-                
-        //alert('hapus ' + $(this).data('delete-id'));
-        //editor
-        //    .title( 'Edit record' )
-        //    .message( "Are you sure you wish to delete this row?" )
-        //    .buttons( { "label": "Delete", "fn": function () { editor.submit() } } )
-        //    .remove( $(this).closest('tr') );
-} );
+
     
 $('body').on('show.bs.modal', '.modal',function (e) {
     

@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class reservation_mdl extends CI_Model {
+class reservation_ticket_mdl extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -11,6 +11,40 @@ class reservation_mdl extends CI_Model {
 
     function getrecordcount() {
         $data = $this->db->count_all_results('ticketing_ticket_stock');
+        return $data;
+    }
+
+    function getlast_transaction_number() {
+        $data = sprintf('%10d',1);
+        $this->db->select('transaction_number');
+        $this->db->order_by('invoice_id desc');
+        $this->db->limit(1);
+        $query = $this->db->get('trans_ticketing_invoice');
+        if ($query->num_rows() > 0)
+            {
+               $row = $query->row();
+               $data = str_split($row->transaction_number, 2);
+               $office = $data[0];
+               $year = $data[1];
+               $month = $data[2];
+               $number_sequence = $data[3].''.$data[4];
+               if ($year != date('y')) {
+                   $year = date('y');
+                   $month = date('m');
+                   $number_sequence = 1;
+               }
+               else{
+                    if ($month != date('m')) {
+                       $month = date('m');
+                       $number_sequence = 1;
+                   }
+                   else {
+                        $number_sequence = (int)$number_sequence + 1;
+                   }
+               }
+               $new_transaction_number = $office.''.$year.''.$month.''.sprintf('%04d', $number_sequence);
+               $data = $new_transaction_number;
+            }
         return $data;
     }
 

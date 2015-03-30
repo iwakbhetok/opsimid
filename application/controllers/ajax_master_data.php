@@ -37,6 +37,13 @@ class Ajax_master_data extends CI_Controller {
         echo json_encode($data);
     }
     
+    function getsupplier_ticketing()
+    {
+        $this->load->model('supplier_mdl');
+        $data = $this->supplier_mdl->getsupplier_ticketing_combobox();
+        echo json_encode($data);
+    }
+
     function getsupplier_hotel()
     {
         $this->load->model('supplier_mdl');
@@ -74,6 +81,29 @@ class Ajax_master_data extends CI_Controller {
         echo json_encode($data);
     }
 
+    function getrecord_group_typehead() {
+        $this->load->model('user_mdl');
+        $params = $this->input->post('query');
+        $data = $this->user_mdl->getrecord_group_typehead($params);
+        echo json_encode($data);
+    }
+
+    function get_group()
+    {
+        $this->load->model('user_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->user_mdl->getdatalist_group();
+        $data['iTotalRecords']          = $this->user_mdl->getrecordcount_group();
+        $data['iTotalDisplayRecords']   = $this->user_mdl->getrecordcount_group();
+        echo json_encode($data);
+    }
+
     function getrecord_customer_typehead() {
         $this->load->model('customer_mdl');
         $params = $this->input->post('query');
@@ -81,18 +111,17 @@ class Ajax_master_data extends CI_Controller {
         echo json_encode($data);
     }
 
-    function customer()
-    {
-        //$this->db->like('currency', $currency);
-        $this->db->order_by('full_name asc');
-        $query = $this->db->get('mst_customer');
-        foreach($query->result() as $row):
-            $data[] = array(
-                'customer_id'   => $row->customer_id,
-                'customer_name' => $row->title . ' ' . $row->full_name,
-                ); 
-        endforeach;
-        
+    function get_group_by_id(){
+        $this->load->model('user_mdl');
+        $group_id = $this->uri->segment(3, 0);
+        $data = $this->user_mdl->getrecord_group_by_id($group_id);
+        echo json_encode($data);
+    }
+
+    function get_customer_by_id(){
+        $this->load->model('customer_mdl');
+        $customer_id = $this->uri->segment(3, 0);
+        $data = $this->customer_mdl->getrecord_customer_by_id($customer_id);
         echo json_encode($data);
     }
 

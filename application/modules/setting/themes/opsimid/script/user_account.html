@@ -37,23 +37,31 @@ $('#table_user_account').on( 'click', 'a.edit-btn', function (e) {
 // Delete a record
 $('#table_user_account').on( 'click', 'a.del-btn', function (e) {
         e.preventDefault();
-        if(confirm("Are you sure?")) {
+        if(confirm("Are you sure you wish to delete this account?")) {
                 var delId = $(this).data('delete-id');  
 		window.location='{{ site_url() }}/setting/user_account/delete/' + delId;	
 	}
-	else
+	else {
 		return false;
-                
-        //alert('hapus ' + $(this).data('delete-id'));
-        //editor
-        //    .title( 'Edit record' )
-        //    .message( "Are you sure you wish to delete this row?" )
-        //    .buttons( { "label": "Delete", "fn": function () { editor.submit() } } )
-        //    .remove( $(this).closest('tr') );
+    }
 } );
     
 $('body').on('show.bs.modal', '.modal',function (e) {
     
 });
+
+var password = document.getElementById('password');
+var confirm_password = document.getElementById('confirm_password');
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
 
 {% endblock %}

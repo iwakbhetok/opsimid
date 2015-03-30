@@ -1,5 +1,9 @@
 {% block content %}
-
+<div class="box border green">
+    <div class="box-title">
+      <h4><i class="fa fa-bars"></i>{{ BREADCRUMBS_TITLE }}</h4>
+    </div>
+    <div class="box-body big">
 	 <form class="form-horizontal" action="{{ site_url('hotel/hotel_rate/save') }}" method="post" role="form" name="form1">
 		<div class="row">
 		    <input type="hidden" name="hotel_rate_id" id="hotel_rate_id" value="{{ edit.hotel_rate_id }}" />
@@ -130,4 +134,6 @@
         <input type="button" onclick="history.back();" class="btn btn-default" value="Back" />    	
 	</div>
     </form>
+ 	</div>
+ </div>
 {% endblock %}

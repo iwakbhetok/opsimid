@@ -1,0 +1,109 @@
+{% block content %}
+
+// customer name typeahead
+    $('#customer_name.typeahead').typeahead({
+        name: 'customer_name',
+        prefetch: '{{ site_url() }}/ajax_master_data/getrecord_customer_typehead',
+        limit: 100,
+        //displayKey:'customer_name'
+    });
+
+    var selected = [];
+    var cTable = $('#table_window_customer').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_customer',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "customer_name" },
+                    { "data": "address" },
+                    { "data": "email" },
+                    { "data": "contact_person" },
+                    { "data": "pricing_policy" },
+                    { "data": "description" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return '{{BUTTON_CHOOSE}}';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+
+    $('#customer_btn').on('click', function(e){
+        cTable.show();
+    });
+
+    // Select record
+    $('#table_window_customer').on( 'click', 'a.select-btn', function (e) {
+            e.preventDefault();        
+            var selectId = $(this).data('select-id');
+            $.ajax({
+            type: "GET",
+            url: '{{ site_url() }}/ajax_master_data/get_customer_by_id/' + selectId,
+            dataType: "json",
+            success: function(data){
+                $('#customer_id').val(selectId);
+                $('#customer_name').val(data[0]);
+                    }
+            });
+    });
+
+    // customer name typeahead
+    $('#customer_name_2.typeahead').typeahead({
+        name: 'customer_name',
+        prefetch: '{{ site_url() }}/ajax_master_data/getrecord_customer_typehead',
+        limit: 100,
+    });
+
+    var cTable_2 = $('#table_window_customer_2').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_customer',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "customer_name" },
+                    { "data": "address" },
+                    { "data": "email" },
+                    { "data": "contact_person" },
+                    { "data": "pricing_policy" },
+                    { "data": "description" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return '{{BUTTON_CHOOSE}}';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+
+    $('#customer_btn_2').on('click', function(e){
+        cTable_2.show();
+    });
+
+    // Select record
+    $('#table_window_customer_2').on( 'click', 'a.select-btn', function (e) {
+            e.preventDefault();        
+            var selectId = $(this).data('select-id');
+            $.ajax({
+            type: "GET",
+            url: '{{ site_url() }}/ajax_master_data/get_customer_by_id/' + selectId,
+            dataType: "json",
+            success: function(data){
+                $('#customer_id_2').val(selectId);
+                $('#customer_name_2').val(data[0]);
+                    }
+            });
+    });
+    
+{% endblock %}

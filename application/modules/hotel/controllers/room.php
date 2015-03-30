@@ -6,7 +6,7 @@ class Room extends CI_Controller {
         parent::__construct();
         $this->load->library('menu');
         $this->load->model('user_mdl');
-        $this->load->model('form_mdl');
+        $this->load->model('room_mdl');
 
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -31,14 +31,13 @@ class Room extends CI_Controller {
         $this->twiggy->set('FORM_NAME', 'form_room');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
         $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.class_id');
+        $this->twiggy->set('FORM_IDKEY', 'full.room_id');
         $this->twiggy->set('FORM_LINK', site_url('hotel/room/form'));
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
 
-        $this->twiggy->set('content_page', $content);
         $script_page = $this->twiggy->template('script/room')->render();       
 
         $this->twiggy->set('SCRIPTS', $script_page);
@@ -48,9 +47,13 @@ class Room extends CI_Controller {
         $this->output->set_output($output);     
     }
 
-    function form()
+    function form($id='')
     {
-        $data = array();        
+        if (!empty($id)){
+        $data = $this->room_mdl->getdataid($id);
+        $this->twiggy->set('edit', $data); 
+        };
+        $data = array(); 
         
         $content = $this->twiggy->template('breadcrumbs')->render();     
         $content .= $this->twiggy->template('form/form_room')->render();
@@ -63,5 +66,27 @@ class Room extends CI_Controller {
 
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
+    }
+
+    function save()
+    {
+        $params = (object) $this->input->post();   
+        
+        $valid = $this->room_mdl->save($params);
+
+        if (empty($valid))
+            $this->owner->alert("Please complete the form", "../index.php/hotel/room/form");
+        else
+            redirect("../index.php/hotel/room/index");
+    }
+
+    public function delete()
+    {       
+        $valid = false;
+        $id = $this->uri->segment(4, 0);
+        $valid = $this->room_mdl->delete($id);
+        
+        if ($valid)
+            redirect("../index.php/hotel/room/index");  
     }
  }

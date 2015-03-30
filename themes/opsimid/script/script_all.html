@@ -1,6 +1,6 @@
 {% block content %}
 
-    $("#save_btn").click(function(){
+    /*$("#save_btn").click(function(){
         var currentTabTitle = $('div[id="mytabs"] ul li.active > a').attr("href");
         var div_name = String(currentTabTitle);
 
@@ -8,23 +8,14 @@
         $(div_name+' input[name][id][value]').each(function(){
              inputTypes.push($(this).attr('name'));
         });
-        console.log(inputTypes);
 
-    });
+    });*/
 
-
-    // customer typeahead
-    $('#customer_name.typeahead').typeahead({                
-                name: 'customer_name',
-                prefetch: '{{ site_url() }}/ajax_master_data/customer',
-                limit: 100
-    });
-    //console.log($('#customer_name'));
-
-    $('#customer_name_2.typeahead').typeahead({                
-                name: 'customer_name_2',
-                prefetch: '{{ site_url() }}/ajax_master_data/customer',
-                limit: 100
+    // customer name typeahead
+    $('#customer_name.typeahead').typeahead({
+        name: 'customer_name',
+        prefetch: '{{ site_url() }}/ajax_master_data/getrecord_customer_typehead',
+        limit: 100
     });
 
     $(".datepicker").datepicker({
@@ -59,6 +50,21 @@
                 }   
     });
         
+    //populate supplier ticketing
+    $.ajax({           
+        type: "GET",
+        url: "{{ site_url() }}/ajax_master_data/getsupplier_ticketing", 
+        data:'',
+        dataType: 'json',               
+        success: function(data){ 
+            $("#supplier_ticketing_name").append('<option value="" default selected>Supplier Name</option>');
+            var arrayLength = data.length;
+            for(i = 0; i < arrayLength; i++) 
+                $("#supplier_ticketing_name").append("<option value='"+data[i]['supplier_id']+"'>"+data[i]['supplier_name']+"</option>");
+        } 
+
+    });
+
     //populate supplier hotel
     $.ajax({           
         type: "GET",
@@ -66,10 +72,10 @@
         data:'',
         dataType: 'json',               
         success: function(data){ 
-            $("#supplier_name").append('<option value="" default selected>Supplier Name</option>');
+            $("#supplier_hotel_name").append('<option value="" default selected>Supplier Name</option>');
             var arrayLength = data.length;
             for(i = 0; i < arrayLength; i++) 
-                $("#supplier_name").append("<option value='"+data[i]['supplier_id']+"'>"+data[i]['supplier_name']+"</option>");
+                $("#supplier_hotel_name").append("<option value='"+data[i]['supplier_id']+"'>"+data[i]['supplier_name']+"</option>");
         } 
 
     });
@@ -150,34 +156,4 @@
 
     });
     
-    var table = $('#table_window_customer').dataTable( {    
-            "searching": true,
-            "ordering": false,    
-            "bLengthChange" : false,
-            "ajax": '{{ site_url() }}/ajax_master_data/get_customer',
-            "columns": [
-                    { "data": "nomor" },
-                    { "data": "customer_name" },
-                    { "data": "address" },
-                    { "data": "email" },
-                    { "data": "contact_person" },
-                    { "data": "pricing_policy" },
-                    { "data": "description" },
-                    { "mRender" : function ( data, type, full ) {
-                        FullData = full;
-                        return ' Select ';
-                      }
-                    },
-                ], 
-                "rowCallback": function( row, data ) {
-                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
-                        $(row).addClass('selected');
-                    }
-                }   
-    });
-    
-    $('body').on('show.bs.modal', '#window-customer',function (e) {
-
-    });
-  
 {% endblock %}

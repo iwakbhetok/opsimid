@@ -6,7 +6,7 @@ class reservation extends CI_Controller {
         parent::__construct();
         $this->load->library('menu');
         $this->load->model('user_mdl');
-        $this->load->model('ticket_stock_mdl');
+        $this->load->model('reservation_ticket_mdl');
         $this->load->model('module_mdl');
 
         $menu = $this->menu->set_menu();
@@ -41,7 +41,7 @@ class reservation extends CI_Controller {
         $this->twiggy->set('window_page', $window_page);
 
         $script_page = $this->twiggy->template('script/reservation')->render();
-        $script_page .= $this->twiggy->template('script/script_all')->render();
+        //$script_page .= $this->twiggy->template('script/script_all')->render();
         $this->twiggy->set('SCRIPTS', $script_page);
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);   
@@ -51,30 +51,44 @@ class reservation extends CI_Controller {
     function form($id='')
     {
         if (!empty($id)){
-        $data = $this->ticket_stock_mdl->getdataid($id);
+        $data = $this->reservation_ticket_mdl->getdataid($id);
         $this->twiggy->set('edit', $data); 
         };
         $module_name = $this->uri->segment(1);
         $data = $this->module_mdl->getcode_name_prefix($module_name);
         $this->twiggy->set('CODE_PREFIX', $data[0]['code_name']);
 
+        $transaction_number = $this->reservation_ticket_mdl->getlast_transaction_number();
+        $this->twiggy->set('transaction_number', $transaction_number);   
+     
+        $this->twiggy->set('FORM_NAME', 'form_ticket_reservation');
+        $this->twiggy->set('FORM_SELECT_IDKEY', 'data-select-id');
+        $this->twiggy->set('FORM_IDKEY', 'full.customer_id');
+        $this->twiggy->set('FORM_LINK', site_url('ticketing/reservation/form')); 
 
-        $data = array(); 
+        $this->twiggy->set('FORM_SECOND_NAME', 'form_airlines');
+        $this->twiggy->set('FORM_SECOND_SELECT_IDKEY', 'data-select-id');
+        $this->twiggy->set('FORM_SECOND_IDKEY', 'full.airlines_id');
+        $this->twiggy->set('FORM_SECOND_LINK', site_url('ticketing/reservation/form')); 
+
+        $window_page = $this->twiggy->template('window/window_customer')->render();        
+        $window_page .= $this->twiggy->template('window/window_customer_sub_form')->render();
+        $window_page .= $this->twiggy->template('window/window_airlines')->render();
+        $this->twiggy->set('window_page', $window_page);   
+        $button_select = $this->twiggy->template('button/btn_select')->render();
+        $this->twiggy->set('BUTTON_CHOOSE', $button_select);
+
+        $button_second_select = $this->twiggy->template('button/btn_second_select')->render();
+        $this->twiggy->set('BUTTON_SECOND_CHOOSE', $button_second_select);
+
         $content = $this->twiggy->template('breadcrumbs')->render();
         $content .= $this->twiggy->template('form/form_reservation')->render();
-        $this->twiggy->set('content_page', $content);        
-        $this->twiggy->set('FORM_NAME', 'form_ticket_stock');
-        $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
-        $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', $id);
-        $this->twiggy->set('FORM_LINK', site_url('ticketing/ticket_stock/delete'));    
+        $this->twiggy->set('content_page', $content);   
         
-        $this->twiggy->set('content_page', $content);
         
-        $button_crud = $this->twiggy->template('button/btn_select')->render();
-        $this->twiggy->set('BUTTON_CRUD', $button_crud);
-
-        $script_page = $this->twiggy->template('script/script_all')->render();
+        $script_page = $this->twiggy->template('script/script_airlines')->render();
+        $script_page .= $this->twiggy->template('script/customer_name')->render();
+        $script_page .= $this->twiggy->template('script/script_all')->render();
         $this->twiggy->set('SCRIPTS', $script_page);
         
         $output = $this->twiggy->template('dashboard')->render();
@@ -85,12 +99,12 @@ class reservation extends CI_Controller {
     {
         $params = (object) $this->input->post();   
         
-        $valid = $this->ticket_stock_mdl->save($params);
+        $valid = $this->reservation_ticket_mdl->save($params);
 
         if (empty($valid))
-            $this->owner->alert("Please complete the form", "../index.php/ticketing/ticket_stock/form");
+            $this->owner->alert("Please complete the form", "../index.php/ticketing/reservation/form");
         else
-            redirect("../index.php/ticketing/ticket_stock/index");
+            redirect("../index.php/ticketing/reservation/index");
     }
 
     public function delete()
@@ -100,6 +114,6 @@ class reservation extends CI_Controller {
         $valid = $this->ticket_stock_mdl->delete($id);
         
         if ($valid)
-            redirect("../index.php/ticketing/ticket_stock/index");  
+            redirect("../index.php/ticketing/reservation/index");  
     }
  }

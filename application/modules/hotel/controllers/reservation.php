@@ -24,7 +24,6 @@ class Reservation extends CI_Controller {
     function index()
     { 
     	$data = array();
-        // create content page invoice
         
         $content = $this->twiggy->template('breadcrumbs')->render();
         $content .= $this->twiggy->template('list/reservation')->render();
@@ -53,8 +52,8 @@ class Reservation extends CI_Controller {
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
 
-        $script_page = $this->twiggy->template('script/reservation')->render();         
-        
+        $script_page = $this->twiggy->template('script/reservation')->render();
+        $script_page .= $this->twiggy->template('script/script_all')->render();        
         $this->twiggy->set('SCRIPTS', $script_page);
         
         $output = $this->twiggy->template('dashboard')->render();

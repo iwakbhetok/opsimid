@@ -25,22 +25,18 @@ class code_configuration extends CI_Controller {
         
         $content = $this->twiggy->template('breadcrumbs')->render();
         $content .= $this->twiggy->template('list/code_configuration')->render();
+        $this->twiggy->set('content_page', $content);
         
         $this->twiggy->set('FORM_NAME', 'form_code_configuration');
         $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
-        $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', 'full.class_id');
+        $this->twiggy->set('FORM_IDKEY', 'full.code_id');
         $this->twiggy->set('FORM_LINK', site_url('setting/code_configuration/form'));
         
-        $button_crud = $this->twiggy->template('button/btn_edit')->render();         
-        $button_crud .= $this->twiggy->template('button/btn_del')->render();
+        $button_crud = $this->twiggy->template('button/btn_edit')->render();
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
 
-        $this->twiggy->set('content_page', $content);
-        $script_page = $this->twiggy->template('script/code_configuration')->render();       
-
+        $script_page = $this->twiggy->template('script/code_configuration')->render();
         $this->twiggy->set('SCRIPTS', $script_page);
-        $this->twiggy->set('content_page', $content);
 
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);     
@@ -48,13 +44,13 @@ class code_configuration extends CI_Controller {
 
     function form($id='')
     {
-        $data = array();        
+        if (!empty($id)){
+        $data = $this->code_configuration_mdl->getdataid($id);
+        $this->twiggy->set('edit', $data); 
+        };       
         
-        // create content page fo dp supplier
         $content = $this->twiggy->template('breadcrumbs')->render();
-        //$content .= $this->twiggy->template('form/filter_dp_supplier')->render();        
         $content .= $this->twiggy->template('form/form_code_configuration')->render();
-        // end        
         $this->twiggy->set('content_page', $content);
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
@@ -63,5 +59,17 @@ class code_configuration extends CI_Controller {
         
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
+    }
+
+    function save()
+    {
+        $params = (object) $this->input->post();   
+        
+        $valid = $this->code_configuration_mdl->save($params);
+
+        if (empty($valid))
+            $this->owner->alert("Please complete the form", "../index.php/setting/code_configuration/form");
+        else
+            redirect("../index.php/setting/code_configuration/index");
     }
  }

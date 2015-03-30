@@ -40,8 +40,7 @@ class Hotel extends CI_Controller {
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
 
         
-        $script_page = $this->twiggy->template('script/hotel')->render();       
-
+        $script_page = $this->twiggy->template('script/hotel')->render(); 
         $this->twiggy->set('SCRIPTS', $script_page);
 
         $output = $this->twiggy->template('dashboard')->render();
@@ -49,7 +48,7 @@ class Hotel extends CI_Controller {
 
     }
 
-    function form()
+    function form($id='')
     {
         $id =  $this->uri->segment(4, 0);
         if (!empty($id)){

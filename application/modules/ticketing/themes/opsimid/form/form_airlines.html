@@ -9,7 +9,7 @@
 	<form action="{{ site_url('/ticketing/airlines/save') }}" method="post" name="form1">
     <div class="row">
             <input type="hidden" name="airlines_id" id="airlines_id" value="{{ edit.airlines_id }}" />
-        <div class="col-lg-8">
+        <div class="col-xs-6">
 
         	<div class="form-group col-md-12">
                 <label class="col-md-3 control-label">Airlines Name</label>
@@ -42,7 +42,45 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-label">Address</label>
                 <div class="col-md-6">
-                    <textarea class="form-control"  id="address" name="address" rows="5">{{ edit.address}}</textarea>
+                    <input type="text" class="form-control" id="address" name="address" value="{{ edit.address}}" required placeholder="Type your address">
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Currency</label>
+                <div class="col-md-6">
+                    <select class="form-control col-xs-10" width="100px" id="currency" name="currency">
+                    </select>
+                    </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Upload Logo</label>
+                <div class="col-md-8">
+                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="input-group">
+                                                    <div class="form-control uneditable-input"><i class="fa fa-file fileupload-exists"></i> 
+                                                        <span class="fileupload-preview"></span>
+                                                    </div>
+                                                    <div class="input-group-btn">
+                                                        <a style="height:30px;" class="btn btn-default btn-file">
+                                                            <span class="fileupload-new">Select file</span>
+                                                            <span class="fileupload-exists">Change</span>
+                                                            <input type="file" class="file-input"/></a>
+                                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Description</label>
+                <div class="col-md-6">
+                    <textarea class="form-control"  id="information" name="information" rows="2">{{ edit.information}}</textarea>
                     </div>
             </div>
         </div>

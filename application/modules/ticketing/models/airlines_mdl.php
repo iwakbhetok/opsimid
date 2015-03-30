@@ -14,6 +14,32 @@ class airlines_mdl extends CI_Model {
         return $data;
     }
 
+    function getdata_airlines_combobox(){
+        $this->db->where('status', '1');
+        $this->db->order_by('airlines_name asc');
+        $query = $this->db->get('ticketing_mst_airlines');
+        $nomor = 1;
+        foreach($query->result() as $row):
+            $data[] = array(
+                'airlines_id'  => $row->airlines_id,
+                'airlines_name'    => $row->airlines_name,
+            ); 
+            $nomor++;
+        endforeach;
+        return $data;
+    }
+
+    function getrecord_airlines_typehead($params)
+    {
+        $this->db->where('airlines_name LIKE', '%'.$params.'%');
+        $this->db->order_by('airlines_name asc');
+        $query = $this->db->get('ticketing_mst_airlines');
+        foreach ($query->result() as $row):
+            $data[] = '00'.$row->airlines_id.' '.$row->airlines_name;
+        endforeach;
+        return $data;
+    }
+
     function getdatalist() {
         $data = array();
         $fields = array(
@@ -26,6 +52,7 @@ class airlines_mdl extends CI_Model {
         );
 
         $this->db->select($fields);
+        $this->db->order_by('airlines_name asc');
         $query = $this->db->get('ticketing_mst_airlines');
         $nomor = 1;
         foreach ($query->result() as $row):
@@ -38,6 +65,16 @@ class airlines_mdl extends CI_Model {
                 'address' => $row->address,   
             );
             $nomor++;
+        endforeach;
+        return $data;
+    }
+
+    function getrecord_airlines_by_id($params)
+    {
+        $this->db->where('airlines_id', $params);
+        $query = $this->db->get('ticketing_mst_airlines');
+        foreach ($query->result() as $row):
+            $data[] = $row->airlines_name;
         endforeach;
         return $data;
     }

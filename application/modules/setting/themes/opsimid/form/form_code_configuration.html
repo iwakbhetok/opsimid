@@ -6,7 +6,7 @@
     </div>
     <div class="box-body big">
     <form action="{{ site_url() }}/setting/code_configuration/save" method="post" name="form1">
-    <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />    
+    <input id="code_id" name="code_id" type="hidden" value="{{ edit.code_id }}" />    
     <div class="row">    
         <div class="col-lg-8">
             <div class="form-group col-xs-12">
@@ -18,7 +18,7 @@
             <div class="form-group col-xs-12">
                 <label for="password" class="col-xs-3 control-label">Description</label>
                 <div class="col-xs-7">
-                    <textarea class="form-control" rows="2" name="description"></textarea>
+                    <textarea class="form-control" rows="2" name="description">{{ edit.description }}</textarea>
                 </div>                
             </div>            
            
@@ -26,7 +26,7 @@
             
     </div>
     <input type="submit" class="btn btn-primary" value="Save" id="btnsave" name="btnsave">
-    <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
+    <input type="submit" class="btn btn-default" value="Cancel" id="btnupdate" name="btnupdate">
 </form> 
 </div>
 </div>

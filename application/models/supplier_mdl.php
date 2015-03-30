@@ -13,17 +13,36 @@ class supplier_mdl extends CI_Model {
 
     function getrecordcount_for_hotel()
     {
-            $this->db->where('supplier_code LIKE', 'HS%'); 
-            $this->db->from('mst_supplier');
-            $data = $this->db->count_all_results();
-            return $data;
+        $this->db->join('sys_module sm', 'sm.module_id=ms.supplier_module_id');
+        $this->db->where('sm.alias_module', 'hotel');
+        $this->db->from('mst_supplier ms');
+        $data = $this->db->count_all_results();
+        return $data;
     }
 
     function getsupplier_hotel_combobox()
     {        
-        $this->db->where('supplier_code LIKE', 'HS%');
-        $this->db->order_by('supplier_code asc');
-        $query = $this->db->get('mst_supplier');
+        $this->db->join('sys_module sm', 'sm.module_id=ms.supplier_module_id');
+        $this->db->where('sm.alias_module', 'hotel');
+        $this->db->order_by('ms.supplier_code asc');
+        $query = $this->db->get('mst_supplier ms');
+        $nomor = 1;
+        foreach($query->result() as $row):
+            $data[] = array(
+                'supplier_id'   => $row->supplier_id,
+                'supplier_name' => $row->supplier_name,
+            ); 
+            $nomor++;
+        endforeach;
+        return $data;
+    }
+
+    function getsupplier_ticketing_combobox()
+    {        
+        $this->db->join('sys_module sm', 'sm.module_id=ms.supplier_module_id');
+        $this->db->where('sm.alias_module', 'ticketing');
+        $this->db->order_by('ms.supplier_code asc');
+        $query = $this->db->get('mst_supplier ms');
         $nomor = 1;
         foreach($query->result() as $row):
             $data[] = array(
@@ -48,8 +67,9 @@ class supplier_mdl extends CI_Model {
         );
 
         $this->db->select($fields);
+        $this->db->join('sys_module sm', 'sm.module_id=ms.supplier_module_id');
         $this->db->join('mst_city mc', 'ms.city_id=mc.city_id');
-        $this->db->where('ms.supplier_code LIKE', 'HS%');
+        $this->db->where('sm.alias_module', 'hotel');
         $query = $this->db->get('mst_supplier ms');
         $nomor = 1;
         foreach ($query->result() as $row):
@@ -68,8 +88,9 @@ class supplier_mdl extends CI_Model {
 
     function getrecordcount_for_ticketing()
     {
-            $this->db->where('supplier_code LIKE', 'TC%'); 
-            $this->db->from('mst_supplier');
+            $this->db->join('sys_module sm', 'sm.module_id=ms.supplier_module_id');
+            $this->db->where('sm.alias_module', 'ticketing');
+            $this->db->from('mst_supplier ms');
             $data = $this->db->count_all_results();
             return $data;
     }
@@ -87,8 +108,9 @@ class supplier_mdl extends CI_Model {
         );
 
         $this->db->select($fields);
+        $this->db->join('sys_module sm', 'sm.module_id=ms.supplier_module_id');
         $this->db->join('mst_city mc', 'ms.city_id=mc.city_id');
-        $this->db->where('ms.supplier_code LIKE', 'TC%');
+        $this->db->where('sm.alias_module', 'ticketing');
         $query = $this->db->get('mst_supplier ms');
         $nomor = 1;
         foreach ($query->result() as $row):
@@ -107,7 +129,10 @@ class supplier_mdl extends CI_Model {
 
     function getmax_supplier_hotel_code()
     {
-        $this->db->select_max('supplier_code');
+        $this->db->select_max('ms.supplier_code');
+        $this->db->join('sys_module sm', 'sm.module_id=ms.supplier_module_id');
+        $this->db->join('setting_mst_code_configuration smcc', 'smcc.code_id=sm.code_configuration_id');
+        $this->db->where('smcc.code_name', 'ticketing');
         $this->db->where('supplier_code LIKE', 'HS%');
         $this->db->limit(1);
         $query = $this->db->get('mst_supplier');

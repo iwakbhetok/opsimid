@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class customer_mdl extends CI_Model {
+class customer_x_mdl extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -17,6 +17,7 @@ class customer_mdl extends CI_Model {
     function getdatalist() {
         $data = array();
         $fields = array(
+            'customer_id',
             'identity_number',
             'title',
             'full_name',
@@ -30,6 +31,7 @@ class customer_mdl extends CI_Model {
         $nomor = 1;
         foreach ($query->result() as $row):
             $data[] = array(
+                'customer_id' => $row->customer_id,
                 'identity_number' => $row->identity_number,
                 'full_name' => $row->title.' '.$row->full_name,
                 'address_1' => $row->address_1,

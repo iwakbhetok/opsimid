@@ -70,7 +70,7 @@ class Ajax_data extends CI_Controller {
     }
 
     function getrecord_reservation() {
-        $this->load->model('reservation_mdl');
+        $this->load->model('reservation_ticket_mdl');
         $data = array(
             'aaData' => array(),
             'sEcho' => 0,
@@ -78,9 +78,9 @@ class Ajax_data extends CI_Controller {
             'iTotalDisplayRecords' => '',
         );
         //find total record 
-        $data['aaData'] = $this->reservation_mdl->getdatalist();
-        $data['iTotalRecords'] = $this->reservation_mdl->getrecordcount();
-        $data['iTotalDisplayRecords'] = $this->reservation_mdl->getrecordcount();
+        $data['aaData'] = $this->reservation_ticket_mdl->getdatalist();
+        $data['iTotalRecords'] = $this->reservation_ticket_mdl->getrecordcount();
+        $data['iTotalDisplayRecords'] = $this->reservation_ticket_mdl->getrecordcount();
         echo json_encode($data);
     }
 
@@ -138,6 +138,36 @@ class Ajax_data extends CI_Controller {
         $data['aaData'] = $this->invoice_mdl->getdatalist();
         $data['iTotalRecords'] = $this->invoice_mdl->getrecordcount();
         $data['iTotalDisplayRecords'] = $this->invoice_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+
+    function getrecord_airlines_typehead() {
+        $this->load->model('airlines_mdl');
+        $params = $this->input->post('query');
+        $data = $this->airlines_mdl->getrecord_airlines_typehead($params);
+        echo json_encode($data);
+    }
+
+    function get_airlines()
+    {
+        $this->load->model('airlines_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->airlines_mdl->getdatalist();
+        $data['iTotalRecords']          = $this->airlines_mdl->getrecordcount();
+        $data['iTotalDisplayRecords']   = $this->airlines_mdl->getrecordcount();
+        echo json_encode($data);
+    }
+
+    function get_airlines_by_id(){
+        $this->load->model('airlines_mdl');
+        $airlines_id = $this->uri->segment(4, 0);
+        $data = $this->airlines_mdl->getrecord_airlines_by_id($airlines_id);
         echo json_encode($data);
     }
 

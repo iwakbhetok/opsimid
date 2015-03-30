@@ -7,11 +7,13 @@ var table = $('#table_customer').dataTable( {
         "bLengthChange" : false,
         "ajax": '{{ site_url() }}/setting/ajax_data/getrecord_customer',
         "columns": [
-                { "data": "full_name" },
-                { "data": "identity_number" },
-                { "data": "address_1" },
-                { "data": "email" },
-                { "data": "type" },
+                { "data": "nomor" },
+                    { "data": "customer_name" },
+                    { "data": "address" },
+                    { "data": "email" },
+                    { "data": "contact_person" },
+                    { "data": "pricing_policy" },
+                    { "data": "description" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
                     return '{{ BUTTON_CRUD }} ';

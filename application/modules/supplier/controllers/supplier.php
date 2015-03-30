@@ -57,7 +57,7 @@ class Supplier extends CI_Controller {
                 $button_crud .= $this->twiggy->template('button/btn_del')->render();
                 $this->twiggy->set('BUTTON_CRUD', $button_crud);
 
-                $script_page = $this->twiggy->template('script/supplier_ticketing')->render();
+                $script_page = $this->twiggy->template('script/supplier')->render();
                 $this->twiggy->set('SCRIPTS', $script_page);
                 break;
             case 'hotel':

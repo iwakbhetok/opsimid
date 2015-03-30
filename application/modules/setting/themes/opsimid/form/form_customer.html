@@ -5,28 +5,149 @@
     </div>
     <div class="box-body big">
 <div class="container-fluid">
-    <form action="{{ site_url() }}/t/coa_class/save" method="post" name="form1">
-        <input id="class_id" name="class_id" type="hidden" value="{{ edit.class_id }}" />
+    <form action="{{ site_url() }}/setting/customer/save" method="post" name="form1">
+        <input id="customer_id" name="customer_id" type="hidden" value="{{ edit.customer_id }}" />
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group col-xs-12">
-                    <label for="kodeVendor" class="col-xs-3 control-label">Reservation Code</label>
+                    <label for="kodeVendor" class="col-xs-3 control-label">Identity No</label>
                     <div class="col-xs-7">
-                        <!--<input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{ edit.kode_vendor }}" placeholder="" readonly="TRUE">-->
-                        <input type="text" class="form-control" id="kode_vendor" name="kode_vendor" value="{{kode_vendor }}" placeholder="xx">
+                        <input type="text" class="form-control" id="identity_number" name="identity_number" value="{{edit.identity_number }}" placeholder="1234456789" required>
                     </div> 
                 </div> 
+            </div>
 
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Address 1</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="address_1" name="address_1" value="{{edit.address_1 }}" placeholder="xx" required>
+                    </div> 
+                </div> 
+            </div>
 
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Title</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="title" name="title" value="{{edit.title }}" placeholder="Mr, Mrs, Miss, Madam, PT" required>
+                    </div> 
+                </div> 
+            </div>
 
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Address 2</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="address_2" name="address_2" value="{{edit.address_2 }}" placeholder="xx">
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Full Name</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="full_name" name="full_name" value="{{edit.full_name }}" placeholder="xx" required>
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Phone No</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="telp1" name="telp1" value="{{edit.telp1 }}" placeholder="xx" required>
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Date of Birth</label>
+                    <div class="col-xs-7">
+                        <div class="input-group date" id="datepicker">
+                    <input type="text" class="form-control datepicker" id="date_of_birth" name="date_of_birth" value="{{edit.date_of_birth}}" placeholder="DD-MM-YYYY" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span></div>
+
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Mobile Phone</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="telp2" name="telp2" value="{{edit.telp2 }}" placeholder="xx">
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Place of Birth</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="place_of_birth" name="place_of_birth" value="{{edit.place_of_birth }}" placeholder="xx">
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Email</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="email" name="email" value="{{edit.email }}" placeholder="xx" required>
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Citizen</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="citizen" name="citizen" value="{{edit.citizen }}" placeholder="xx" required>
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Pricing Policy</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="pricing_policy" name="pricing_policy" value="{{edit.pricing_policy}}" placeholder="xx" required>
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Type</label>
+                    <div class="col-xs-7">
+                        <select class="form-control" id="type" name="type" required>
+                        <option value="{{ edit.type}}">{{ edit.type}}</option>
+                        <option value="individual">Individual</option>
+                        <option value="company">Company</option>
+                    </select>
+                    </div> 
+                </div> 
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group col-xs-12">
+                    <label for="kodeVendor" class="col-xs-3 control-label">Description</label>
+                    <div class="col-xs-7">
+                        <textarea class="form-control" rows="2" name="description">{{ edit.description }}</textarea>
+                    </div> 
+                </div> 
             </div>
 
         </div>
 
 
 
-        <input type="submit" class="btn btn-default" value="Save" id="btnsave" name="btnsave">
-        <input type="submit" class="btn btn-default" value="Update" id="btnupdate" name="btnupdate">
+        <input type="submit" class="btn btn-primary" value="Save" id="btnsave" name="btnsave">
+        <input type="button" onclick="history.back();" class="btn btn-default" value="Back" id="btnupdate" name="btnupdate">
     </form> 
 </div>
 </div>

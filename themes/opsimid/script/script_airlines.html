@@ -1,0 +1,54 @@
+{% block content %}
+  
+// airlines name typeahead
+    $('#airlines_name.typeahead').typeahead({                
+                name: 'airlines_name',
+                remote: '{{ site_url() }}/ticketing/ajax_data/getrecord_airlines_typehead',
+                limit: 100,
+    });
+
+    var selected = [];
+    var oTable = $('#table_window_airlines').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ticketing/ajax_data/get_airlines',
+            "columns": [
+                    { "data": "airlines_name" },                                
+                    { "data": "address" },
+                    { "data": "contact_person" },
+                    { "data": "phone" },
+                    { "data": "email" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return '{{ BUTTON_SECOND_CHOOSE }}';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    $('#airlines_btn').on('click', function(e){
+        oTable.show();
+    });
+
+    // Select record
+    $('#table_window_airlines').on( 'click', 'a.select-btn', function (e) {
+            e.preventDefault();        
+            var selectId = $(this).data('select-id');
+            $.ajax({
+            type: "GET",
+            url: '{{ site_url() }}/ticketing/ajax_data/get_airlines_by_id/' + selectId,
+            dataType: "json",
+            success: function(data){
+                $('#airlines_id').val(selectId);
+                $('#airlines_name').val(data[0]);
+                    }
+            });
+    });
+
+
+{% endblock %}

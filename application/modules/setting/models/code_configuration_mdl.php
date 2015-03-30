@@ -28,6 +28,8 @@ class code_configuration_mdl extends CI_Model {
         $nomor = 1;
         foreach ($result as $row):
             $data[] = array(
+                'nomor' => $nomor,
+                'code_id' => $row->code_id,
                 'code_name' => $row->code_name,
                 'description' => $row->description,
             );
@@ -39,27 +41,55 @@ class code_configuration_mdl extends CI_Model {
     function getdataid($id) {
         $data = array();
         $fields = array(
-            'user_id',
-            'full_name',
-            'group_name',
+            'code_id',
+            'code_name',
+            'description',
         );
 
         $this->db->select($fields);
 
-        $this->db->where('id_vendor', $id);
-        $query = $this->db->get('setting_mst_user');
+        $this->db->where('code_id', $id);
+        $query = $this->db->get('setting_mst_code_configuration');
         if ($query->num_rows() > 0) {
             $row = $query->row();
             $data = array(
-                'user_id' => $row->user_id,
-                'username' => $row->username,
-                'full_name' => $row->full_name,
+                'code_id' => $row->code_id,
+                'code_name' => $row->code_name,
+                'description' => $row->description,
             );
         }
         return $data;
     }
 
     function save($params) {
+        $log = $this->session->all_userdata();
+        $this->load->model('logUpdate');
+        $valid = false;
+
+                $fields = array(
+                    'code_name'       => $params->code_name,
+                    'description'          => $params->description,
+                    'add_date'          => date('Y-m-d H:i:s'),
+                    'add_user'          => $log['user_id'],
+                );
+        
+        if (!empty($params->code_id)) {
+            $fields_update = array(
+                    'code_name'       => $params->code_name,
+                    'description'       => $params->description,
+                    'modified_date'     => date('Y-m-d H:i:s'),
+                    'modified_user'     => $log['user_id'],
+                );
+            $this->db->where("code_id", $params->code_id);
+            $valid = $this->db->update("setting_mst_code_configuration", $fields_update);
+                        
+            $valid = $this->logUpdate->addLog("update", "setting_mst_code_configuration", $params);
+        }
+        else {
+            $valid = $this->db->insert('setting_mst_code_configuration', $fields);
+            $valid = $this->logUpdate->addLog("insert", "setting_mst_code_configuration", $params);
+                        
+        }
         return true;
     }
 
