@@ -36,6 +36,7 @@ class Main extends CI_Controller {
             'status'        => '',
             'user_group_id'      => '',
             'user_id'       => '',
+            'division_id'       => '',
         );
         $this->session->unset_userdata($data);
         redirect(site_url('main/index'), 'false');

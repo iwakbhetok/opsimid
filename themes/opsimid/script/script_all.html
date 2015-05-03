@@ -1,6 +1,6 @@
 {% block content %}
 
-    /*$("#save_btn").click(function(){
+    $("#save_btn").click(function(){
         var currentTabTitle = $('div[id="mytabs"] ul li.active > a').attr("href");
         var div_name = String(currentTabTitle);
 
@@ -9,7 +9,7 @@
              inputTypes.push($(this).attr('name'));
         });
 
-    });*/
+    });
 
     // customer name typeahead
     $('#customer_name.typeahead').typeahead({
@@ -88,9 +88,17 @@
         dataType: 'json',               
         success: function(data){ 
             $("#currency").append('<option value="" default selected>Currency</option>');
-            var arrayLength = data.length;
-            for(i = 0; i < arrayLength; i++) 
+            $("#payment_currency").append('<option value="" default selected>Currency</option>');
+            $("#convert_currency").append('<option value="" default selected>Currency</option>');
+            var array1 = data.length;
+            var array2 = data.length;
+            var array3 = data.length;
+            for(i = 0; i < array1; i++) 
                 $("#currency").append("<option value='"+data[i]['currency']+"'>"+data[i]['currency_label']+"</option>");
+            for(i = 0; i < array2; i++)
+                $("#payment_currency").append("<option value='"+data[i]['currency']+"'>"+data[i]['currency_label']+"</option>");
+            for(i = 0; i < array3; i++)
+                $("#convert_currency").append("<option value='"+data[i]['currency']+"'>"+data[i]['currency_label']+"</option>");
         } 
 
     });

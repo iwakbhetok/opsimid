@@ -27,4 +27,14 @@ class module_mdl extends CI_Model {
         return $data;
     }
 
+    function get_module_id($module_name){
+        $this->db->select('module_id');
+        $this->db->where('alias_module', $module_name);
+        $this->db->limit(1);
+        $query = $this->db->get('sys_module');
+        $row = $query->result();
+        $data = $row[0]->module_id;
+        return $data;
+    }
+
 }

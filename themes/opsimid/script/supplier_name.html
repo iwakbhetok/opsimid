@@ -1,0 +1,51 @@
+{% block content %}
+  
+// group name typeahead
+    $('#supplier_name.typeahead').typeahead({                
+                name: 'supplier_name',
+                remote: '{{ site_url() }}/ajax_master_data/getrecord_supplier_typehead',
+                limit: 100,
+    });
+
+    var selected = [];
+    var oTable = $('#table_window_group').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_group',
+            "columns": [
+                    { "data": "nomor" },
+                    { "data": "group_name" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return '{{ BUTTON_CHOOSE }}';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    $('#group_btn').on('click', function(e){
+        oTable.show();
+    });
+
+    // Select record
+    $('#table_window_group').on( 'click', 'a.select-btn', function (e) {
+            e.preventDefault();        
+            var selectId = $(this).data('select-id');
+            $.ajax({
+            type: "GET",
+            url: '{{ site_url() }}/ajax_master_data/get_group_by_id/' + selectId,
+            dataType: "json",
+            success: function(data){
+                $('#group_name_id').val(selectId);
+                $('#group_name').val(data[0]);
+                    }
+            });
+    });
+
+
+{% endblock %}

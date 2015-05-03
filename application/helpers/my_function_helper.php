@@ -348,3 +348,75 @@ if (!function_exists('tgl_jam_str')) {
     }
 
 }
+
+//generate and benchmark with old number sequencer without code prefix
+if (!function_exists('resetter_new_number')) {
+
+    function resetter_new_number($number) {
+        $cur_year = date('y');
+        $cur_month = date('m');
+        if (empty($number)){
+            $new_number = $cur_year.''.$cur_month.''.sprintf('%04d','1');
+        }
+        else {
+            $arr_number = str_split($number, 2);
+            $year = $arr_number[1];
+            $month = $arr_number[2];
+            $sequence_1 = $arr_number[3];
+            $sequence_2 = $arr_number[4];
+            $cur_year = date('y');
+            $cur_month = date('m');
+            if (($year != $cur_year) && ($month != $cur_month)) {
+                $new_number = $cur_year.''.$cur_month.''.sprintf('%04d','1');
+            }
+            elseif (($year != $cur_year) && ($month == $cur_month)) {
+                $new_number = $cur_year.''.$cur_month.''.sprintf('%04d','1');
+            }
+            elseif (($year == $cur_year) && ($month != $cur_month)) {
+                $new_number = $cur_year.''.$cur_month.''.sprintf('%04d','1');
+            }
+            else {
+                $sequence = ($sequence_1.''.$sequence_2);
+                $sequence = (int)$sequence + 1;
+                $new_number = $year.''.$cur_month.''.sprintf('%04d',$sequence);
+            }
+        }
+        return $new_number;
+    }
+
+}
+
+//generate and benchmark with old number sequencer with code prefix
+if (!function_exists('resetter_new_number_with_code')) {
+
+    function resetter_new_number_with_code($number) {
+        $cur_year = date('y');
+        $cur_month = date('m');
+        if (empty($number)){
+            $new_number = $cur_year.''.$cur_month.''.sprintf('%04d','1');
+        }
+        else {
+            $arr_number = str_split($number, 2);
+            $year = $arr_number[2];
+            $month = $arr_number[3];
+            $sequence_1 = $arr_number[4];
+            $sequence_2 = $arr_number[5];
+            if (($year != $cur_year) && ($month != $cur_month)) {
+                $new_number = $cur_year.''.$cur_month.''.sprintf('%04d','1');
+            }
+            elseif (($year != $cur_year) && ($month == $cur_month)) {
+                $new_number = $cur_year.''.$cur_month.''.sprintf('%04d','1');
+            }
+            elseif (($year == $cur_year) && ($month != $cur_month)) {
+                $new_number = $year.''.$cur_month.''.sprintf('%04d','1');
+            }
+            else {
+                $sequence = ($sequence_1.''.$sequence_2);
+                $sequence = (int)$sequence + 1;
+                $new_number = $year.''.$cur_month.''.sprintf('%04d',$sequence);
+            }
+        }
+        return $new_number;
+    }
+
+}

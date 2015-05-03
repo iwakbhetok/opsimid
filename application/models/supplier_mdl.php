@@ -118,7 +118,7 @@ class supplier_mdl extends CI_Model {
                 'supplier_id' => $row->supplier_id,
                 'supplier_code' => $row->supplier_code,
                 'supplier_name' => $row->supplier_name,
-                'address' => $row->address1,
+                'address' => 'Address 1: '.$row->address1.(empty($row->address2)? '' : '<br>Address 2: '.$row->address2),
                 'city_name' => $row->city_name,
                 'phone_number' => $row->phone_number,
             );
@@ -190,6 +190,26 @@ class supplier_mdl extends CI_Model {
                 'country_code' => $row->country_name,
             );
         }
+        return $data;
+    }
+
+    function getrecord_supplier_typehead($params, $supplier_module_id){
+        $this->db->where('supplier_name LIKE', '%'.$params.'%');
+        $this->db->where('supplier_module_id', $supplier_module_id);
+        $query = $this->db->get('mst_supplier');
+        foreach ($query->result() as $row):
+            $data[] = $row->supplier_name.' '.$row->supplier_code;
+        endforeach;
+        return $data;
+    }
+
+    function getrecord_supplier_by_id($params)
+    {
+        $this->db->where('supplier_id', $params);
+        $query = $this->db->get('mst_supplier');
+        foreach ($query->result() as $row):
+            $data[] = $row->supplier_name.' '.$row->supplier_code;
+        endforeach;
         return $data;
     }
 

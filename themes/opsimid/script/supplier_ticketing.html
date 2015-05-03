@@ -1,0 +1,54 @@
+{% block content %}
+  
+// group name typeahead
+    $('#supplier_name.typeahead').typeahead({                
+                name: 'supplier_name',
+                remote: '{{ site_url() }}/ajax_master_data/getrecord_supplier_typehead/ticketing',
+                limit: 100,
+    });
+
+    var selected = [];
+    var oTable = $('#table_window_supplier').dataTable( {    
+            "searching": true,
+            "ordering": false,    
+            "bLengthChange" : false,
+            "ajax": '{{ site_url() }}/ajax_master_data/get_supplier/ticketing',
+            "columns": [
+                    { "data": "supplier_code" },
+                    { "data": "supplier_name" },
+                    { "data": "address" },
+                    { "data": "city_name" },
+                    { "data": "phone_number" },
+                    { "mRender" : function ( data, type, full ) {
+                        FullData = full;
+                        return '{{ BUTTON_CHOOSE }}';
+                      }
+                    },
+                ], 
+                "rowCallback": function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }   
+    });
+    $('#supplier_btn').on('click', function(e){
+        oTable.show();
+    });
+
+    // Select record
+    $('#table_window_supplier').on( 'click', 'a.select-btn', function (e) {
+            e.preventDefault();        
+            var selectId = $(this).data('select-id');
+            $.ajax({
+            type: "GET",
+            url: '{{ site_url() }}/ajax_master_data/get_supplier_by_id/' + selectId,
+            dataType: "json",
+            success: function(data){
+                $('#supplier_name_id').val(selectId);
+                $('#supplier_name').val(data[0]);
+                    }
+            });
+    });
+
+
+{% endblock %}

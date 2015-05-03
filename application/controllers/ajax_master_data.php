@@ -125,6 +125,40 @@ class Ajax_master_data extends CI_Controller {
         echo json_encode($data);
     }
 
+    function get_supplier_by_id(){
+        $this->load->model('supplier_mdl');
+        $supplier_id = $this->uri->segment(3, 0);
+        $data = $this->supplier_mdl->getrecord_supplier_by_id($supplier_id);
+        echo json_encode($data);
+    }
+
+    function getrecord_supplier_typehead() {
+        $this->load->model('supplier_mdl');
+        $this->load->model('module_mdl');
+        $params = $this->input->post('query');
+        $module = $this->uri->segment(3, 0);
+        $supplier_module_id = $this->module_mdl->get_module_id($module);
+        $data = $this->supplier_mdl->getrecord_supplier_typehead($params, $supplier_module_id);
+        echo json_encode($data);
+    }
+
+    function get_supplier()
+    {
+        $this->load->model('supplier_mdl');
+        $data = array(
+            'aaData'                => array(),
+            'sEcho'                 => 0,
+            'iTotalRecords'         => '',
+            'iTotalDisplayRecords'  => '',
+        );        
+        //find total record 
+        $data['aaData']                 = $this->supplier_mdl->getdatalist_for_ticketing();
+        $data['iTotalRecords']          = $this->supplier_mdl->getrecordcount_for_ticketing();
+        $data['iTotalDisplayRecords']   = $this->supplier_mdl->getrecordcount_for_ticketing();
+        echo json_encode($data);
+    }
+
+
 }    
     
     

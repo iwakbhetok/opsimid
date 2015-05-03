@@ -15,7 +15,7 @@ var table = $('#table_invoice').dataTable( {
 				{ "data": "total" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
-                    return '{{ BUTTON_CRUD }} ';
+                    return '{{ BUTTON_VIEW }} ';
                   }
                 },
             ], 
@@ -27,17 +27,17 @@ var table = $('#table_invoice').dataTable( {
 });
 
 
-$('#table_invoice').on('click', 'a.edit-btn', function (e) {
+$('#table_invoice').on('click', 'a.view-btn', function (e) {
     e.preventDefault(); 
-    var editId = $(this).data('edit-id');
+    var editId = $(this).data('view-id');
     window.location.href='{{ site_url() }}/ticketing/invoice/form/' + editId;
 });
 
 // Delete a record
-$('#table_invoice').on( 'click', 'a.del-btn', function (e) {
+$('#table_invoice').on( 'click', 'a.print-btn', function (e) {
         e.preventDefault();
-        if(confirm("Are you sure?")) {
-                var delId = $(this).data('delete-id');  
+        if(confirm("Are you sure to print?")) {
+                var delId = $(this).data('print-id');  
 		window.location='{{ site_url() }}/ticketing/invoice/delete/' + delId;	
 	}
 	else

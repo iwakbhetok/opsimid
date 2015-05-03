@@ -30,14 +30,14 @@ class invoice extends CI_Controller {
         $this->twiggy->set('content_page', $content);
 
         $this->twiggy->set('FORM_NAME', 'form_invoice');
-        $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
-        $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
+        $this->twiggy->set('FORM_VIEW_IDKEY', 'data-view-id');
+        $this->twiggy->set('FORM_PRINT_IDKEY', 'data-print-id');        
         $this->twiggy->set('FORM_IDKEY', 'full.invoice_id');
         $this->twiggy->set('FORM_LINK', site_url('ticketing/invoice/delete'));
         
-        $button_crud = $this->twiggy->template('button/btn_edit')->render();         
-        $button_crud .= $this->twiggy->template('button/btn_del')->render();
-        $this->twiggy->set('BUTTON_CRUD', $button_crud);
+        $button_view = $this->twiggy->template('button/btn_view')->render();         
+        $button_view .= $this->twiggy->template('button/btn_print')->render();
+        $this->twiggy->set('BUTTON_VIEW', $button_view);
 
         $script_page = $this->twiggy->template('script/invoice')->render();
         $this->twiggy->set('SCRIPTS', $script_page);

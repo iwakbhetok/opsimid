@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Waktu pembuatan: 20. Maret 2015 jam 15:23
+-- Waktu pembuatan: 03. Mei 2015 jam 23:46
 -- Versi Server: 5.1.41
 -- Versi PHP: 5.3.1
 
@@ -81,7 +81,7 @@ INSERT INTO `hotel_mst_hotels` (`hotel_id`, `country_id`, `state_id`, `city_id`,
 (7, 101, 14, 203, '000003', 'Dewi', 'Domestic', '3', 'Jl. Dewi Sartika', 'izal', '0267407213', 'izalkira@ymail.com', '407213', 1, '2015-02-02 04:58:29', NULL, 1, NULL),
 (8, 101, 12, 161, '000004', 'Hotel Cinta Kasih', 'Domestic', '5', 'jalan sekeloa', 'Ibu Kasih', '0217387837', 'cinta@gmail.com', '0215657', 1, NULL, NULL, NULL, NULL),
 (9, 101, 12, 163, '000005', 'Hotel Aura Nusantara', 'Domestic', '4', 'jalan sesukanya', 'Bapak Jarwo', '', 'nusantara@gmail.com', '', NULL, '2015-03-11 02:29:57', NULL, 1, NULL),
-(10, 101, 13, 179, '000006', 'Hotel Mirasantika', 'Domestic', '3', 'Jalan Wahid', 'Bpk Pendi', '0261939484', '', '', 1, '2015-03-12 14:46:58', NULL, 1, NULL);
+(10, 101, 12, 164, '000006', 'Hotel Mirasantika', 'Domestic', '1', 'Jalan Wahid', 'Bpk Pendi', '0261939484', 'mirasantika@yahoo.com', '', 1, '2015-03-12 14:46:58', '2015-03-27 10:09:13', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -134,20 +134,22 @@ CREATE TABLE IF NOT EXISTS `hotel_mst_room` (
   `room_id` int(10) NOT NULL AUTO_INCREMENT,
   `room_name` varchar(100) DEFAULT NULL,
   `description` text,
+  `state` int(11) NOT NULL,
   `add_date` datetime DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL,
   `add_user` int(10) DEFAULT NULL,
   `modified_user` int(10) DEFAULT NULL,
   PRIMARY KEY (`room_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data untuk tabel `hotel_mst_room`
 --
 
-INSERT INTO `hotel_mst_room` (`room_id`, `room_name`, `description`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
-(2, 'Single', 'Test', '2015-01-06 07:51:30', NULL, 1, NULL),
-(3, 'Double', 'Test', '2015-01-30 03:03:22', NULL, 1, NULL);
+INSERT INTO `hotel_mst_room` (`room_id`, `room_name`, `description`, `state`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
+(2, 'Single', 'Test', 1, '2015-01-06 07:51:30', NULL, 1, NULL),
+(3, 'Double', 'Test', 1, '2015-01-30 03:03:22', NULL, 1, NULL),
+(4, 'Deluxe', '', 0, '2015-03-27 09:59:49', '2015-03-27 10:05:41', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1088,21 +1090,22 @@ CREATE TABLE IF NOT EXISTS `mst_customer` (
   `modified_user` int(10) DEFAULT NULL,
   PRIMARY KEY (`customer_id`,`identity_number`),
   UNIQUE KEY `customer_id` (`customer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data untuk tabel `mst_customer`
 --
 
 INSERT INTO `mst_customer` (`customer_id`, `identity_number`, `group_id`, `title`, `full_name`, `address_1`, `address_2`, `email`, `telp1`, `telp2`, `citizen`, `date_of_birth`, `place_of_birth`, `state`, `description`, `type`, `pricing_policy`, `setting_id`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
-(1, '44665453545343', NULL, 'Sir.', 'David Jones', 'New South Wales', '', 'theallnewvios@gmail.com', '4563534534', '87896867', 'AUS', '2014-08-14', 'Amerika', 1, 'Testing Data', 'company', 3, NULL, '2014-08-03 11:48:23', '2015-01-05 13:36:21', 1, 1),
+(1, '44665453545343', NULL, 'Sir.', 'David Jones', 'New South Wales', 'Melbourne', 'theallnewvios@gmail.com', '4563534534', '87896867', 'AUS', '2015-04-09', 'Amerika', 1, 'Testing Data', 'individual', 3, NULL, '2014-08-03 11:48:23', '2015-03-27 09:46:03', 1, 1),
 (2, '454878576576', NULL, 'Mrs.', 'Selvie Sutanjaya', 'Jl. H. Daimun No. 9i RT.001/09 Sunter Jaya', '', 'blurify@gmail.com', '4563534534', '87896867', 'WNI', '1996-06-14', 'Jakarta', 1, 'Percobaan Data', 'company', 3, 3, '2014-08-03 11:50:36', '2014-08-10 09:08:10', 1, 1),
-(3, '90987678676', NULL, 'Mr.', 'Zulfikar Ahmadi Fathurrahman', 'Jl. H. Daimun No. 9i RT.001/09 Sunter Jaya', '', 'izulonthenet@gmail.com', '465657658', '', 'WNI', '2014-08-15', 'Bandung', 1, 'Percobaan Data', 'company', 3, 5, '2014-08-03 11:52:22', '2014-09-15 01:55:17', 1, 1),
+(3, '90987678676', NULL, 'Mr.', 'Zulfikar Ahmadi Fathurrahman', 'Jl. H. Daimun No. 9i RT.001/09 Sunter Jaya', '', 'izulonthenet@gmail.com', '465657658', '', 'WNI', '2014-08-15', 'Bandung', 0, 'Percobaan Data', 'company', 3, 5, '2014-08-03 11:52:22', '2015-03-27 09:49:43', 1, 1),
 (4, '6586785678', NULL, 'Mrs.', 'Yani Nurbayati', 'Medan Merdeka', '', 'Yani Nurbayati', '0775765646545', '', 'WNI', '1943-08-19', 'Medan', 1, 'Percobaan Data', 'company', 3, 3, '2014-08-03 12:01:35', '2014-08-10 09:07:46', 1, 1),
 (5, '7457634557', NULL, '', 'PT. Megah Rejeki Utama', 'Haji Samali', '', 'cakra@yahoo.com', '078675675', '', 'WNI', '0000-00-00', '', 1, 'Percobaan', 'company', 3, 3, '2014-08-03 12:02:16', '2014-08-10 09:07:37', 1, 1),
 (6, '5465454', NULL, '', 'PT. Perkasa Inti Raya', 'Thamrin', '', 'bigmobile@yahoo.com', '87576565', '', 'AUS', '0000-00-00', '', 1, 'Testing Data', 'individual', 3, 5, '2014-08-03 12:03:31', '2014-09-15 01:54:48', 1, 1),
 (7, '345654354343', NULL, 'Madam.', 'Santi Maryanti', 'Jl. Ledeng', '', 'santi@yahoo.com', '78776565', '', 'WNI', '1959-08-14', 'Bandung', 1, 'Ok', 'individual', 3, 3, '2014-08-03 12:07:10', '2014-08-10 09:07:09', 1, 1),
-(8, '333423', NULL, '', 'PT. Kencana Oto Rental', 'Jakarta', '', 'kencanaoto@yahoo.com', '7656565', '566456', 'Indonesia', '2014-09-11', 'Jakarta', 1, 'Test', 'company', NULL, 5, '2014-09-15 01:56:37', NULL, 1, NULL);
+(8, '333423', NULL, '', 'PT. Kencana Oto Rental', 'Jakarta', '', 'kencanaoto@yahoo.com', '7656565', '566456', 'Indonesia', '2014-09-11', 'Jakarta', 1, 'Test', 'company', NULL, 5, '2014-09-15 01:56:37', NULL, 1, NULL),
+(9, '1242253', NULL, 'Mr', 'Abdul Gofur', 'Gunung Sahari no 23', '', 'email@domain.com', '02746464', '084635222234', 'Indonesia', '0000-00-00', 'Bogor', 1, '', 'individual', 2, NULL, '2015-03-30 23:43:24', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1173,6 +1176,7 @@ CREATE TABLE IF NOT EXISTS `mst_supplier` (
   `state_id` int(10) DEFAULT NULL,
   `city_id` int(10) DEFAULT NULL,
   `supplier_type_id` int(10) DEFAULT NULL,
+  `supplier_module_id` int(10) NOT NULL,
   `supplier_name` varchar(45) DEFAULT NULL,
   `supplier_code` varchar(20) DEFAULT NULL,
   `address1` varchar(100) DEFAULT NULL,
@@ -1194,11 +1198,11 @@ CREATE TABLE IF NOT EXISTS `mst_supplier` (
 -- Dumping data untuk tabel `mst_supplier`
 --
 
-INSERT INTO `mst_supplier` (`supplier_id`, `country_id`, `state_id`, `city_id`, `supplier_type_id`, `supplier_name`, `supplier_code`, `address1`, `address2`, `zip_code`, `phone_number`, `fax`, `email`, `contact_person`, `description`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
-(1, 101, 12, 162, NULL, 'KAHA', 'HS000009', 'Jalan Gajah Mada', NULL, NULL, 219939334, NULL, NULL, 'Mr. Lee', NULL, '2015-03-11 20:58:00', NULL, 1, NULL),
-(2, 101, 12, 163, NULL, 'XXX', 'HS000002', 'Jalan Hayam Wuruk', NULL, NULL, NULL, NULL, NULL, 'Mrs. Siska', NULL, '2015-03-11 20:59:47', NULL, 1, NULL),
-(3, 101, 12, 162, NULL, 'BERKELANA', 'TS000001', 'Jalan Kapiten', NULL, NULL, NULL, NULL, NULL, 'Hanimoon', NULL, '2015-03-11 23:22:15', NULL, 1, NULL),
-(4, 101, 12, 162, NULL, 'JAMIK', 'TC000001', 'Jalan Sersan', NULL, NULL, NULL, NULL, NULL, 'Herman', NULL, '2015-03-11 23:27:35', NULL, 1, NULL);
+INSERT INTO `mst_supplier` (`supplier_id`, `country_id`, `state_id`, `city_id`, `supplier_type_id`, `supplier_module_id`, `supplier_name`, `supplier_code`, `address1`, `address2`, `zip_code`, `phone_number`, `fax`, `email`, `contact_person`, `description`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
+(1, 101, 12, 162, NULL, 2, 'KAHA', 'HS000009', 'Jalan Gajah Mada', NULL, NULL, 219939334, NULL, NULL, 'Mr. Lee', NULL, '2015-03-11 20:58:00', NULL, 1, NULL),
+(2, 101, 12, 163, NULL, 2, 'XXX', 'HS000002', 'Jalan Hayam Wuruk', NULL, NULL, NULL, NULL, NULL, 'Mrs. Siska', NULL, '2015-03-11 20:59:47', NULL, 1, NULL),
+(3, 101, 12, 162, 4, 1, 'BERKELANA', 'TS000001', 'Jalan Kapiten', NULL, NULL, NULL, NULL, NULL, 'Hanimoon', NULL, '2015-03-11 23:22:15', NULL, 1, NULL),
+(4, 101, 12, 162, NULL, 4, 'JAMIK', 'TC000001', 'Jalan Sersan', NULL, NULL, NULL, NULL, NULL, 'Herman', NULL, '2015-03-11 23:27:35', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1207,7 +1211,7 @@ INSERT INTO `mst_supplier` (`supplier_id`, `country_id`, `state_id`, `city_id`, 
 --
 
 CREATE TABLE IF NOT EXISTS `mst_supplier_type` (
-  `suplier_type_id` int(10) NOT NULL AUTO_INCREMENT,
+  `supplier_type_id` int(10) NOT NULL AUTO_INCREMENT,
   `type_name` varchar(100) DEFAULT NULL,
   `description` text,
   `type` int(1) DEFAULT NULL COMMENT '1=ticket, 2=hotel, 3=dokumen, 4=tour, 5=others',
@@ -1216,14 +1220,14 @@ CREATE TABLE IF NOT EXISTS `mst_supplier_type` (
   `modified_date` datetime DEFAULT NULL,
   `add_user` int(10) DEFAULT NULL,
   `modified_user` int(10) DEFAULT NULL,
-  PRIMARY KEY (`suplier_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  PRIMARY KEY (`supplier_type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18446744073709551615 ;
 
 --
 -- Dumping data untuk tabel `mst_supplier_type`
 --
 
-INSERT INTO `mst_supplier_type` (`suplier_type_id`, `type_name`, `description`, `type`, `is_direct`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
+INSERT INTO `mst_supplier_type` (`supplier_type_id`, `type_name`, `description`, `type`, `is_direct`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
 (1, 'LCC (Low Cost Carrier)', 'Kelompok vendor yang memberikan tiket untuk maskapai domestik. Dalam hal ini, vendornya langsung diwakili oleh maskapai ybs. Kelompok ini menggunakan skema deposit untuk setiap pembelian tiket oleh agen. ', NULL, 0, '2014-09-03 18:32:55', NULL, 1, NULL),
 (2, 'BSP', 'Kelompok vendor yang memberikan tiket maskapai domestik tetapi dengan konsep kredit (tidak deposit seperti LCC). Contoh vendor jenis ini adalah Garuda.', NULL, 0, '2014-09-03 18:34:06', NULL, 1, NULL),
 (3, 'IATA (International Air Transport Aviation)', 'Kelompok vendor yang memberikan tiket maskapai internasional (yg jumlahnya sangat banyak) dengan konsep kredit (tidak deposit seperti LCC). Setiap pembelian tiket internasional melalui vendor jenis ini, skema harganya akan sama karena diambil dari1 sumber (meskipun maskapainya berbagai macam). Hanya agen yang memiliki membership IATA yang dapat issued tiket melalui jalur IATA.', NULL, 0, '2014-09-03 18:34:28', NULL, 1, NULL),
@@ -1292,7 +1296,7 @@ CREATE TABLE IF NOT EXISTS `reff_log` (
   `event_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`,`user_id`,`position_id`),
   UNIQUE KEY `log_id` (`log_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data untuk tabel `reff_log`
@@ -1310,7 +1314,27 @@ INSERT INTO `reff_log` (`log_id`, `ip_address`, `user_id`, `position_id`, `actio
 (9, '::1', 0, 0, 'insert', 'hotel_rate_id=, suplier_name=1, hotel_name=7, room_type=3, class_type=4, date_from=2015-03-01, date_to=2015-03-31, market_type=Indonesia, currency=IDR, nett_room=1000, sell_room=1100, nett_breakfast=90, sell_breakfast=100, include_breakfast=YES', 'hotel_mst_hotel_rate', '2015-03-12 01:04:27'),
 (10, '::1', 0, 0, 'insert', 'hotel_rate_id=, suplier_name=1, hotel_name=7, room_type=3, class_type=4, date_from=2015-03-01, date_to=2015-03-31, market_type=Indonesia, currency=IDR, nett_room=1000, sell_room=1100, nett_breakfast=90, sell_breakfast=100, include_breakfast=YES', 'hotel_mst_hotel_rate', '2015-03-12 01:07:01'),
 (11, '::1', 0, 0, 'insert', 'hotel_rate_id=, supplier_name=2, hotel_name=8, room_type=3, class_type=4, date_from=2015-03-01, date_to=2015-03-31, market_type=Foreign, currency=USD, nett_room=1000, sell_room=1100, nett_breakfast=90, sell_breakfast=100, include_breakfast=YES', 'hotel_mst_hotel_rate', '2015-03-12 01:07:40'),
-(12, '::1', 0, 0, 'insert', 'hotel_id=, hotel_code=000006, hotel_name=Hotel Mirasantika, address=Jalan Wahid, country_code=101, state=13, city=179, hotel_type=Domestic, star=3, telp=0261939484, fax=, email=, contact_person=Bpk Pendi', 'hotel_mst_hotels', '2015-03-12 14:46:58');
+(12, '::1', 0, 0, 'insert', 'hotel_id=, hotel_code=000006, hotel_name=Hotel Mirasantika, address=Jalan Wahid, country_code=101, state=13, city=179, hotel_type=Domestic, star=3, telp=0261939484, fax=, email=, contact_person=Bpk Pendi', 'hotel_mst_hotels', '2015-03-12 14:46:58'),
+(13, '::1', 0, 0, 'update', 'code_id=4, code_name=TI, description=Tour Code Transaction, btnsave=Save', 'setting_mst_code_configuration', '2015-03-21 02:34:59'),
+(14, '::1', 0, 0, 'update', 'code_id=4, code_name=TI, description=Tour Code Invoice, btnsave=Save', 'setting_mst_code_configuration', '2015-03-21 02:35:21'),
+(15, '::1', 0, 0, 'update', 'code_id=1, code_name=TK, description=Ticketing, btnupdate=Cancel', 'setting_mst_code_configuration', '2015-03-25 17:55:22'),
+(16, '::1', 0, 0, 'insert', 'user_id=, username=ds, password=admin, confirm_password=admin, full_name=Dedi Sapar, group_name=User, group_name_id=4, btnsave=Save', 'setting_mst_user', '2015-03-26 16:18:53'),
+(17, '::1', 0, 0, 'update', 'user_id=9, username=ds, password=21232f297a57a5a743894a0e4a801fc3, confirm_password=21232f297a57a5a743894a0e4a801fc3, full_name=Dedi Sapar, group_name=Manager, group_name_id=2, btnsave=Save', 'setting_mst_user', '2015-03-26 16:34:23'),
+(18, '::1', 0, 0, 'update', 'user_id=9, username=dsa, password=c3284d0f94606de1fd2af172aba15bf3, confirm_password=c3284d0f94606de1fd2af172aba15bf3, full_name=Dedi Sapar, group_name=Manager, group_name_id=, btnsave=Save', 'setting_mst_user', '2015-03-26 16:45:14'),
+(19, '::1', 0, 0, 'update', 'user_id=9, username=dsa, password=c3284d0f94606de1fd2af172aba15bf3, confirm_password=c3284d0f94606de1fd2af172aba15bf3, full_name=Dedi Sapar, group_name=Manager, group_name_id=2, btnsave=Save', 'setting_mst_user', '2015-03-26 16:46:31'),
+(20, '::1', 0, 0, 'update', 'user_id=9, username=dsa, password=admin, confirm_password=admin, full_name=Dedi Sapar, group_name=Manager, group_name_id=2, btnsave=Save', 'setting_mst_user', '2015-03-26 16:49:31'),
+(21, '::1', 0, 0, 'delete', 'user_id=9, username=dsa, password=21232f297a57a5a743894a0e4a801fc3, full_name=Dedi Sapar, level=1, status=0, last_login=2015-03-26 16%3A50%3A04, group_id=2, add_date=2015-03-26 16%3A18%3A53, modified_date=2015-03-26 16%3A59%3A42, add_user=1, modified_user=1', 'setting_mst_user', '2015-03-26 16:59:42'),
+(22, '::1', 0, 0, 'update', 'code_id=1, code_name=TK, description=Ticketing aaa, btnsave=Save', 'setting_mst_code_configuration', '2015-03-26 17:03:55'),
+(23, '::1', 0, 0, 'update', 'code_id=1, code_name=TK, description=Ticketing , btnsave=Save', 'setting_mst_code_configuration', '2015-03-26 17:04:05'),
+(24, '::1', 0, 0, 'update', 'customer_id=1, identity_number=44665453545343, address_1=New South Wales, title=Sir.1, address_2=, full_name=David Jones, telp1=4563534534, date_of_birth=14-08-2014, telp2=87896867, place_of_birth=Amerika, email=theallnewvios%40gmail.com, citizen=AUS, pricing_policy=3, type=company, description=Testing Data, btnsave=Save', 'mst_customer', '2015-03-27 09:44:29'),
+(25, '::1', 0, 0, 'update', 'customer_id=1, identity_number=44665453545343, address_1=New South Wales, title=Sir., address_2=Melbourne, full_name=David Jones, telp1=4563534534, date_of_birth=09-04-2015, telp2=87896867, place_of_birth=Amerika, email=theallnewvios%40gmail.com, citizen=AUS, pricing_policy=3, type=company, description=Testing Data, btnsave=Save', 'mst_customer', '2015-03-27 09:45:28'),
+(26, '::1', 0, 0, 'update', 'customer_id=1, identity_number=44665453545343, address_1=New South Wales, title=Sir., address_2=Melbourne, full_name=David Jones, telp1=4563534534, date_of_birth=09-04-2015, telp2=87896867, place_of_birth=Amerika, email=theallnewvios%40gmail.com, citizen=AUS, pricing_policy=3, type=individual, description=Testing Data, btnsave=Save', 'mst_customer', '2015-03-27 09:46:03'),
+(27, '::1', 0, 0, 'delete', 'customer_id=3, identity_number=90987678676, title=Mr., full_name=Zulfikar Ahmadi Fathurrahman, address_1=Jl. H. Daimun No. 9i RT.001%2F09 Sunter Jaya, address_2=, email=izulonthenet%40gmail.com, telp1=465657658, telp2=, citizen=WNI, date_of_birth=2014-08-15, place_of_birth=Bandung, state=0, description=Percobaan Data, type=company, pricing_policy=3, setting_id=5, add_date=2014-08-03 11%3A52%3A22, modified_date=2015-03-27 09%3A49%3A43, add_user=1, modified_user=1', 'mst_customer', '2015-03-27 09:49:43'),
+(28, '::1', 0, 0, 'insert', 'room_id=, room_name=Deluxe, description=', 'hotel_mst_room', '2015-03-27 09:59:49'),
+(29, '::1', 0, 0, 'delete', '', 'hotel_mst_room', '2015-03-27 09:59:56'),
+(30, '::1', 0, 0, 'delete', 'room_id=4, room_name=Deluxe, description=, state=0, add_date=2015-03-27 09%3A59%3A49, modified_date=2015-03-27 10%3A05%3A41, add_user=1, modified_user=1', 'hotel_mst_room', '2015-03-27 10:05:41'),
+(31, '::1', 0, 0, 'update', 'hotel_id=10, hotel_code=000006, hotel_name=Hotel Mirasantika, address=Jalan Wahid, country_code=101, state=12, city=164, hotel_type=Domestic, star=1, telp=0261939484, fax=, email=mirasantika%40yahoo.com, contact_person=Bpk Pendi', 'hotel_mst_hotels', '2015-03-27 10:09:13'),
+(32, '::1', 0, 0, 'insert', 'customer_id=, identity_number=1242253, address_1=Gunung Sahari no 23, title=Mr, address_2=, full_name=Abdul Gofur, telp1=02746464, date_of_birth=31-12-1984, telp2=084635222234, place_of_birth=Bogor, email=email%40domain.com, citizen=Indonesia, pricing_policy=2, type=individual, description=, btnsave=Save', 'mst_customer', '2015-03-30 23:43:24');
 
 -- --------------------------------------------------------
 
@@ -1334,10 +1358,10 @@ CREATE TABLE IF NOT EXISTS `setting_mst_code_configuration` (
 --
 
 INSERT INTO `setting_mst_code_configuration` (`code_id`, `code_name`, `description`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
-(1, 'TK', 'Ticketing', '2015-03-18 14:17:52', NULL, 1, NULL),
+(1, 'TK', 'Ticketing ', '2015-03-18 14:17:52', '2015-03-26 17:04:05', 1, 1),
 (2, 'HI', 'Hotel', '2015-03-18 14:18:20', NULL, 1, NULL),
 (3, 'DI', 'Document Code Transaction', '2015-03-18 14:20:15', NULL, 1, NULL),
-(4, 'TI', 'Tour Code Invoice', '2015-03-18 14:20:53', NULL, 1, NULL),
+(4, 'TI', 'Tour Code Invoice', '2015-03-18 14:20:53', '2015-03-21 02:35:21', 1, 1),
 (5, 'OI', 'Other Code Invoice', '2015-03-18 14:21:37', NULL, 1, NULL);
 
 -- --------------------------------------------------------
@@ -1359,22 +1383,24 @@ CREATE TABLE IF NOT EXISTS `setting_mst_user` (
   `modified_date` datetime DEFAULT NULL,
   `add_user` int(10) DEFAULT NULL,
   `modified_user` int(10) DEFAULT NULL,
+  `division_id` int(10) DEFAULT '1',
   PRIMARY KEY (`user_id`,`username`),
   UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data untuk tabel `setting_mst_user`
 --
 
-INSERT INTO `setting_mst_user` (`user_id`, `username`, `password`, `full_name`, `level`, `status`, `last_login`, `group_id`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 0, 1, '2015-03-20 15:10:24', 1, NULL, '2014-05-11 15:00:12', NULL, 1),
-(3, 'sekda', '21232f297a57a5a743894a0e4a801fc3', 'User Sekretariat Daerah Saja', 1, 1, '2015-03-01 14:15:07', NULL, '2014-05-11 08:43:51', '2014-05-11 09:12:04', 1, 1),
-(4, 'aspem', '21232f297a57a5a743894a0e4a801fc3', 'User Asisten Pemerintahan', 1, 1, '2014-05-11 09:00:36', NULL, '2014-05-11 08:44:49', '2014-05-11 09:11:51', 1, 1),
-(5, 'walikota', '21232f297a57a5a743894a0e4a801fc3', 'User Tingkat Walikota', 1, 1, '2014-07-25 20:01:06', NULL, '2014-05-11 09:12:31', NULL, 1, NULL),
-(6, 'aspp', '21232f297a57a5a743894a0e4a801fc3', 'User Asisten 1', 1, 1, NULL, NULL, '2014-05-11 09:13:00', NULL, 1, NULL),
-(7, 'asdum', '21232f297a57a5a743894a0e4a801fc3', 'User Asisten 2', 1, 1, NULL, NULL, '2014-05-11 09:13:17', NULL, 1, NULL),
-(8, 'badum', '21232f297a57a5a743894a0e4a801fc3', 'User Bagian Administrasi Umum', 1, 1, NULL, NULL, '2014-05-11 09:13:53', NULL, 1, NULL);
+INSERT INTO `setting_mst_user` (`user_id`, `username`, `password`, `full_name`, `level`, `status`, `last_login`, `group_id`, `add_date`, `modified_date`, `add_user`, `modified_user`, `division_id`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 0, 1, '2015-04-30 10:54:50', 1, NULL, '2014-05-11 15:00:12', NULL, 1, 1),
+(3, 'sekda', '21232f297a57a5a743894a0e4a801fc3', 'User Sekretariat Daerah Saja', 1, 1, '2015-03-01 14:15:07', NULL, '2014-05-11 08:43:51', '2014-05-11 09:12:04', 1, 1, 1),
+(4, 'aspem', '21232f297a57a5a743894a0e4a801fc3', 'User Asisten Pemerintahan', 1, 1, '2014-05-11 09:00:36', NULL, '2014-05-11 08:44:49', '2014-05-11 09:11:51', 1, 1, 1),
+(5, 'walikota', '21232f297a57a5a743894a0e4a801fc3', 'User Tingkat Walikota', 1, 1, '2014-07-25 20:01:06', NULL, '2014-05-11 09:12:31', NULL, 1, NULL, 1),
+(6, 'aspp', '21232f297a57a5a743894a0e4a801fc3', 'User Asisten 1', 1, 1, NULL, NULL, '2014-05-11 09:13:00', NULL, 1, NULL, 1),
+(7, 'asdum', '21232f297a57a5a743894a0e4a801fc3', 'User Asisten 2', 1, 1, NULL, NULL, '2014-05-11 09:13:17', NULL, 1, NULL, 1),
+(8, 'badum', '21232f297a57a5a743894a0e4a801fc3', 'User Bagian Administrasi Umum', 1, 1, NULL, NULL, '2014-05-11 09:13:53', NULL, 1, NULL, 1),
+(9, 'dsa', '21232f297a57a5a743894a0e4a801fc3', 'Dedi Sapar', 1, 0, '2015-03-26 16:50:04', 2, '2015-03-26 16:18:53', '2015-03-26 16:59:42', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1434,7 +1460,7 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `menu_link`, `menu_icon`, `menu_
 (14, 'State of Ticket', '#', '', 0, 11, 'TRUE', 'FALSE'),
 (15, 'Total Transaction', 'reports/total_transaction/index', '', 0, 11, 'TRUE', 'FALSE'),
 (16, 'Refund/Period', '#', '', 0, 11, 'TRUE', 'FALSE'),
-(17, 'Supplier', 'supplier/supplier/get_supplier/hotel', '', 3, 3, 'TRUE', 'FALSE'),
+(17, 'Supplier', 'supplier/supplier/get_supplier/hotel', '', 3, 18, 'TRUE', 'FALSE'),
 (18, 'Configuration', '#', '', 6, 3, 'TRUE', 'FALSE'),
 (19, 'Hotels', 'hotel/hotel/index', '', 0, 18, 'TRUE', 'FALSE'),
 (20, 'Class', 'hotel/class_hotel/index', '', 0, 18, 'TRUE', 'FALSE'),
@@ -1443,13 +1469,13 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `menu_link`, `menu_icon`, `menu_
 (23, 'Reservation', 'hotel/reservation/index', '', 1, 3, 'TRUE', 'FALSE'),
 (24, 'Invoice', 'hotel/invoice/index', '', 2, 3, 'TRUE', 'FALSE'),
 (25, 'Report', '#', '', 5, 3, 'TRUE', 'FALSE'),
-(26, 'Supplier', 'supplier/supplier/get_supplier/document', '', 5, 4, 'TRUE', 'FALSE'),
+(26, 'Supplier', 'supplier/supplier/get_supplier/document', '', 5, 57, 'TRUE', 'FALSE'),
 (27, 'Document Receipt', 'document/document_receipt/index', '', 3, 4, 'TRUE', 'FALSE'),
 (28, 'Create Document', 'document/document/index', '', 4, 4, 'TRUE', 'FALSE'),
 (29, 'Reservation', 'document/reservation/index', '', 1, 4, 'TRUE', 'FALSE'),
 (30, 'Invoice', 'document/invoice/index', '', 2, 4, 'TRUE', 'TRUE'),
 (31, 'Report', 'document/report/index', '', 8, 4, 'TRUE', 'TRUE'),
-(32, 'Supplier', 'tour/supplier/index', '', 4, 5, 'TRUE', 'TRUE'),
+(32, 'Supplier', 'tour/supplier/index', '', 4, 67, 'TRUE', 'TRUE'),
 (33, 'Cost', '/reports/ar_summary/index', '', 0, 67, 'TRUE', 'TRUE'),
 (34, 'Main Cost', '/reports/aging_schedule/index', '', 0, 33, 'TRUE', 'TRUE'),
 (35, 'Sub Cost', '/reports/ap_statement_summary/index', '', 0, 33, 'TRUE', 'TRUE'),
@@ -1457,15 +1483,15 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `menu_link`, `menu_icon`, `menu_
 (37, 'Reservation', 'tour/reservation/index', '', 2, 5, 'TRUE', 'TRUE'),
 (38, 'Invoice', 'tour/invoice/index', '', 3, 5, 'TRUE', 'TRUE'),
 (39, 'Report', '#', '', 6, 5, 'TRUE', 'TRUE'),
-(40, 'Supplier', 'supplier/supplier/get_supplier/other', '', 0, 6, 'TRUE', 'TRUE'),
+(40, 'Supplier', 'supplier/supplier/get_supplier/other', '', 0, 8, 'TRUE', 'TRUE'),
 (41, 'Invoice', 'other/invoice/index', '', 2, 6, 'TRUE', 'FALSE'),
 (42, 'Report', 'other/report/index', '', 5, 6, 'TRUE', 'TRUE'),
 (43, 'Customer', 'setting/customer/index', '', 0, 7, 'TRUE', 'FALSE'),
-(44, 'DP Supplier', '#', '', 0, 2, 'TRUE', 'FALSE'),
+(44, 'DP Supplier', 'ticketing/dp_supplier/form', '', 0, 2, 'TRUE', 'FALSE'),
 (45, 'Payment', '#', '', 0, 2, 'TRUE', 'FALSE'),
 (46, 'Refund', '#', '', 4, 2, 'TRUE', 'FALSE'),
 (47, 'Configuration', 'ticketing/configuration/index', '', 6, 2, 'TRUE', 'FALSE'),
-(48, 'Supplier', 'supplier/supplier/get_supplier/ticketing', '', 3, 2, 'TRUE', 'FALSE'),
+(48, 'Supplier', 'supplier/supplier/get_supplier/ticketing', '', 3, 47, 'TRUE', 'FALSE'),
 (49, 'Airlines', 'ticketing/airlines/index', '', 0, 47, 'TRUE', 'FALSE'),
 (50, 'Payment', '#', '', 0, 19, 'TRUE', 'FALSE'),
 (51, 'Refund', '#', '', 0, 19, 'TRUE', 'FALSE'),
@@ -1612,7 +1638,7 @@ INSERT INTO `sys_user_permission` (`permission_id`, `user_group_id`, `user_id`, 
 (42, 1, 1, 41),
 (43, 1, 1, 42),
 (44, 1, 1, 43),
-(45, 0, 0, 44),
+(45, 1, 1, 44),
 (46, 0, 0, 45),
 (47, 1, 1, 46),
 (48, 1, 1, 47),
@@ -1886,6 +1912,66 @@ INSERT INTO `tour_mst_quotation` (`quotation_id`, `airlines_id`, `code_tour`, `v
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `trans_ticketing_dp_supplier`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_ticketing_dp_supplier` (
+  `dp_supplier_id` int(10) NOT NULL AUTO_INCREMENT,
+  `cashier_number` varchar(10) DEFAULT NULL,
+  `transaction_number` varchar(10) DEFAULT NULL,
+  `transaction_code` set('DC','DS') NOT NULL,
+  `date` date NOT NULL,
+  `dp_slip_number` varchar(20) NOT NULL,
+  `supplier_id` int(10) DEFAULT NULL,
+  `currency` varchar(5) NOT NULL,
+  `amount` double DEFAULT NULL,
+  `paid` double DEFAULT NULL,
+  `outstanding` double DEFAULT NULL,
+  `add_date` datetime NOT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `add_user` int(5) DEFAULT NULL,
+  `modified_user` int(5) DEFAULT NULL,
+  PRIMARY KEY (`dp_supplier_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `trans_ticketing_dp_supplier`
+--
+
+INSERT INTO `trans_ticketing_dp_supplier` (`dp_supplier_id`, `cashier_number`, `transaction_number`, `transaction_code`, `date`, `dp_slip_number`, `supplier_id`, `currency`, `amount`, `paid`, `outstanding`, `add_date`, `modified_date`, `add_user`, `modified_user`) VALUES
+(1, '0115030012', '0000000001', 'DC', '2015-03-01', 'DC0115030023', 1, 'IDR', 1200000, 10000, 1000, '2015-03-03 21:31:20', NULL, 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `trans_ticketing_dp_supplier_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `trans_ticketing_dp_supplier_detail` (
+  `dp_supplier_detail_id` int(10) NOT NULL AUTO_INCREMENT,
+  `dp_supplier_id` int(10) NOT NULL,
+  `payment_method` set('cash','cheque','credit') NOT NULL,
+  `payment_currency` varchar(50) NOT NULL,
+  `payment_amount` double NOT NULL,
+  `convert_currency` varchar(50) NOT NULL,
+  `convert_amount` double NOT NULL,
+  `rate` double NOT NULL,
+  `description` text NOT NULL,
+  `add_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `add_user` int(10) NOT NULL,
+  `modified_user` int(10) DEFAULT NULL,
+  PRIMARY KEY (`dp_supplier_detail_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data untuk tabel `trans_ticketing_dp_supplier_detail`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `trans_ticketing_invoice`
 --
 
@@ -1954,7 +2040,7 @@ INSERT INTO `trans_ticketing_invoice` (`invoice_id`, `invoice_number`, `transact
 (28, 'TK001411016', NULL, NULL, NULL, 2, 6, NULL, '2014-12-04', '2014-12-25', 0, '1', 'Domestic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'AED', 'sfsds', '', 'LCC', 0, NULL, NULL, NULL, '2014-12-04 14:59:53', NULL, 1, NULL),
 (29, 'TK001411016', NULL, NULL, NULL, 2, 6, NULL, '2014-12-04', '2014-12-25', 0, '1', 'Domestic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'AED', 'sfsds', '', 'LCC', 0, NULL, NULL, NULL, '2014-12-04 15:00:15', NULL, 1, NULL),
 (30, 'TK001411022', NULL, NULL, NULL, 2, 6, NULL, '2014-12-04', '2014-12-25', 0, '1', 'Domestic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'AED', 'Percobaan Lagi Pusing', '', 'LCC', 0, NULL, NULL, NULL, '2014-12-04 15:07:59', NULL, 1, NULL),
-(31, 'TK001411023', NULL, NULL, NULL, 1, 4, NULL, '2014-12-04', '2014-12-26', 0, '1', 'Domestic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'AED', 'Percobaan', '', 'LCC', 0, NULL, NULL, NULL, '2014-12-04 15:18:16', NULL, 1, NULL);
+(31, 'TK001411023', '0114030002', NULL, NULL, 1, 4, NULL, '2014-12-04', '2014-12-26', 0, '1', 'Domestic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'AED', 'Percobaan', '', 'LCC', 0, NULL, NULL, NULL, '2014-12-04 15:18:16', NULL, 1, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

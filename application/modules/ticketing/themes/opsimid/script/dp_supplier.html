@@ -1,0 +1,31 @@
+{% block content %}
+
+$('#transaction_id').on('change', function(){
+    var id = $('#transaction_id').val();
+    if (id == "ds from customer"){
+        $('#CODE_PREFIX').text(id);
+    }
+    else{
+        $('#CODE_PREFIX').text(id);
+    }
+});
+
+/* ADD TABLE ROW */
+var rows = $("#table_dp_supplier_detail tbody").last().html();
+$('#add_row_dp_supplier').on('click',function(){
+    $("#table_dp_supplier_detail tbody tr:last-child").last().after(rows);
+   return false;
+});
+
+
+/* DELETE TABLE ROW */
+$('#delete_row_dp_supplier').on('click',function(){
+   if($('#table_dp_supplier_detail tr').size()>2){
+     $('#table_dp_supplier_detail tbody tr:last-child').remove();
+     }else{
+     alert('One row should be present in table');
+     }   
+    return false;
+});
+
+{% endblock %}

@@ -6,6 +6,7 @@ class dp_supplier extends CI_Controller {
         parent::__construct();
         $this->load->library('menu');
         $this->load->model('user_mdl');
+        $this->load->model('dp_supplier_mdl');
 
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -53,24 +54,33 @@ class dp_supplier extends CI_Controller {
         /*$module_name = $this->uri->segment(1);
         $data = $this->module_mdl->getcode_name_prefix($module_name);
         $this->twiggy->set('CODE_PREFIX', $data[0]['code_name']);*/
-
+        $slip_no = $this->dp_supplier_mdl->create_slip_no();
+        $this->twiggy->set('SLIP_NO', $slip_no);
+        $cashier_no = $this->dp_supplier_mdl->create_cashier_no();
+        $this->twiggy->set('CASHIER_NO', $cashier_no);
+        $transaction_number = $this->dp_supplier_mdl->getmax_transaction_number();
+        $this->twiggy->set('TRANSACTION_NO', $transaction_number);
 
         $data = array(); 
         $content = $this->twiggy->template('breadcrumbs')->render();
         $content .= $this->twiggy->template('form/form_dp_supplier')->render();
         $this->twiggy->set('content_page', $content);        
         $this->twiggy->set('FORM_NAME', 'form_dp_supplier');
-        $this->twiggy->set('FORM_EDIT_IDKEY', 'data-edit-id');
-        $this->twiggy->set('FORM_DELETE_IDKEY', 'data-delete-id');        
-        $this->twiggy->set('FORM_IDKEY', $id);
+        $this->twiggy->set('FORM_SELECT_IDKEY', 'data-select-id');
+        $this->twiggy->set('FORM_IDKEY', 'full.supplier_id');
         $this->twiggy->set('FORM_LINK', site_url('ticketing/dp_supplier/delete'));    
         
         $this->twiggy->set('content_page', $content);
+        $window_page = $this->twiggy->template('window/window_supplier')->render();
+        $this->twiggy->set('window_page', $window_page);
         
-        $button_crud = $this->twiggy->template('button/btn_select')->render();
-        $this->twiggy->set('BUTTON_CRUD', $button_crud);
+        $button_select = $this->twiggy->template('button/btn_select')->render();
+        $this->twiggy->set('BUTTON_CHOOSE', $button_select);
+
 
         $script_page = $this->twiggy->template('script/script_all')->render();
+        $script_page .= $this->twiggy->template('script/dp_supplier')->render();
+        $script_page .= $this->twiggy->template('script/supplier_ticketing')->render();
         $this->twiggy->set('SCRIPTS', $script_page);
         
         $output = $this->twiggy->template('dashboard')->render();
